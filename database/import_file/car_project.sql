@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Czas generowania: 07 Sty 2022, 15:14
--- Wersja serwera: 10.4.22-MariaDB
--- Wersja PHP: 8.1.0
+-- Host: 127.0.0.1:3306
+-- Czas generowania: 15 Paź 2022, 14:16
+-- Wersja serwera: 8.0.30
+-- Wersja PHP: 8.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -17,98 +17,91 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
 
-CREATE DATABASE IF NOT EXISTS car_project;
-USE car_project;
 --
 -- Baza danych: `car_project`
 --
 
 -- --------------------------------------------------------
-DROP TABLE IF EXISTS car_bases;
-DROP TABLE IF EXISTS car_makes;
-DROP TABLE IF EXISTS failed_jobs;
-DROP TABLE IF EXISTS migrations;
-DROP TABLE IF EXISTS password_resets;
-DROP TABLE IF EXISTS personal_access_tokens;
-DROP TABLE IF EXISTS users;
-DROP TABLE IF EXISTS user_refuels;
-DROP TABLE IF EXISTS user_reprairs;
+
 --
 -- Struktura tabeli dla tabeli `car_bases`
 --
 
-CREATE TABLE `car_bases` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `model` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `make` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `make_id` bigint(20) NOT NULL,
-  `generation` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `year_from` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `year_to` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `series` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `trim` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `body_type` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `number_of_seats` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `length_mm` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `width_mm` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `height_mm` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `wheelbase_mm` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `front_track_mm` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `rear_track_mm` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `curb_weight_kg` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `wheel_size_r14` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `ground_clearance_mm` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `trailer_load_with_brakes_kg` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `payload_kg` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `back_track_width_mm` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `front_track_width_mm` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `clearance_mm` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `Npęd na wszystkie koła_weight_kg` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `front_rear_axle_load_kg` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `max_trunk_capacity_l` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `minimum_trunk_capacity_l` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `maximum_torque_n_m` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `injection_type` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `overhead_camshaft` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `cylinder_layout` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `number_of_cylinders` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `compression_ratio` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `engine_type` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `valves_per_cylinder` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `boost_type` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `cylinder_bore_mm` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `stroke_cycle_mm` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `engine_placement` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `turnover_of_maximum_torque_rpm` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `max_power_kw` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `presence_of_intercooler` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `capacity_cm3` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `engine_hp` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `engine_hp_rpm` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `drive_wheels` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `number_of_gears` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `turning_circle_m` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `transmission` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `mixed_fuel_consumption_per_100_km_l` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `range_km` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `fuel_tank_capacity_l` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `acceleration_0_100_km/h_s` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `max_speed_km_per_h` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `fuel_grade` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `back_suspension` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `rear_brakes` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `front_brakes` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `front_suspension` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `car_class` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `country_of_origin` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `number_of_doors` text COLLATE utf8mb4_unicode_ci NOT NULL,
+DROP TABLE IF EXISTS `car_bases`;
+CREATE TABLE IF NOT EXISTS `car_bases` (
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `model` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `make` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `make_id` bigint NOT NULL,
+  `generation` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `year_from` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `year_to` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `series` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `trim` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `body_type` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `number_of_seats` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `length_mm` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `width_mm` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `height_mm` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `wheelbase_mm` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `front_track_mm` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `rear_track_mm` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `curb_weight_kg` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `wheel_size_r14` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ground_clearance_mm` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `trailer_load_with_brakes_kg` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payload_kg` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `back_track_width_mm` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `front_track_width_mm` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `clearance_mm` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `Npęd na wszystkie koła_weight_kg` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `front_rear_axle_load_kg` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `max_trunk_capacity_l` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `minimum_trunk_capacity_l` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `maximum_torque_n_m` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `injection_type` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `overhead_camshaft` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `cylinder_layout` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `number_of_cylinders` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `compression_ratio` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `engine_type` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `valves_per_cylinder` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `boost_type` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `cylinder_bore_mm` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `stroke_cycle_mm` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `engine_placement` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `turnover_of_maximum_torque_rpm` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `max_power_kw` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `presence_of_intercooler` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `capacity_cm3` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `engine_hp` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `engine_hp_rpm` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `drive_wheels` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `number_of_gears` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `turning_circle_m` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `transmission` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `mixed_fuel_consumption_per_100_km_l` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `range_km` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `fuel_tank_capacity_l` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `acceleration_0_100_km/h_s` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `max_speed_km_per_h` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `fuel_grade` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `back_suspension` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `rear_brakes` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `front_brakes` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `front_suspension` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `car_class` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `country_of_origin` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `number_of_doors` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Zrzut danych tabeli `car_bases`
 --
+
 INSERT INTO `car_bases` (`id`, `model`, `make`, `make_id`, `generation`, `year_from`, `year_to`, `series`, `trim`, `body_type`, `number_of_seats`, `length_mm`, `width_mm`, `height_mm`, `wheelbase_mm`, `front_track_mm`, `rear_track_mm`, `curb_weight_kg`, `wheel_size_r14`, `ground_clearance_mm`, `trailer_load_with_brakes_kg`, `payload_kg`, `back_track_width_mm`, `front_track_width_mm`, `clearance_mm`, `Npęd na wszystkie koła_weight_kg`, `front_rear_axle_load_kg`, `max_trunk_capacity_l`, `minimum_trunk_capacity_l`, `maximum_torque_n_m`, `injection_type`, `overhead_camshaft`, `cylinder_layout`, `number_of_cylinders`, `compression_ratio`, `engine_type`, `valves_per_cylinder`, `boost_type`, `cylinder_bore_mm`, `stroke_cycle_mm`, `engine_placement`, `turnover_of_maximum_torque_rpm`, `max_power_kw`, `presence_of_intercooler`, `capacity_cm3`, `engine_hp`, `engine_hp_rpm`, `drive_wheels`, `number_of_gears`, `turning_circle_m`, `transmission`, `mixed_fuel_consumption_per_100_km_l`, `range_km`, `fuel_tank_capacity_l`, `acceleration_0_100_km/h_s`, `max_speed_km_per_h`, `fuel_grade`, `back_suspension`, `rear_brakes`, `front_brakes`, `front_suspension`, `car_class`, `country_of_origin`, `number_of_doors`, `created_at`, `updated_at`) VALUES
 (1, 'Giulia', 'Alfa Romeo', 1, '105', '1962', '1977', 'Sedan', '1.8 D MT', 'Sedan', '5', '4140', '1560', '1430', '2510', '1310', '1270', '1130', '', '114', '', '400', '', '', '', '1530', '', '480', '480', '108', 'Wielopunktowy wtrysk paliwa', '', 'Inline', '4', '', 'Diesel', '2', '', '79', '88', '', '2200', '', '', '1760', '52', '4000', 'Npęd na tylne koła', '5', '10', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '2022-01-06 16:05:59', '2022-01-06 16:05:59'),
 (2, 'Giulietta', 'Alfa Romeo', 1, '116', '1977', '1981', 'Alfa Romeo Giulietta I Coupe', '1.3 MT', '', '4', '3980', '1535', '1320', '2380', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', 'Włochy', '2', '2022-01-06 16:05:59', '2022-01-06 16:05:59'),
@@ -154,16 +147,19 @@ INSERT INTO `car_bases` (`id`, `model`, `make`, `make_id`, `generation`, `year_f
 -- Struktura tabeli dla tabeli `car_makes`
 --
 
-CREATE TABLE `car_makes` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `make` text COLLATE utf8mb4_unicode_ci NOT NULL,
+DROP TABLE IF EXISTS `car_makes`;
+CREATE TABLE IF NOT EXISTS `car_makes` (
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `make` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Zrzut danych tabeli `car_makes`
 --
+
 INSERT INTO `car_makes` (`id`, `make`, `created_at`, `updated_at`) VALUES
 (1, 'Alfa Romeo', '2022-01-06 16:08:13', '2022-01-06 16:08:13'),
 (2, 'Audi', '2022-01-06 16:08:13', '2022-01-06 16:08:13'),
@@ -183,14 +179,17 @@ INSERT INTO `car_makes` (`id`, `make`, `created_at`, `updated_at`) VALUES
 -- Struktura tabeli dla tabeli `failed_jobs`
 --
 
-CREATE TABLE `failed_jobs` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `uuid` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `connection` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `queue` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `payload` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `exception` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `failed_at` timestamp NOT NULL DEFAULT current_timestamp()
+DROP TABLE IF EXISTS `failed_jobs`;
+CREATE TABLE IF NOT EXISTS `failed_jobs` (
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `uuid` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `connection` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `queue` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `payload` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `exception` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `failed_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -199,11 +198,13 @@ CREATE TABLE `failed_jobs` (
 -- Struktura tabeli dla tabeli `migrations`
 --
 
-CREATE TABLE `migrations` (
-  `id` int(10) UNSIGNED NOT NULL,
-  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `batch` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+DROP TABLE IF EXISTS `migrations`;
+CREATE TABLE IF NOT EXISTS `migrations` (
+  `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
+  `migration` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `batch` int NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=196 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -211,10 +212,12 @@ CREATE TABLE `migrations` (
 -- Struktura tabeli dla tabeli `password_resets`
 --
 
-CREATE TABLE `password_resets` (
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `created_at` timestamp NULL DEFAULT NULL
+DROP TABLE IF EXISTS `password_resets`;
+CREATE TABLE IF NOT EXISTS `password_resets` (
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  KEY `password_resets_email_index` (`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -223,16 +226,20 @@ CREATE TABLE `password_resets` (
 -- Struktura tabeli dla tabeli `personal_access_tokens`
 --
 
-CREATE TABLE `personal_access_tokens` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `tokenable_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `tokenable_id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `token` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `abilities` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+DROP TABLE IF EXISTS `personal_access_tokens`;
+CREATE TABLE IF NOT EXISTS `personal_access_tokens` (
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `tokenable_type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tokenable_id` bigint UNSIGNED NOT NULL,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `token` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `abilities` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `last_used_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
+  KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -241,16 +248,26 @@ CREATE TABLE `personal_access_tokens` (
 -- Struktura tabeli dla tabeli `users`
 --
 
-CREATE TABLE `users` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE IF NOT EXISTS `users` (
+  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `remember_token` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `users_email_unique` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Zrzut danych tabeli `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
+(2, 'Test', 'test@test.pl', NULL, '$2y$10$fQ8llhXNDHtg/vRCUx0zr.sHPmyoM6fylDalJwbEEmOMxB7l/xU.W', NULL, '2022-09-27 10:36:35', '2022-09-27 10:36:35');
 
 -- --------------------------------------------------------
 
@@ -258,16 +275,18 @@ CREATE TABLE `users` (
 -- Struktura tabeli dla tabeli `user_refuels`
 --
 
-CREATE TABLE `user_refuels` (
-  `refueling_id` bigint(20) UNSIGNED NOT NULL,
-  `user_id` bigint(20) NOT NULL,
+DROP TABLE IF EXISTS `user_refuels`;
+CREATE TABLE IF NOT EXISTS `user_refuels` (
+  `refueling_id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `user_id` bigint NOT NULL,
   `fuel` double(8,2) NOT NULL,
   `price` double(8,2) NOT NULL,
   `refueling_date` date NOT NULL,
   `distance` double(8,2) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`refueling_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -275,131 +294,19 @@ CREATE TABLE `user_refuels` (
 -- Struktura tabeli dla tabeli `user_reprairs`
 --
 
-CREATE TABLE `user_reprairs` (
-  `reprair_id` bigint(20) UNSIGNED NOT NULL,
-  `user_id` bigint(20) NOT NULL,
+DROP TABLE IF EXISTS `user_reprairs`;
+CREATE TABLE IF NOT EXISTS `user_reprairs` (
+  `reprair_id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
+  `user_id` bigint NOT NULL,
   `reprair_date` date NOT NULL,
-  `car_mileage` bigint(20) NOT NULL,
-  `reprair_location` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `reprair_subject` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `car_mileage` bigint NOT NULL,
+  `reprair_location` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `reprair_subject` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `price` double(8,2) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Indeksy dla zrzutów tabel
---
-
---
--- Indeksy dla tabeli `car_bases`
---
-ALTER TABLE `car_bases`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indeksy dla tabeli `car_makes`
---
-ALTER TABLE `car_makes`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indeksy dla tabeli `failed_jobs`
---
-ALTER TABLE `failed_jobs`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
-
---
--- Indeksy dla tabeli `migrations`
---
-ALTER TABLE `migrations`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indeksy dla tabeli `password_resets`
---
-ALTER TABLE `password_resets`
-  ADD KEY `password_resets_email_index` (`email`);
-
---
--- Indeksy dla tabeli `personal_access_tokens`
---
-ALTER TABLE `personal_access_tokens`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
-  ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
-
---
--- Indeksy dla tabeli `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `users_email_unique` (`email`);
-
---
--- Indeksy dla tabeli `user_refuels`
---
-ALTER TABLE `user_refuels`
-  ADD PRIMARY KEY (`refueling_id`);
-
---
--- Indeksy dla tabeli `user_reprairs`
---
-ALTER TABLE `user_reprairs`
-  ADD PRIMARY KEY (`reprair_id`);
-
---
--- AUTO_INCREMENT dla zrzuconych tabel
---
-
---
--- AUTO_INCREMENT dla tabeli `car_bases`
---
-ALTER TABLE `car_bases`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
-
---
--- AUTO_INCREMENT dla tabeli `car_makes`
---
-ALTER TABLE `car_makes`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
-
---
--- AUTO_INCREMENT dla tabeli `failed_jobs`
---
-ALTER TABLE `failed_jobs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT dla tabeli `migrations`
---
-ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=196;
-
---
--- AUTO_INCREMENT dla tabeli `personal_access_tokens`
---
-ALTER TABLE `personal_access_tokens`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT dla tabeli `users`
---
-ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT dla tabeli `user_refuels`
---
-ALTER TABLE `user_refuels`
-  MODIFY `refueling_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT dla tabeli `user_reprairs`
---
-ALTER TABLE `user_reprairs`
-  MODIFY `reprair_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`reprair_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
