@@ -17,17 +17,26 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
 
+CREATE DATABASE IF NOT EXISTS car_project;
+USE car_project;
 --
 -- Baza danych: `car_project`
 --
 
 -- --------------------------------------------------------
-
+DROP TABLE IF EXISTS car_bases;
+DROP TABLE IF EXISTS car_makes;
+DROP TABLE IF EXISTS failed_jobs;
+DROP TABLE IF EXISTS migrations;
+DROP TABLE IF EXISTS password_resets;
+DROP TABLE IF EXISTS personal_access_tokens;
+DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS user_refuels;
+DROP TABLE IF EXISTS user_reprairs;
 --
 -- Struktura tabeli dla tabeli `car_bases`
 --
 
-DROP TABLE IF EXISTS `car_bases`;
 CREATE TABLE IF NOT EXISTS `car_bases` (
   `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
   `model` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -147,7 +156,6 @@ INSERT INTO `car_bases` (`id`, `model`, `make`, `make_id`, `generation`, `year_f
 -- Struktura tabeli dla tabeli `car_makes`
 --
 
-DROP TABLE IF EXISTS `car_makes`;
 CREATE TABLE IF NOT EXISTS `car_makes` (
   `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
   `make` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -179,7 +187,6 @@ INSERT INTO `car_makes` (`id`, `make`, `created_at`, `updated_at`) VALUES
 -- Struktura tabeli dla tabeli `failed_jobs`
 --
 
-DROP TABLE IF EXISTS `failed_jobs`;
 CREATE TABLE IF NOT EXISTS `failed_jobs` (
   `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
   `uuid` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -198,7 +205,7 @@ CREATE TABLE IF NOT EXISTS `failed_jobs` (
 -- Struktura tabeli dla tabeli `migrations`
 --
 
-DROP TABLE IF EXISTS `migrations`;
+
 CREATE TABLE IF NOT EXISTS `migrations` (
   `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
   `migration` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -212,7 +219,6 @@ CREATE TABLE IF NOT EXISTS `migrations` (
 -- Struktura tabeli dla tabeli `password_resets`
 --
 
-DROP TABLE IF EXISTS `password_resets`;
 CREATE TABLE IF NOT EXISTS `password_resets` (
   `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `token` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -226,7 +232,6 @@ CREATE TABLE IF NOT EXISTS `password_resets` (
 -- Struktura tabeli dla tabeli `personal_access_tokens`
 --
 
-DROP TABLE IF EXISTS `personal_access_tokens`;
 CREATE TABLE IF NOT EXISTS `personal_access_tokens` (
   `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
   `tokenable_type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -248,7 +253,7 @@ CREATE TABLE IF NOT EXISTS `personal_access_tokens` (
 -- Struktura tabeli dla tabeli `users`
 --
 
-DROP TABLE IF EXISTS `users`;
+
 CREATE TABLE IF NOT EXISTS `users` (
   `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
   `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -275,7 +280,6 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `re
 -- Struktura tabeli dla tabeli `user_refuels`
 --
 
-DROP TABLE IF EXISTS `user_refuels`;
 CREATE TABLE IF NOT EXISTS `user_refuels` (
   `refueling_id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
   `user_id` bigint NOT NULL,
@@ -294,7 +298,6 @@ CREATE TABLE IF NOT EXISTS `user_refuels` (
 -- Struktura tabeli dla tabeli `user_reprairs`
 --
 
-DROP TABLE IF EXISTS `user_reprairs`;
 CREATE TABLE IF NOT EXISTS `user_reprairs` (
   `reprair_id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
   `user_id` bigint NOT NULL,
