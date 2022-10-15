@@ -248,43 +248,36 @@ CREATE TABLE `personal_access_tokens` (
 --
 
 
-CREATE TABLE IF NOT EXISTS `users` (
-  `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+CREATE TABLE `users` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `remember_token` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Zrzut danych tabeli `users`
 --
-
-INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(2, 'Test', 'test@test.pl', NULL, '$2y$10$fQ8llhXNDHtg/vRCUx0zr.sHPmyoM6fylDalJwbEEmOMxB7l/xU.W', NULL, '2022-09-27 10:36:35', '2022-09-27 10:36:35');
-
 -- --------------------------------------------------------
 
 --
 -- Struktura tabeli dla tabeli `user_refuels`
 --
 
-CREATE TABLE IF NOT EXISTS `user_refuels` (
-  `refueling_id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `user_id` bigint NOT NULL,
+CREATE TABLE `user_refuels` (
+  `refueling_id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) NOT NULL,
   `fuel` double(8,2) NOT NULL,
   `price` double(8,2) NOT NULL,
   `refueling_date` date NOT NULL,
   `distance` double(8,2) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`refueling_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -292,20 +285,125 @@ CREATE TABLE IF NOT EXISTS `user_refuels` (
 -- Struktura tabeli dla tabeli `user_reprairs`
 --
 
-CREATE TABLE IF NOT EXISTS `user_reprairs` (
-  `reprair_id` bigint UNSIGNED NOT NULL AUTO_INCREMENT,
-  `user_id` bigint NOT NULL,
+CREATE TABLE `user_reprairs` (
+  `reprair_id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) NOT NULL,
   `reprair_date` date NOT NULL,
-  `car_mileage` bigint NOT NULL,
-  `reprair_location` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `reprair_subject` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `car_mileage` bigint(20) NOT NULL,
+  `reprair_location` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `reprair_subject` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `price` double(8,2) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL,
-  PRIMARY KEY (`reprair_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-COMMIT;
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+ALTER TABLE `car_bases`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeksy dla tabeli `car_makes`
+--
+ALTER TABLE `car_makes`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeksy dla tabeli `failed_jobs`
+--
+ALTER TABLE `failed_jobs`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
+
+--
+-- Indeksy dla tabeli `migrations`
+--
+ALTER TABLE `migrations`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indeksy dla tabeli `password_resets`
+--
+ALTER TABLE `password_resets`
+  ADD KEY `password_resets_email_index` (`email`);
+
+--
+-- Indeksy dla tabeli `personal_access_tokens`
+--
+ALTER TABLE `personal_access_tokens`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
+  ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
+
+--
+-- Indeksy dla tabeli `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `users_email_unique` (`email`);
+
+--
+-- Indeksy dla tabeli `user_refuels`
+--
+ALTER TABLE `user_refuels`
+  ADD PRIMARY KEY (`refueling_id`);
+
+--
+-- Indeksy dla tabeli `user_reprairs`
+--
+ALTER TABLE `user_reprairs`
+  ADD PRIMARY KEY (`reprair_id`);
+
+--
+-- AUTO_INCREMENT dla zrzuconych tabel
+--
+
+--
+-- AUTO_INCREMENT dla tabeli `car_bases`
+--
+ALTER TABLE `car_bases`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+
+--
+-- AUTO_INCREMENT dla tabeli `car_makes`
+--
+ALTER TABLE `car_makes`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT dla tabeli `failed_jobs`
+--
+ALTER TABLE `failed_jobs`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT dla tabeli `migrations`
+--
+ALTER TABLE `migrations`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=196;
+
+--
+-- AUTO_INCREMENT dla tabeli `personal_access_tokens`
+--
+ALTER TABLE `personal_access_tokens`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT dla tabeli `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT dla tabeli `user_refuels`
+--
+ALTER TABLE `user_refuels`
+  MODIFY `refueling_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT dla tabeli `user_reprairs`
+--
+ALTER TABLE `user_reprairs`
+  MODIFY `reprair_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+COMMIT;
