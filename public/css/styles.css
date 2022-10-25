@@ -14903,6 +14903,7 @@ textarea.form-control-lg {
   color: #0d6efd;
   text-decoration: none;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+  font-size: 18px;
 }
 @media (prefers-reduced-motion: reduce) {
   .nav-link {
@@ -15016,6 +15017,7 @@ textarea.form-control-lg {
   font-size: 1.125rem;
   text-decoration: none;
   white-space: nowrap;
+  font-size: 26px;
 }
 .navbar-nav {
   display: flex;
@@ -15477,12 +15479,12 @@ textarea.form-control-lg {
   background-color: #1f1f1f;
   color: #e3e3e3;
   background-clip: border-box;
-  border: 1px solid rgba(0, 0, 0, 0.125);
+  border: 2px solid rgba(0, 0, 0, 0.125);
   border-radius: 0.25rem;
 }
 .card > hr {
-  margin-right: 0;
-  margin-left: 0;
+  margin-right: 20px;
+  margin-left: 20px;
 }
 .card > .list-group {
   border-top: inherit;
@@ -22257,4 +22259,12 @@ textarea.form-control-lg {
 .mr_right
 {
     padding-right: 100px;
+}
+.mr_left
+{
+    padding-right: 100px;
+}
+.mr_top
+{
+    margin-top: 20px;
 }

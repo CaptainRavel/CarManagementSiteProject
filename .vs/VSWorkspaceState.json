@@ -2,13 +2,12 @@
   "ExpandedNodes": [
     "",
     "\\public",
-    "\\public\\css",
     "\\resources",
     "\\resources\\css",
     "\\resources\\views",
     "\\resources\\views\\auth",
     "\\resources\\views\\layouts"
   ],
-  "SelectedNode": "\\resources\\views\\user_car.blade.php",
+  "SelectedNode": "\\resources\\views\\car_base.blade.php",
   "PreviewInSolutionExplorer": false
 }

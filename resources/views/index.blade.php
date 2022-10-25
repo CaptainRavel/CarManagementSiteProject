@@ -13,7 +13,7 @@
                 </div>
             </div>
             <!-- Call to Action-->
-            <div class="card text-white bg-black my-5 py-4 text-center">
+            <div class="card text-white my-5 py-4 text-center">
                 <div class="card-body"><p class="text-white m-0">Ciekawostka o samochodach albo cwany slogan</p></div>
             </div>
             <!-- Content Row-->

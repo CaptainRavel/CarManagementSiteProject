@@ -108,7 +108,7 @@
    
   <body style="background-color:#252525">
 
-        <main class="py-4">
+        <main class="py-4 ">
             @yield('content')
         </main>
    
