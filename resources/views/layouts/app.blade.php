@@ -20,8 +20,11 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
+     
+	
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&amp;subset=latin-ext" rel="stylesheet">
+  
 
             <script type="text/javascript">
     		function spalanie()
@@ -46,69 +49,63 @@
     	</script>
 <!-- Styles -->
 
-    <!-- Navbar -->
+    <!-- Navbar --> 
     <nav class="navbar navbar-dark bg-navbar navbar-expand-md">
-          
-          <a class="navbar-brand" href="/"><img src="{{ URL::to('/img/logo.svg') }}" width="60" height="60" alt="">AutoDane</a>
+                <div class="container-fluid">
+                                <a class="navbar-brand "  href="/"><img src="{{ URL::to('/img/logo.svg') }}" width="60" height="60" alt="">AutoDane</a>
+                                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                     <span class="navbar-toggler-icon"></span>
+                                   </button>
 
-
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#test" aria-controls="test" aria-expanded="false" aria-label="dropdownmenu">
-                          <span class="navbar-toggler-icon"></span>
-                    </button>
-                
-
-              <div class="collapse navbar-collapse" id="mainmenu">
-                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0"
-                            <li class="nav-item"><a class="nav-link" href="{{ url('/car_base') }}">Baza aut</a></li>
-                            <li class="nav-item"><a class="nav-link" href="{{ url('/oblicz') }}">Oblicz spalanie</a></li>
-                     @if (Route::has('login'))
-                        @auth
-                            <li class="nav-item"><a class="nav-link"href="{{ url('/user_car') }}">Moje raporty</a></li>
-                            <li class="nav-item"><a class="nav-link"href="{{ url('/user_account') }}">Moje konto</a></li>
-                            <li class="nav-item"> <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"> {{ __('Wyloguj') }} </a> </li>
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none"> @csrf </form>
-                     @else
-                            <li class="nav-item"><a class="nav-link" href="{{ route('login') }}" class="nav-link">Zaloguj</a></li>
-                     @if (Route::has('register'))
-                            <li class="nav-item"><a class="nav-link" href="{{ route('register') }}" class="nav-link">Zarejestruj</a></li> 
-                     @endif
-                          @endauth
-                     @endif
-
-
-                    <!-- Right Side Of Navbar -->
-                  
-                      <!-- Authentication Links -->
-                      @guest
-                          @if (Route::has('login'))
-
-                          @endif
-
-                          @if (Route::has('register'))
-
-                          @endif
-                      @else
-                                <li class="nav-item dropdown">
-                                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre> {{ Auth::user()->name }}</a>
-
-                                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                                 <a class="dropdown-item" href="{{ route('logout') }}"
-                                                      onclick="event.preventDefault();
-                                                       document.getElementById('logout-form').submit();">
-                                                        {{ __('Logout') }}
-                                                 </a>
-
-                                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                                 @csrf
-                                                 </form>
-                                              </div>
+                  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                      <ul class="navbar-nav ms-auto mb-2 mb-lg-0 mr_right">
+                                
+                                  <li class="nav-item"><a class="nav-link" href="{{ url('/car_base') }}">Baza aut</a></li>
+                                  <li class="nav-item"><a class="nav-link" href="{{ url('/oblicz') }}">Oblicz spalanie</a></li>
+                                  @if (Route::has('login'))
+                                     @auth
+                                         <li class="nav-item"><a class="nav-link"href="{{ url('/user_car') }}">Moje raporty</a></li>
+                                         <li class="nav-item dropdown">
+                                  <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> {{ Auth::user()->name }}</a>
+                                      <ul class="dropdown-menu">
+                                         <li><a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"> {{ __('Wyloguj') }} </a> </li>
+                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none"> @csrf </form>
+                                         <li><a class="dropdown-item" href="{{ url('/user_account') }}">Moje konto</a></li>
+                                         <li><hr class="dropdown-divider"></li>
+                                         <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                       </ul>
                                 </li>
-                      @endguest
-                 </ul>    
-              </div>
-             
-     </nav>
+                                    @else
+                                         <li class="nav-item"><a class="nav-link" href="{{ route('login') }}" class="nav-link">Zaloguj</a></li>
+                                    @if (Route::has('register'))
+                                         <li class="nav-item"><a class="nav-link" href="{{ route('register') }}" class="nav-link">Zarejestruj</a></li> 
+                                    @endif
+                                     @endauth
+                                    @endif
 
+                                @guest
+                                    @if (Route::has('login'))
+
+                                    @endif
+
+                                     @if (Route::has('register'))
+
+                                     @endif
+                                  @else
+                                
+                            @endguest   
+                     </ul>       
+                  </div>
+             </div>
+    </nav>
+
+
+
+    
+                          
+             
+                    
+   
   <body style="background-color:#252525">
 
         <main class="py-4">

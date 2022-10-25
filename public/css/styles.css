@@ -22253,3 +22253,8 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+
+.mr_right
+{
+    padding-right: 100px;
+}

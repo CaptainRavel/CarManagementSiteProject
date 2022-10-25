@@ -9,6 +9,6 @@
     "\\resources\\views\\auth",
     "\\resources\\views\\layouts"
   ],
-  "SelectedNode": "\\resources\\views\\car_base.blade.php",
+  "SelectedNode": "\\resources\\views\\user_car.blade.php",
   "PreviewInSolutionExplorer": false
 }
