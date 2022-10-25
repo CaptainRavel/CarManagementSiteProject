@@ -28,7 +28,7 @@
                     </div>
                 </div>
                 <div class="col-md-4 mb-5">
-                    <div class="card h-100 text-muted">
+                    <div class="card h-100">
                         <div class="card-body">
                             <h2 class="card-title">Oblicz spalanie</h2>
                             <p class="card-text">Oblicz swoje średnie spalanie. Wystarczy ,że podasz przejechany dystans i liczbe zatankowanych litrów</p>

@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="container">
+<div class="container .text-light">
     <div class="container px-4 px-lg-6">
         <div class="row gx-2 gx-lg-5 my-5">
             <div class="col-lg-6">
@@ -14,7 +14,7 @@
                                 <table class="table">
                                     <thead>
                                         <tr>
-                                            <th>Data</th>
+                                            <th>Data </th>
                                             <th>Paliwo</th>
                                             <th>Dystans</th>
                                             <th>Cena</th>
