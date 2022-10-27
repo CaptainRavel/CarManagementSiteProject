@@ -25,7 +25,7 @@
 	
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700&amp;subset=latin-ext" rel="stylesheet">
   
-
+    <script src="{{ asset('js//spalanie.js') }}" </script>
             <script type="text/javascript">
     		function spalanie()
     			{
@@ -50,9 +50,9 @@
 <!-- Styles -->
 
     <!-- Navbar --> 
-    <nav class="navbar navbar-dark bg-navbar navbar-expand-md">
+    <nav class="navbar navbar-dark bg-navbar navbar-expand-lg">
                 <div class="container-fluid">
-                                <a class="navbar-brand "  href="/"><img src="{{ URL::to('/img/logo.svg') }}" width="60" height="60" alt="">AutoDane</a>
+                                <a class="navbar-brand "  href="/"><img src="{{ URL::to('/img/icon/car-16.png') }}" width="60" height="60" alt="">AutoDane</a>
                                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                                      <span class="navbar-toggler-icon"></span>
                                    </button>
@@ -68,11 +68,10 @@
                                          <li class="nav-item dropdown">
                                   <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> {{ Auth::user()->name }}</a>
                                       <ul class="dropdown-menu">
-                                         <li><a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"> {{ __('Wyloguj') }} </a> </li>
-                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none"> @csrf </form>
                                          <li><a class="dropdown-item" href="{{ url('/user_account') }}">Moje konto</a></li>
                                          <li><hr class="dropdown-divider"></li>
-                                         <li><a class="dropdown-item" href="#">Something else here</a></li>
+                                          <li><a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"> {{ __('Wyloguj') }} </a> </li>
+                                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none"> @csrf </form>
                                        </ul>
                                 </li>
                                     @else
@@ -108,7 +107,7 @@
    
   <body style="background-color:#252525">
 
-        <main class="py-4 ">
+        <main class="main">
             @yield('content')
         </main>
    
