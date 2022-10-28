@@ -1,0 +1,89 @@
+HTML CSSResult Skip Results Iframe
+EDIT ON
+
+
+
+.navbar{
+  width: 100%;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  background-color: #8e54ff;
+}
+
+.header{
+  width: 100%;
+  height: 60px;
+}
+
+.menu{
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  list-style: none;
+  padding: 0 100px;
+}
+
+.menu li{
+  display: block;
+  height: 100%;
+  font-size: 20px;
+  padding: 5px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  text-transform: uppercase;
+  text-shadow: 0 0 15px #8e54e9;
+  transition: all 300ms cubic-bezier(0.075, 0.82, 0.165, 1);
+  text-align: center;
+  margin-right: 10px;
+}
+
+
+/* Style 1 */
+/* Before Hover: Width of before element is set to 100% and height to 0 and Width of before element is*/
+/* set to 0% and height to 100%  */
+/* On Hover:  Top and bottom borders' of after element and left and right borders of before element*/
+/* is animated here by increasing the height of before element from 0 to 80% and width of after */
+/* element from 0 to 120% */
+
+.menu li:after,
+.menu li:before {
+  content: "";
+  position: absolute;
+  display: block;
+  border: 0px solid transparent;
+}
+
+.menu li:after {
+  width: 0%;
+  height: 80%;
+  border-top: 2px solid #fff;
+  border-bottom: 2px solid #fff;
+  transition: all 0.3s ease;
+}
+
+.menu li:before {
+  width: 120%;
+  height: 0%;
+  border-left: 2px solid #fff;
+  border-right: 2px solid #fff;
+  transition: all 0.5s ease;
+}
+
+.menu li:hover::before {
+  height: 80%;
+}
+
+.menu li:hover::after {
+  width: 120%;
+}
+
+
+
+
+
+Resources1× 0.5× 0.25×Rerun

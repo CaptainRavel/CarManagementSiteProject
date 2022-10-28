@@ -8,6 +8,6 @@
     "\\resources\\views\\auth",
     "\\resources\\views\\layouts"
   ],
-  "SelectedNode": "\\public\\js",
+  "SelectedNode": "\\resources\\views\\layouts\\app.blade.php",
   "PreviewInSolutionExplorer": false
 }

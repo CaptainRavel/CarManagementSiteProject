@@ -1,6 +1,7 @@
 @extends('layouts.app')
-
 @section('content')
+
+
 
 <div class="container">
  <!-- panel with foto -->
@@ -76,4 +77,4 @@
  
         <!-- Footer-->
       
-            @endsection
+@endsection
