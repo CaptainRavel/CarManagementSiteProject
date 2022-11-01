@@ -1751,7 +1751,7 @@ progress {
   --bs-table-hover-bg: rgba(0, 0, 0, 0.075);
   width: 100%;
   margin-bottom: 1rem;
-  color: var(--bs-table-color);
+  color: #ebf0f7;
   vertical-align: top;
   border-color: var(--bs-table-border-color);
 }
@@ -2836,6 +2836,7 @@ textarea.form-control-lg {
   border-radius: var(--bs-btn-border-radius);
   background-color: var(--bs-btn-bg);
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  margin-top: 20px;
 }
 @media (prefers-reduced-motion: reduce) {
   .btn {

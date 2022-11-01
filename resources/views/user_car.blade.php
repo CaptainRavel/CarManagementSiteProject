@@ -2,16 +2,16 @@
 
 @section('content')
 
-<div class="container .text-light">
+<div class="container text-light">
     <div class="container px-4 px-lg-6">
         <div class="row gx-2 gx-lg-5 my-5">
             <div class="col-lg-6">
                 <div class="card">
                     <div class="card text-center">
-                        <div class="card-header">
+                        <div class="card-header ">
                             <h3 class="card-title" class='text-center'>Twoje raporty splania</h3>
                             <div class="table-responsive">
-                                <table class="table">
+                                <table class="table text-light">
                                     <thead>
                                         <tr>
                                             <th>Data </th>
@@ -39,6 +39,9 @@
                     </div>
                 </div>
                 <br>
+
+
+
                 <div class="card">
                     <div class="card text-center">
                         <div class="card-header">
