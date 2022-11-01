@@ -30,30 +30,32 @@
     
 </head>
 <!-- Styles -->
-<nav class="navbar navbar-dark bg-navbar navbar-expand-md">
+<nav class="navbar navbar-dark bg-navbar navbar-expand-lg">
 
-        <div class="container-fluid float-right">
-                                <a class="navbar-brand"  href="/"><img src="{{ URL::to('/img/icon/car-16.png') }}" width="60" height="60" alt="">AutoDane</a>
+        <div class="container-fluid float-right ps-6">
+                                <a class="navbar-brand" style:"margin-left:25%" href="/"><img src="{{ URL::to('/img/icon/car-16.png') }}" width="60" height="60" alt="">AutoDane</a>
                                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                                      <span class="navbar-toggler-icon"></span>
                                    </button>
         </div>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
                   <ul class="menu navbar-nav ms-auto mb-2 mb-lg-0 mr_right">
                           <a class="nav-link" href="{{ url('/car_base') }}"> <li> Baza aut</li></a>    
                           <a class="nav-link" href="{{ url('/oblicz') }}"> <li> Kalkulator spalania</li></a>        
                     @if (Route::has('login'))
                     @auth
                           <a class="nav-link" href="{{ url('/user_car') }}"> <li>Moje Raporty</li></a>   
-                         
-                       
-                           <a class="nav-link dropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><li> {{ Auth::user()->name }} ↓</li>
-                                      <ul class="dropdown-menu">
+                          <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> <li> {{ Auth::user()->name }} ↓</li><a/>
+                                      <div class="dropdown-menu ">
                                       <a class="dropdown-item" href="{{ url('/user_account') }}">Moje konto</a>
                                       <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"> {{ __('Wyloguj') }} </a> </li></a>
                                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none"> @csrf </form>
-                                       </ul>
+                                       </div>
+
+
+
+
                                     @else
                                         <a class="nav-link" href="{{ route('login') }}"><li>Zaloguj</li></a>
                                     @if (Route::has('register'))
@@ -74,15 +76,13 @@
                                   @else
                                 
                             @endguest   
-
+                            
 
                   </ul>
-              </div>
-         </div>
+       
+         
   
 </nav>
-
-
 
 
 

@@ -101,7 +101,7 @@ body {
 
 hr {
   margin: 1rem 0;
-  color: inherit;
+  color: #edece8;
   border: 0;
   border-top: 1px solid;
   opacity: 0.25;
@@ -112,6 +112,7 @@ h6, .h6, h5, .h5, h4, .h4, h3, .h3, h2, .h2, h1, .h1 {
   margin-bottom: 0.5rem;
   font-weight: 500;
   line-height: 1.2;
+ color: #edece8;
 }
 
 h1, .h1 {
@@ -3277,7 +3278,7 @@ textarea.form-control-lg {
   --bs-dropdown-header-color: #6c757d;
   --bs-dropdown-header-padding-x: 1rem;
   --bs-dropdown-header-padding-y: 0.5rem;
-  position: absolute;
+  position: relative;
   z-index: var(--bs-dropdown-zindex);
   display: none;
   min-width: var(--bs-dropdown-min-width);
@@ -3285,7 +3286,7 @@ textarea.form-control-lg {
   margin: 0;
   font-size: var(--bs-dropdown-font-size);
   color: var(--bs-dropdown-color);
-  text-align: left;
+  text-align: center;
   list-style: none;
   background-color: var(--bs-dropdown-bg);
   background-clip: padding-box;
@@ -3293,8 +3294,8 @@ textarea.form-control-lg {
   border-radius: var(--bs-dropdown-border-radius);
 }
 .dropdown-menu[data-bs-popper] {
-  top: 100%;
-  left: 0;
+  top: 75%;
+  right: 3%;
   margin-top: var(--bs-dropdown-spacer);
 }
 
@@ -4208,11 +4209,15 @@ textarea.form-control-lg {
   min-width: 0;
   height: var(--bs-card-height);
   word-wrap: break-word;
-  background-color: var(--bs-card-bg);
+  background-color: #404242;
   background-clip: border-box;
   border: var(--bs-card-border-width) solid var(--bs-card-border-color);
   border-radius: var(--bs-card-border-radius);
+  color: ##edece8;
+
 }
+
+
 .card > hr {
   margin-right: 0;
   margin-left: 0;
@@ -4239,7 +4244,7 @@ textarea.form-control-lg {
 .card-body {
   flex: 1 1 auto;
   padding: var(--bs-card-spacer-y) var(--bs-card-spacer-x);
-  color: var(--bs-card-color);
+  color: #edece8;
 }
 
 .card-title {
@@ -4262,7 +4267,7 @@ textarea.form-control-lg {
 .card-header {
   padding: var(--bs-card-cap-padding-y) var(--bs-card-cap-padding-x);
   margin-bottom: 0;
-  color: var(--bs-card-cap-color);
+  color: #edece8;
   background-color: var(--bs-card-cap-bg);
   border-bottom: var(--bs-card-border-width) solid var(--bs-card-border-color);
 }
@@ -4272,7 +4277,7 @@ textarea.form-control-lg {
 
 .card-footer {
   padding: var(--bs-card-cap-padding-y) var(--bs-card-cap-padding-x);
-  color: var(--bs-card-cap-color);
+  color: #edece8;
   background-color: var(--bs-card-cap-bg);
   border-top: var(--bs-card-border-width) solid var(--bs-card-border-color);
 }
@@ -7933,6 +7938,9 @@ textarea.form-control-lg {
 .ps-5 {
   padding-left: 3rem !important;
 }
+.ps-6 {
+  padding-left: 9rem !important;
+}
 
 .gap-0 {
   gap: 0 !important;
@@ -10878,3 +10886,85 @@ textarea.form-control-lg {
 }
 
 /*# sourceMappingURL=bootstrap.css.map */
+.wrapper {
+  width: 100%;
+  margin: 10px auto;
+  padding: 10px;
+
+}
+.wrapper .card {
+  border-radius: 10px;
+  overflow: hidden;
+  height: calc(100% - 0px);
+  border: 2px solid #ddd;
+   background-color: #404242;
+  background-clip: border-box;
+  border: var(--bs-card-border-width) solid var(--bs-card-border-color);
+  border-radius: var(--bs-card-border-radius);
+  color: ##edece8;
+}
+.wrapper .card img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  object-position: 0 center;
+}
+.wrapper .card h3 {
+  padding: 10px 0;
+  font-size: 25px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+.wrapper .card p {
+  color: #ede7e6;
+  font-size: 16px;
+}
+.wrapper .card .card-footer {
+  background: transparent;
+  border: 0;
+  padding: 1rem;
+  padding-bottom: 2rem;
+}
+.wrapper .card .btn {
+  padding: 10px 35px;
+}
+
+
+.conteudo {
+            display: flex;
+            width: 350px;
+            scroll-snap-type: x mandatory;
+            scroll-padding: 25px;
+            column-gap: 20px;
+        }
+
+         .conteudo .card {
+            flex: 0 0 100%;
+            padding: 30px;
+            scroll-snap-align: start;
+            border-radius: 30px;
+        }
+
+        .conteudo .card h1 {
+            margin-bottom: 2rem;
+        }
+
+        .conteudo .card:nth-child(1) {
+            background: linear-gradient(-229deg, #00DBDE, #FC00FF);
+        }
+
+        .conteudo .card:nth-child(2) {
+            background: linear-gradient(-229deg, #0093E9, #80D0C7);
+        }
+
+        .conteudo .card:nth-child(3) {
+            background: linear-gradient(-229deg, #50d990, #d4d054);
+        }
+
+        .conteudo .card:nth-child(4) {
+            background: linear-gradient(-229deg, #D9AFD9, #97D9E1);
+        }
+
+        .conteudo.card:nth-child(5) {
+            background: linear-gradient(-229deg, #FBAB7E, #F7CE68);
+        }
