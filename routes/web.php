@@ -27,12 +27,11 @@ Route::get('/oblicz', function () {
 
 Auth::routes();
 
-Route::get('/user_car', [App\Http\Controllers\UserCarController::class, 'user_raports'])->name('user_car.reports');
+Route::get('/user_car', [App\Http\Controllers\UserCarController::class, 'user_raports'])->name('user_car.reports')->middleware('can:isUser');
 Route::post('/user_car1', [App\Http\Controllers\UserCarController::class, 'store_refuels'])->name('user_car.store_refuels');
 Route::post('/user_car2', [App\Http\Controllers\UserCarController::class, 'store_reprairs'])->name('user_car.store_reprairs');
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
 Route::post('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get('/user_account', [App\Http\Controllers\UserAccountController::class, 'index'])->name('user_account');

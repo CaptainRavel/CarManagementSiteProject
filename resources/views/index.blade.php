@@ -47,7 +47,6 @@
                                 </div>
                           </div>
                     </div>
-
                     <div class="col-md-4 mb-4">
                         <div class="card shadow-sm">
                             <img src="{{ URL::to('/img/car-tax.jpg') }}" />
@@ -61,11 +60,11 @@
                                         <a href="{{ url('/user_car') }}" class="btn btn-primary d-flex justify-content-center font-weight-bold"> Raporty</a>
                                          @else
                                         <a href="{{ url('/user_car') }}" class="btn btn-primary d-flex justify-content-center font-weight-bold"> Raporty</a>
-                                        @endauth
                                  @endif
                                 </div>
                         </div>
-                    </div>
+                    </div>                                          
+                    @endcan
                   </div>
               </div>
     </div>

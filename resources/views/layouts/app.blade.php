@@ -44,7 +44,7 @@
                           <a class="nav-link" href="{{ url('/car_base') }}"> <li> Baza aut</li></a>    
                           <a class="nav-link" href="{{ url('/oblicz') }}"> <li> Kalkulator spalania</li></a>        
                     @if (Route::has('login'))
-                    @auth
+                    @auth                         
                           <a class="nav-link" href="{{ url('/user_car') }}"> <li>Moje Raporty</li></a>   
                           <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> <li> {{ Auth::user()->name }} ↓</li><a/>
                                       <div class="dropdown-menu ">
