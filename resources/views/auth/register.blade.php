@@ -38,7 +38,6 @@
                                 @enderror
                             </div>
                         </div>
-
                         <div class="form-group row">
                             <label for="password" class="pb-3 col-md-4 col-form-label text-md-right">{{ __('Haslo') }}</label>
 
