@@ -44,7 +44,13 @@
                           <a class="nav-link" href="{{ url('/car_base') }}"> <li> Baza aut</li></a>    
                           <a class="nav-link" href="{{ url('/oblicz') }}"> <li> Kalkulator spalania</li></a>        
                     @if (Route::has('login'))
-                    @auth                         
+                    @auth           
+                        @can('isAdmin')
+                            <a class="nav-link" href="{{ url('/admin_panel') }}"> <li>Panel Administratora</li></a>    
+                            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"> {{ __('Wyloguj') }} <li>Wyloguj</li></a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none"> @csrf </form>
+                        @endcan
+                        @can('isUser')             
                           <a class="nav-link" href="{{ url('/user_car') }}"> <li>Moje Raporty</li></a>   
                           <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> <li> {{ Auth::user()->name }} ↓</li><a/>
                                       <div class="dropdown-menu ">
@@ -52,7 +58,7 @@
                                       <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"> {{ __('Wyloguj') }} </a> </li></a>
                                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none"> @csrf </form>
                                        </div>
-
+                        @endcan 
 
 
 

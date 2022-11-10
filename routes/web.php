@@ -27,7 +27,7 @@ Route::get('/oblicz', function () {
 
 Auth::routes();
 
-Route::get('/user_car', [App\Http\Controllers\UserCarController::class, 'user_raports'])->name('user_car.reports')->middleware('can:isUser');
+Route::get('/user_car', [App\Http\Controllers\UserCarController::class, 'user_raports'])->name('user_car.reports');
 Route::post('/user_car1', [App\Http\Controllers\UserCarController::class, 'store_refuels'])->name('user_car.store_refuels');
 Route::post('/user_car2', [App\Http\Controllers\UserCarController::class, 'store_reprairs'])->name('user_car.store_reprairs');
 
@@ -43,3 +43,10 @@ Route::get('/add_user_car_info', [App\Http\Controllers\UserCarInfoController::cl
 Route::post('/add_user_car_info1', [App\Http\Controllers\UserCarInfoController::class, 'store_car'])->name('user_car_info.store_car');
 
 Route::get('/car_base', [App\Http\Controllers\CarBaseController::class, 'index'])->name('car_base');
+
+Route::get('/admin_panel', [App\Http\Controllers\AdminPanelController::class, 'user_list'])->name('admin_panel')->middleware('can:isAdmin');
+
+Route::get('/user_management/{id}', [App\Http\Controllers\UserManagementController::class, 'user_edit'])->name('user_management')->middleware('can:isAdmin');
+Route::post('/user_management_edit_name/{id}', [App\Http\Controllers\UserManagementController::class, 'update_nick'])->middleware('can:isAdmin');
+Route::post('/user_management_edit_email/{id}', [App\Http\Controllers\UserManagementController::class, 'update_email'])->middleware('can:isAdmin');
+Route::get('/user_management_delete_user/{id}', [App\Http\Controllers\UserManagementController::class, 'destroy_user'])->middleware('can:isAdmin');
