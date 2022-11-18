@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Database\Eloquent\Model;
+
 return [
 
     /*
@@ -66,7 +68,8 @@ return [
         ],
 
         'users' => [
-             'driver' => 'database',
+             'driver' => 'eloquent',
+             'model' => App\Models\User::class,
              'table' => 'users',
          ],
     ],

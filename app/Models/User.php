@@ -2,30 +2,22 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Contracts\Auth\Authenticatable;
-use Illuminate\Auth\Authenticatable as AuthenticableTrait;
-use Illuminate\Contracts\Validation\Validator;
-use Illuminate\Foundation\Validation\ValidatesRequests;
-use Illuminate\Auth\Passwords\CanResetPassword;
-use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
-use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
-class User extends Model implements AuthenticatableContract,CanResetPasswordContract
+class User extends Authenticable
 {
     use HasApiTokens, HasFactory, Notifiable;
-    use AuthenticableTrait,CanResetPassword;
-    use ValidatesRequests;
 
     protected $fillable = [
         'name',
         'email',
         'role',
         'password',
+        'is_email_verified'
     ];
 
     protected $hidden = [
@@ -38,7 +30,7 @@ class User extends Model implements AuthenticatableContract,CanResetPasswordCont
         'email_verified_at' => 'datetime',
     ];
 
-    public function userRefuels(){
+     public function userRefuels(){
         return $this->hasMany(UserRefuels::class,'user_id');
     }
     public function userReprairs(){

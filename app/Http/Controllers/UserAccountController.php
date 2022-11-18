@@ -5,8 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\UserRefuels;
 use App\Models\UserReprairs;
+use App\Models\UserVerify;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Str;
+
 
 class UserAccountController extends Controller
 {
@@ -41,10 +47,25 @@ class UserAccountController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users']]);
 
         $user_id = Auth::id();
+        UserVerify::where('user_id', '=', $user_id)->delete();
         $mail = $request->email;
-        User::where('id', '=', $user_id)->update(['email' => $mail]);
-    
-        return redirect()->route('user_account');
+        User::where('id', '=', $user_id)->update(['email' => $mail]);       
+        User::where('id', '=', $user_id)->update(['is_email_verified' => 0]); 
+
+        $token = Str::random(64);
+  
+        UserVerify::create([
+              'user_id' => $user_id, 
+              'token' => $token
+            ]);
+  
+        Mail::send('email.emailVerificationEmail', ['token' => $token], function($message) use($request){
+              $message->to($request->email);
+              $message->subject('Zweryfikuj swój adres e-mail');
+          });
+
+        return redirect()->route('login')
+        ->with('not verified', 'Aby się zalogować, zweryfikuj zwój adres-email. Wysłaliśmy ci link, jeśli masz kłopot skontaktuj się z administratorem.');
     }
     public function destroy_user(){
 

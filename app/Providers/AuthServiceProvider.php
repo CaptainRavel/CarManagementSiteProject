@@ -3,7 +3,6 @@
 namespace App\Providers;
 
 use App\Enums\UserRole;
-use App\Models\User;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 
@@ -34,7 +33,12 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('isUser', function($user) {
             return $user->role == UserRole::USER;
         });   
-        
+        Gate::define('isPremiumUser', function($user) {
+            return $user->role == UserRole::P_USER;
+        });
+        Gate::define('isVerifiedEmailUser', function($user) {
+            return $user->is_email_verified == 1;
+        });
         
     }
 }

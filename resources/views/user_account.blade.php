@@ -42,21 +42,21 @@
                         <div class="autosized">
                             <div class="form-group">
                                 <input style="width: 80%; margin-left: auto; margin-right: auto;" type="email" class="form-control @error('email') is-invalid @enderror" name="email" required="required" placeholder="Zmień swój e-mail"/>
-                                @error('email')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                                @if ($errors->has('email'))
+                                <span class="text-danger">{{ $errors->first('email') }}</span>
+                            @endif
                             </div>
                         </div>
                         <input style="width: 80%; margin-left: auto; margin-right: auto;" type="submit" value="Zmień email" class="btn btn-primary text-light d-flex justify-content-center"/>
                     </form>
                     <br>
-                    <a class="btn btn-primary text-light d-flex justify-content-center" style="width: 80%; margin-left: auto; margin-right: auto;" style="width: 50%" href="{{ route('user_account.destroy_user') }}" role="button">Usuń konto</a>
+                    <a class="btn btn-primary text-light d-flex justify-content-center" style="width: 80%; margin-left: auto; margin-right: auto;" style="width: 50%" href="{{ route('forget.password.get') }}" role="button">Zresetuj hasło</a>
+                    <br>
+                    <a class="btn btn-primary text-light d-flex justify-content-center" style="width: 80%; margin-left: auto; margin-right: auto;" style="width: 50%" href="{{ route('user_account.destroy_user') }}" role="button" onclick="return confirm('{{ __('Jesteś pewny, że chcesz usunąć konto?') }}')">Usuń konto</a>
             </div>
         </div>
     </div>
   </div>
-</div>
+</div>s
 
 @endsection
