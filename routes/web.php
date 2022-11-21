@@ -70,13 +70,13 @@ Route::get('/reset-password/{token}', [App\Http\Controllers\Auth\ForgotPasswordC
 Route::post('/reset-password', [App\Http\Controllers\Auth\ForgotPasswordController::class, 'submitResetPasswordForm'])->name('reset.password.post');
 
 //Google login
-Route::get('login/google',[App\Http\Controllers\Auth\AuthController::class, 'redirectToGoogle'])->name('login.google');
-Route::get('login/google/callback',[App\Http\Controllers\Auth\AuthController::class, 'handleGoogleCallback']);
-
+//Route::get('login/google',[App\Http\Controllers\Auth\AuthController::class, 'redirectToGoogle'])->name('login.google');
+//Route::get('login/google/callback',[App\Http\Controllers\Auth\AuthController::class, 'handleGoogleCallback']);
+//
 //Facebook login
-Route::get('login/facebook',[App\Http\Controllers\Auth\AuthController::class, 'redirectToFacebook'])->name('login.facebook');
-Route::get('login/facebook/callback',[App\Http\Controllers\Auth\AuthController::class, 'handleFacebookCallback']);
-
+//Route::get('login/facebook',[App\Http\Controllers\Auth\AuthController::class, 'redirectToFacebook'])->name('login.facebook');
+//Route::get('login/facebook/callback',[App\Http\Controllers\Auth\AuthController::class, 'handleFacebookCallback']);
+//
 //Github login
-Route::get('login/github',[App\Http\Controllers\Auth\AuthController::class, 'redirectToGithub'])->name('login.github');
-Route::get('login/github/callback',[App\Http\Controllers\Auth\AuthController::class, 'handleGithubCallback']);
+//Route::get('login/github',[App\Http\Controllers\Auth\AuthController::class, 'redirectToGithub'])->name('login.github');
+//Route::get('login/github/callback',[App\Http\Controllers\Auth\AuthController::class, 'handleGithubCallback']);

@@ -27,7 +27,7 @@ class AdminPanelController extends Controller
         $found_users_list = User::query()
             ->where('name', 'LIKE', "%{$search}%")
             ->orWhere('email', 'LIKE', "%{$search}%")
-            ->get()->orderby('name');
+            ->get();
         
             return view('searchuser', ["found_user_list"=>$found_users_list]);
     }
