@@ -4,9 +4,9 @@
 <main class="login-form">
   <div class="cotainer">
       <div class="row justify-content-center">
-          <div class="col-md-8">
+          <div class="col-lg-4 col-md-6">
               <div class="card">
-                  <div class="card-header">Logowanie</div>
+                  <div class="card-header text-center">Logowanie</div>
                   <div class="card-body">
                     @if (\Session::has('not verified'))
                         <div class="alert alert-success">
@@ -47,9 +47,9 @@
                           </div>
                           <p style="text-align: center"> LUB</p>   
                                                      --}}   
-                            <div class = "form-group row">
-                              <label for="email_address" class="col-md-4 col-form-label text-md-right">E-Mail</label>
-                              <div class="col-md-6" > 
+                            <div class = "form-group row mt-4">
+                              <label for="email_address" class="col-md-4 col-form-label text-md-right text-center">E-Mail</label>
+                              <div class="col-md-6 mb-4" > 
                                     <input type="text" id="email_adress" class="form-control" name="email" required autofocus> 
                                         @if ($errors->has('email'))
                                             <span class ="text-danger">{{ $errors->first('email') }}</span>
@@ -57,8 +57,8 @@
                                     </div> 
                                 </div> 
      
-                                <div class="form-group row"> 
-                                        <label for="password" class="col-md-4 col-form-label text-md-right" >Hasło</label> 
+                                <div class="form-group row mb-4"> 
+                                        <label for="password" class="col-md-4 col-form-label text-md-right text-center" >Hasło</label> 
                                         <div class= "col-md-6" > 
                                             <input type="password" id="password" class="form-control" name="password" required> 
                                                 @if ($errors->has('password'))
@@ -68,7 +68,7 @@
                           </div>
   
                           <div class="form-group row">
-                              <div class="col-md-6 offset-md-4">
+                              <div class="col-md-6 offset-md-4 mb-4">
                                   <div class="checkbox">
                                       <label>
                                           <input type="checkbox" name="remember"> Pamiętaj mnie
@@ -80,14 +80,14 @@
                             <div class="col-md-6 offset-md-4">
                                 <div class="checkbox">
                                     <label>
-                                        <a href="{{ route('forget.password.get') }}">Zapomniałeś hasła?</a>
+                                        <a href="{{ route('forget.password.get') }}" class="link-warning">Zapomniałeś hasła?</a>
                                     </label>
                                 </div>
                             </div>
                         </div>  
-                          <div class="col-md-6 offset-md-4">
-                              <button type="submit" class="btn btn-primary">
-                                  Login
+                          <div class="d-grid gap-2 col-6 mx-auto">
+                              <button type="submit" class="btn btn-warning">
+                                  Zaloguj
                               </button>
                           </div>
                       </form>

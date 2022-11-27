@@ -16,21 +16,21 @@
                  
                           <h1 class="text-center mt-2 mb-4">Oblicz spalanie</h1>
                                 <div class="form-group row mr_top">
-                                    <label  class="pb-3 col-md-4 col-form-label text-md-right">Litry</label>
+                                    <label  class="col-md-4 col-form-label text-center mb-3">Litry</label>
                                       <div class="col-md-6">
                                         <input id="p" type="text" class="form-control @error('email') is-invalid @enderror"required="required" autofocus>
                                       </div>
                                 </div>
                                 <div class="form-group row">
-                                    <label class="pb-3 col-md-4 col-form-label text-md-right">KM</label>
+                                    <label class="col-md-4 col-form-label text-center mb-2">KM</label>
                                       <div class="col-md-6">
                                         <input id="d" type="text" class="form-control @error('email') is-invalid @enderror"required="required" autofocus>
                                       </div>
                                 </div>
-                                <input type="submit" value="Oblicz" onclick="spalanie()" class="btn btn-primary text-light  justify-content-center" >
+                                <input type="submit" value="Oblicz" onclick="spalanie()" class="btn btn-warning d-grid gap-2 col-8 mx-auto mb-2" >
 
 
-                                </p><label class="col-lg-9 text-center strong font-weight-bold"><p id="w"></label>
+                                <label class="text-center m-2">Średnie spalanie: <p id="w"></label>
 
                 </div>
                      

@@ -33,7 +33,7 @@
 <nav class="navbar navbar-dark bg-navbar navbar-expand-lg">
 
         <div class="container-fluid float-right ps-6">
-                                <a class="navbar-brand" style:"margin-left:25%" href="/"><img src="{{ URL::to('/img/icon/car-16.png') }}" width="60" height="60" alt="">AutoDane</a>
+                                <a class="navbar-brand" style:"margin-left:35%" href="/"><img src="{{ URL::to('/img/icon/logo.png') }}" width="250" alt=""></a>
                                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                                      <span class="navbar-toggler-icon"></span>
                                    </button>
@@ -51,7 +51,11 @@
                             <form id="logout-form" action="{{ route('logout') }}" method="GET" class="d-none"> @csrf </form>
                         @endcan
                         @can('isUser')             
-                          <a class="nav-link" href="{{ url('/user_car') }}"> <li>Moje Raporty</li></a>   
+                          <a class="nav-link" href="{{ url('/user_car') }}"> <li>Moje Raporty</li></a>
+                          <a class="nav-link" href="{{ url('/user_account') }}"> <li>Moje Konto</li></a>
+                          <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"> {{ __('Wyloguj') }} </a> 
+                                            <form id="logout-form" action="{{ route('logout') }}" method="GET" class="d-none"> @csrf </form>
+                                       
                           <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> <li> {{ Auth::user()->name }} ↓</li><a/>
                                       <div class="dropdown-menu ">
                                       <a class="dropdown-item" href="{{ url('/user_account') }}">Moje konto</a>

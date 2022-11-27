@@ -2,11 +2,15 @@
   "ExpandedNodes": [
     "",
     "\\public",
+    "\\public\\js",
     "\\resources",
     "\\resources\\css",
+    "\\resources\\js",
     "\\resources\\views",
     "\\resources\\views\\auth",
+    "\\resources\\views\\email",
     "\\resources\\views\\layouts"
   ],
+  "SelectedNode": "\\resources\\views\\oblicz_spalanie.blade.php",
   "PreviewInSolutionExplorer": false
 }

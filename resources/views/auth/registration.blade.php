@@ -2,9 +2,20 @@
 
 @section('content')
 <main class="login-form">
-  <div class="cotainer">
+
+
+
+
+
+
+
+
+
+
+
+<div class="cotainer">
       <div class="row justify-content-center">
-          <div class="col-md-8">
+          <div class="col-lg-4 col-md-8">
               <div class="card">
                   <div class="card-header">Rejestracja</div>
                   <div class="card-body">
@@ -18,7 +29,7 @@
                       <form action="{{ route('register.post') }}" method="POST">
                           @csrf
                           <div class="form-group row">
-                              <label for="name" class="col-md-4 col-form-label text-md-right">Nick</label>
+                              <label for="name" class="col-md-4 col-form-label text-center mb-3">Nick</label>
                               <div class="col-md-6">
                                   <input type="text" id="name" class="form-control" name="name" required autofocus>
                                   @if ($errors->has('name'))
@@ -28,7 +39,7 @@
                           </div>
   
                           <div class="form-group row">
-                              <label for="email_address" class="col-md-4 col-form-label text-md-right">E-Mail</label>
+                              <label for="email_address" class="col-md-4 col-form-label text-center mb-3">E-Mail</label>
                               <div class="col-md-6">
                                   <input type="text" id="email_address" class="form-control" name="email" required autofocus>
                                   @if ($errors->has('email'))
@@ -38,7 +49,7 @@
                           </div>
   
                           <div class="form-group row">
-                              <label for="password" class="col-md-4 col-form-label text-md-right">Hasło</label>
+                              <label for="password" class="col-md-4 col-form-label text-center mb-3">Hasło</label>
                               <div class="col-md-6">
                                   <input type="password" id="password" class="form-control" name="password" required>
                                   @if ($errors->has('password'))
@@ -47,15 +58,15 @@
                               </div>
                           </div>
                           <div class="form-group row">
-                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">Powtórz hasło</label>
+                            <label for="password-confirm" class="col-md-4 col-form-label text-center mb-3">Powtórz hasło</label>
 
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                             </div>
                         </div>
   
-                          <div class="col-md-6 offset-md-4">
-                              <button type="submit" class="btn btn-primary">
+                          <div class="d-grid gap-2 col-6 mx-auto">
+                              <button type="submit" class="btn btn-warning">
                                   Zarejestruj!
                               </button>
                           </div>

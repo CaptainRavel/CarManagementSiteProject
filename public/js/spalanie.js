@@ -11,7 +11,7 @@ function spalanie()
     						if( d != 0 )
     							{
     								var wynik = ( Math.abs( p ) * 100 ) / Math.abs( d );
-    								out.innerHTML = "Spalanie: " + wynik.toFixed( 2 ) + " l/100km";
+    								out.innerHTML = " " + wynik.toFixed( 2 ) + " l/100km";
     							}
     						else
     							out.innerHTML = "Dystans nie może być zerowy!";

@@ -30,7 +30,7 @@
                                 <p class="text-justify">Znajdziesz tutaj wszystkie niezbędne dane techniczne o modelu auta</p>
                                </div>
                                <div class="card-footer">
-                                  <a href="{{ url('/car_base') }}" class="btn btn-primary d-flex justify-content-center font-weight-bold ">Auto Dane</a>
+                                  <a href="{{ url('/car_base') }}" class="btn btn-warning d-flex justify-content-center font-weight-bold ">Auto Dane</a>
                                </div>
                            </div>
                     </div>
@@ -43,7 +43,7 @@
                                 <p class="text-justify">Oblicz swoje średnie spalanie. Wystarczy ,że podasz przejechany dystans i liczbe zatankowanych litrów</p>
                                 </div>
                                 <div class="card-footer">
-                                   <a href="{{ url('/oblicz') }}" class="btn btn-primary d-flex justify-content-center font-weight-bold"> Oblicz</a>
+                                   <a href="{{ url('/oblicz') }}" class="btn btn-warning d-flex justify-content-center font-weight-bold"> Oblicz</a>
                                 </div>
                           </div>
                     </div>
@@ -57,9 +57,9 @@
                                 <div class="card-footer">
                                    @if (Route::has('login'))
                                          @auth
-                                        <a href="{{ url('/user_car') }}" class="btn btn-primary d-flex justify-content-center font-weight-bold"> Raporty</a>
+                                        <a href="{{ url('/user_car') }}" class="btn btn-warning d-flex justify-content-center font-weight-bold"> Raporty</a>
                                          @else
-                                        <a href="{{ url('/user_car') }}" class="btn btn-primary d-flex justify-content-center font-weight-bold"> Raporty</a>
+                                        <a href="{{ url('/user_car') }}" class="btn btn-warning d-flex justify-content-center font-weight-bold"> Raporty</a>
                                  @endif
                                 </div>
                         </div>
