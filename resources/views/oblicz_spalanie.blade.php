@@ -10,7 +10,7 @@
             <div class="row gx-2 gx-lg-5 align-items-center my-5">
                 <div class="col-lg-6"><img class="img-fluid rounded mb-4 mb-lg-0" <img src="{{ URL::to('/img/spalanie.jpg') }}">
                 </div>
-                <div class="card text-light col-lg-6">
+                <div class="card text-light col-lg-6 border border-warning">
 
 
                  

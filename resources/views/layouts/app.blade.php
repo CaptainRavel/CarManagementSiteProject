@@ -23,14 +23,14 @@
 
     <link href="/css/main.css" rel="stylesheet">
     <link href="/css/bootstrap.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+
            
 
   
     
 </head>
-<!-- Styles -->
-<nav class="navbar navbar-dark bg-navbar navbar-expand-lg">
+<nav class="navbar navbar-dark bg-navbar navbar-expand-lg ">
+
 
         <div class="container-fluid float-right ps-6">
                                 <a class="navbar-brand" style:"margin-left:35%" href="/"><img src="{{ URL::to('/img/icon/logo.png') }}" width="250" alt=""></a>
@@ -53,15 +53,13 @@
                         @can('isUser')             
                           <a class="nav-link" href="{{ url('/user_car') }}"> <li>Moje Raporty</li></a>
                           <a class="nav-link" href="{{ url('/user_account') }}"> <li>Moje Konto</li></a>
-                          <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"> {{ __('Wyloguj') }} </a> 
+
+                          <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"> {{ __('') }}<li>Wyloguj</li> </a> 
                                             <form id="logout-form" action="{{ route('logout') }}" method="GET" class="d-none"> @csrf </form>
-                                       
-                          <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"> <li> {{ Auth::user()->name }} ↓</li><a/>
-                                      <div class="dropdown-menu ">
-                                      <a class="dropdown-item" href="{{ url('/user_account') }}">Moje konto</a>
-                                      <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"> {{ __('Wyloguj') }} </a> </li></a>
-                                            <form id="logout-form" action="{{ route('logout') }}" method="GET" class="d-none"> @csrf </form>
-                                       </div>
+
+                          <a class="nav-link" href="{{ url('/user_account') }}"> <li>Witaj {{ Auth::user()->name }}</li></a>           
+
+                          
                         @endcan 
 
 
@@ -104,7 +102,8 @@
    
   <body style="background-color:#252525">
 
-        <main class="main">
+        <main class="main mt-5">
+
             @yield('content')
         </main>
    

@@ -2,20 +2,17 @@
 
 @section('content')
 
-<div class="container ">
-  <div class="row justify-content-center">
-      <div class="col-md-5">
-    <div class="card">
-        <div class="card text-center">
-            <div class="card-header">
-                <h3 class="card-title" class='text-center'>Moje konto</h3>
-            </div>
-        </div>
-    </div>
-        <div class="card">
-            <div class="card-header">
-            <h5 class="pb-3 card-title" style="margin-left: 10%">Moje dane</h5>
-            <p class="card-text" style="margin-left: 10%">Nick:
+<div class="container mt-4">
+	<div class="row">
+        <div class="row justify-content-center">
+          <div class="col-md-6">
+            <div class="card border border-warning text-center">
+                  <div class="card-header">
+                        <h3 class="card-title">Moje konto</h3>
+                  </div>
+
+                  <div class="card-body">
+                               <h5> Login:
                                 @foreach ($user_name as $nick)
                                 {{ $nick->name}}
                                 @endforeach
@@ -24,39 +21,60 @@
                                 @foreach ($user_email as $mail)
                                 {{ $mail->email}}
                                 @endforeach
-            </p>
-            <br>
-            <form action="{{ route('user_account.update_nick') }}" method="POST" role="form">
-                {{ csrf_field() }}
-                    <div class="autosized">
-                        <div class="form-group">
+                                </h5>
+                        	<div class="row mt-5">
+		                        <div class="col col-sm-12"></div>
+		                        <div class="col-md-6">
+                                        <form action="{{ route('user_account.update_nick') }}" method="POST" role="form">
+                                            {{ csrf_field() }}
+                                            <div class="autosized">
+                                                <div class="form-group">
 
-                            <input style="width: 80%; margin-left: auto; margin-right: auto;" type="text" class="form-control" name="name" required="required" placeholder="Zmień swój nick"/>
-                        </div>
-                    </div>
-                    <input class="btn btn-primary text-light d-flex justify-content-center" style="width: 80%; margin-left: auto; margin-right: auto;" type="submit" value="Zmień" />
-                </form>
-                <br>
-                <form action="{{ route('user_account.update_email') }}" method="POST" role="form">
-                    {{ csrf_field() }}
-                        <div class="autosized">
-                            <div class="form-group">
-                                <input style="width: 80%; margin-left: auto; margin-right: auto;" type="email" class="form-control @error('email') is-invalid @enderror" name="email" required="required" placeholder="Zmień swój e-mail"/>
-                                @if ($errors->has('email'))
-                                <span class="text-danger">{{ $errors->first('email') }}</span>
-                            @endif
-                            </div>
-                        </div>
-                        <input style="width: 80%; margin-left: auto; margin-right: auto;" type="submit" value="Zmień email" class="btn btn-primary text-light d-flex justify-content-center"/>
-                    </form>
-                    <br>
-                    <a class="btn btn-primary text-light d-flex justify-content-center" style="width: 80%; margin-left: auto; margin-right: auto;" style="width: 50%" href="{{ route('forget.password.get') }}" role="button">Zresetuj hasło</a>
-                    <br>
-                    <a class="btn btn-primary text-light d-flex justify-content-center" style="width: 80%; margin-left: auto; margin-right: auto;" style="width: 50%" href="{{ route('user_account.destroy_user') }}" role="button" onclick="return confirm('{{ __('Jesteś pewny, że chcesz usunąć konto?') }}')">Usuń konto</a>
+                                                    <input type="text" class="form-control" name="name" required="required" placeholder="Zmień swój nick"/>
+                                                </div>
+                                            </div>
+                                            <input class="btn btn-warning d-flex justify-content-center mb-4" style="width: 80%; margin-left: auto; margin-right: auto;" type="submit" value="Zmień login" />
+                                        </form>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <form action="{{ route('user_account.update_email') }}" method="POST" role="form">
+                                    {{ csrf_field() }}
+                                        <div class="autosized">
+                                            <div class="form-group">
+                                                <input style="" type="email" class="form-control @error('email') is-invalid @enderror" name="email" required="required" placeholder="Zmień swój e-mail"/>
+                                                @if ($errors->has('email'))
+                                                <span class="text-danger">{{ $errors->first('email') }}</span>
+                                            @endif
+                                            </div>
+                                        </div>
+                                        <input type="submit" value="Zmień email" class="btn btn-warning d-flex justify-content-center mb-4" style="width: 80%; margin-left: auto; margin-right: auto;"/>
+                                    </form>
+                                </div>
+	                        </div>
+                            <div class="row">
+		                        <div class="col">
+                                    <a class="btn btn-warning d-flex justify-content-center mb-4" style="width: 80%; margin-left: auto; margin-right: auto;" style="width: 50%" href="{{ route('forget.password.get') }}" role="button">Zresetuj hasło</a>
+                                </div>
+	                        </div>
+                             <div class="row">
+		                        <div class="col">
+                                   <a class="btn btn-danger text-light d-flex justify-content-center mb-4" style="width: 80%; margin-left: auto; margin-right: auto;" style="width: 50%" href="{{ route('user_account.destroy_user') }}" role="button" onclick="return confirm('{{ __('Jesteś pewny, że chcesz usunąć konto?') }}')">Usuń konto</a>
+                                </div>
+	                        </div>
+
+
+                  </div>
+             </div>
             </div>
         </div>
-    </div>
-  </div>
-</div>s
+	</div>
+</div>
+
+
+                
+
+
+
 
 @endsection
