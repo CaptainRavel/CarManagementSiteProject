@@ -97,7 +97,7 @@ class AuthController extends Controller
     public function dashboard()
     {
         if(Auth::check()){
-            return view('dashboard');
+            return view('index');
         }
   
         return redirect("login")->withSuccess('Nie jesteś poprawnie zalogowany!');

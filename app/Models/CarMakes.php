@@ -8,8 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class CarMakes extends Model
 {
     use HasFactory;
-    
+    protected $table = 'car_makes';
+    protected $primaryKey = 'id_car_make';
+
     protected $fillable = [
-        'make',
+        'name',
     ];
 }

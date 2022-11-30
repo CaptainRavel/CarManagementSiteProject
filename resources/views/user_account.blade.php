@@ -70,11 +70,4 @@
         </div>
 	</div>
 </div>
-
-
-                
-
-
-
-
 @endsection
