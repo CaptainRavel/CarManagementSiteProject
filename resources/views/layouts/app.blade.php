@@ -51,13 +51,13 @@
                             <form id="logout-form" action="{{ route('logout') }}" method="GET" class="d-none"> @csrf </form>
                         @endcan
                         @can('isUser')             
-                          <a class="nav-link" href="{{ url('/user_car') }}"> <li>Moje Raporty</li></a>
-                          <a class="nav-link" href="{{ url('/user_account') }}"> <li>Moje Konto</li></a>
+                          <a class="nav-link" href="{{ route('user_raports.reports') }}"> <li>Moje Raporty</li></a>
+                          <a class="nav-link" href="{{ route('user_auto') }}"> <li>Moje Auta</li></a>
+                          <a class="nav-link" href="{{ route('user_account') }}"> <li>Moje Konto</li></a>
 
+                          {{--<a class="nav-link" href="{{ url('/user_account') }}"> <li>Witaj {{ Auth::user()->name }}</li></a>--}} 
                           <a class="nav-link" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"> {{ __('') }}<li>Wyloguj</li> </a> 
-                                            <form id="logout-form" action="{{ route('logout') }}" method="GET" class="d-none"> @csrf </form>
-
-                          <a class="nav-link" href="{{ url('/user_account') }}"> <li>Witaj {{ Auth::user()->name }}</li></a>           
+                          <form id="logout-form" action="{{ route('logout') }}" method="GET" class="d-none"> @csrf </form>        
 
                           
                         @endcan 

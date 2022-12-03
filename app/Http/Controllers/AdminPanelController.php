@@ -29,6 +29,6 @@ class AdminPanelController extends Controller
             ->orWhere('email', 'LIKE', "%{$search}%")
             ->get();
         
-            return view('searchuser', ["found_user_list"=>$found_users_list]);
+            return view('search_user', ["found_user_list"=>$found_users_list]);
     }
 }

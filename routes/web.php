@@ -30,9 +30,15 @@ Route::middleware(['auth'])->group(function()
 Route::middleware(['auth', 'is_verify_email'])->group(function()
 {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-    Route::get('/user_car', [App\Http\Controllers\UserCarController::class, 'user_raports'])->name('user_car.reports');
-    Route::post('/user_car1', [App\Http\Controllers\UserCarController::class, 'store_refuels'])->name('user_car.store_refuels');
-    Route::post('/user_car2', [App\Http\Controllers\UserCarController::class, 'store_reprairs'])->name('user_car.store_reprairs');
+    Route::get('/user_raports', [App\Http\Controllers\UserCarController::class, 'user_raports'])->name('user_raports.reports');
+    Route::post('/user_raports1', [App\Http\Controllers\UserCarController::class, 'store_refuels'])->name('user_raports.store_refuels');
+    Route::post('/user_raports2', [App\Http\Controllers\UserCarController::class, 'store_reprairs'])->name('user_raports.store_reprairs');
+    Route::get('/user_auto', [App\Http\Controllers\UserCarController::class, 'user_auto'])->name('user_auto');
+    Route::get('/add_user_auto', [App\Http\Controllers\UserCarController::class, 'user_add_car'])->name('user_auto.add_car');
+    Route::post('/add_user_auto1', [App\Http\Controllers\UserCarController::class, 'user_add_car_save'])->name('user_auto.add_car_save');
+    Route::get('/edit_user_auto/{car_id}', [App\Http\Controllers\UserCarController::class, 'edit_user_car'])->name('user_auto.edit_car');
+    Route::post('/update_user_auto', [App\Http\Controllers\UserCarController::class, 'update_user_car'])->name('user_auto.update_car');
+    Route::get('/destroy_user_auto/{car_id}', [App\Http\Controllers\UserCarController::class, 'destroy_user_car'])->name('user_auto.destroy_car');
 
     //Route::get('/add_user_car_info', [App\Http\Controllers\UserCarInfoController::class, 'index'])->name('user_car_info');
     //Route::post('/add_user_car_info1', [App\Http\Controllers\UserCarInfoController::class, 'store_car'])->name('user_car_info.store_car');
@@ -42,7 +48,6 @@ Route::middleware(['can:isAdmin'])->group(function()
 {
     Route::get('/admin_panel', [App\Http\Controllers\AdminPanelController::class, 'user_list'])->name('admin_panel');
     Route::get('/searchuser', [App\Http\Controllers\AdminPanelController::class, 'search'])->name('search');
-
 
     Route::get('/user_management/{id}', [App\Http\Controllers\UserManagementController::class, 'user_edit'])->name('user_management');
     Route::post('/user_management_edit_name/{id}', [App\Http\Controllers\UserManagementController::class, 'update_nick']);
