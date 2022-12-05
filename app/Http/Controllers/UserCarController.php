@@ -22,10 +22,20 @@ class UserCarController extends Controller
     public function user_raports()
     {
         $user_id = Auth::id();
-        $refuel_list = UserRefuels::where('user_id', '=', $user_id)->orderBy('refueling_date', 'desc')->paginate(5, ['*'], 'refuels');
-        $reprair_list = UserReprairs::where('user_id', '=', $user_id)->orderBy('reprair_date', 'desc')->paginate(5, ['*'], 'reprairs');
-        return view('user_raports', ["refuel_list"=>$refuel_list,
-                    "reprair_list"=>$reprair_list,
+        $exist = UserCars::where('user_id', '=', $user_id)->exists();
+        $user_cars = UserCars::where('user_id', '=', $user_id)->get();
+        return view('user_raports', ["user_cars"=>$user_cars, "exist"=>$exist]);
+    }
+    public function user_car_raports($car)
+    {
+        $user_id = Auth::id();
+        $car_id=$car;
+        $current_car_name= UserCars::select('name')->Where('car_id', '=', $car)->value('name');
+        $cars_list = UserCars::Where('user_id', '=', $user_id)->OrderBy('car_id')->get();
+        $refuel_list = UserRefuels::where('user_id', '=', $user_id)->where('car_id', '=', $car_id)->orderBy('refueling_date', 'desc')->paginate(5, ['*'], 'refuels');
+        $reprair_list = UserReprairs::where('user_id', '=', $user_id)->where('car_id', '=', $car_id)->orderBy('reprair_date', 'desc')->paginate(5, ['*'], 'reprairs');
+        return view('user_car_raports', ["refuel_list"=>$refuel_list,
+                    "reprair_list"=>$reprair_list, "cars_list"=>$cars_list, "current_car"=>$car, "current_car_name"=>$current_car_name,
                     "title" => "Moje konto"]);
     }
     
@@ -35,10 +45,11 @@ class UserCarController extends Controller
         $refuel_list->fuel = $request->fuel;
         $refuel_list->price = $request->price;
         $refuel_list->refueling_date = $request->date;
-        $refuel_list->distance = $request ->distance;
+        $refuel_list->distance = $request->distance;
+        $refuel_list->car_id = $request->car_id;
         $refuel_list->save();
     
-        return redirect()->route('user_raports.reports');
+        return redirect()->route('user_raports.car_reports', $request->car_id);
     }
 
     public function store_reprairs(Request $request){
@@ -49,9 +60,10 @@ class UserCarController extends Controller
         $reprair_list->reprair_location = $request->reprair_location;
         $reprair_list->reprair_subject = $request ->reprair_subject;
         $reprair_list->price = $request->price;
+        $reprair_list->car_id = $request->car_id;
         $reprair_list->save();
     
-        return redirect()->route('user_raports.reports');
+        return redirect()->route('user_raports.car_reports', $request->car_id);
     }
     public function user_auto()
     {
@@ -74,10 +86,15 @@ class UserCarController extends Controller
             'production_year' => 'required|integer|min:1900|max:2099',
             'image' => 'mimes:jpg,png,jpeg|max:5048',
         ]);
-
+        if ($request->image != NULL){
         $newImageName = time() . '-' . $request->name . '.' . $request->image->extension();
         $request->image->move(public_path('img/users_car_images'), $newImageName);
+        $image = $newImageName;
 
+        }
+        else{
+        $image = NULL;
+        }
         $user_cars = new UserCars();
         $user_cars->user_id = Auth::id();
         $user_cars->name = $request->name;
@@ -86,7 +103,7 @@ class UserCarController extends Controller
         $user_cars->production_year = $request->production_year;
         $user_cars->oc_date = $request->oc_date;
         $user_cars->tech_rev_date = $request->tech_rev_date;
-        $user_cars->image = $newImageName;
+        $user_cars->image = $image;
         $user_cars->save();
     
         return redirect()->route('user_auto');
@@ -146,9 +163,13 @@ class UserCarController extends Controller
         if (File::exists($file_path)){
             File::delete($file_path);
             UserCars::where('car_id', '=', $id)->delete();
+            UserRefuels::where('car_id', '=', $id)->delete();
+            UserReprairs::where('car_id', '=', $id)->delete();
         }
         else{
             UserCars::where('car_id', '=', $id)->delete();
+            UserRefuels::where('car_id', '=', $id)->delete();
+            UserReprairs::where('car_id', '=', $id)->delete();
         }
 
         return redirect()->route('user_auto');

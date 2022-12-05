@@ -30,7 +30,8 @@ Route::middleware(['auth'])->group(function()
 Route::middleware(['auth', 'is_verify_email'])->group(function()
 {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-    Route::get('/user_raports', [App\Http\Controllers\UserCarController::class, 'user_raports'])->name('user_raports.reports');
+    Route::get('/user_raports/', [App\Http\Controllers\UserCarController::class, 'user_raports'])->name('user_raports.reports');
+    Route::get('/user_raports/{car}', [App\Http\Controllers\UserCarController::class, 'user_car_raports'])->name('user_raports.car_reports');
     Route::post('/user_raports1', [App\Http\Controllers\UserCarController::class, 'store_refuels'])->name('user_raports.store_refuels');
     Route::post('/user_raports2', [App\Http\Controllers\UserCarController::class, 'store_reprairs'])->name('user_raports.store_reprairs');
     Route::get('/user_auto', [App\Http\Controllers\UserCarController::class, 'user_auto'])->name('user_auto');
