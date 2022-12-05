@@ -98,7 +98,7 @@ class Carbasedropdown extends Component
     public function updatedSelectedTrim($trim)
     {
         if (!is_null($trim)) {  
-        $this->equipments = CarEquip::where('id_car_trim', '=', $trim)->OrderBy('equip_name')->get();
+        //$this->equipments = CarEquip::where('id_car_trim', '=', $trim)->OrderBy('equip_name')->get();
         $this->specs = CarSpec::select('spec_name', 'value', 'unit')->where('id_car_trim', '=', $trim)->get();
        // $this->options = collect();
         }
