@@ -6,7 +6,7 @@ use App\Models\User;
 use App\Models\UserRefuels;
 use App\Models\UserReprairs;
 use App\Models\UserVerify;
-use Illuminate\Support\Facades\DB;
+use App\Models\UserCars;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -73,6 +73,7 @@ class UserAccountController extends Controller
         User::where('id', '=', $user_id)->delete();
         UserRefuels::where('user_id', '=', $user_id)->delete();
         UserReprairs::where('user_id', '=', $user_id)->delete();
+        UserCars::where('user_id', '=', $user_id)->delete();
 
         return redirect()->route('home');
     }
