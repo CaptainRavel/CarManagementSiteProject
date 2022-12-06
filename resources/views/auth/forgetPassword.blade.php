@@ -4,9 +4,9 @@
 <main class="login-form">
   <div class="cotainer">
       <div class="row justify-content-center">
-          <div class="col-md-8">
-              <div class="card">
-                  <div class="card-header">Reset hasła</div>
+          <div class="col-md-3">
+              <div class="card p-2  border border-warning">
+                  <div class="card-header text-center"><h3>Reset Hasła</h3></div>
                   <div class="card-body">
   
                     @if (\Session::has('passchange'))
@@ -19,18 +19,18 @@
   
                       <form action="{{ route('forget.password.post') }}" method="POST">
                           @csrf
-                          <div class="form-group row">
+                          <div class="form-group row justify-content-center">
+                              <div class="col-md-8 mb-4" >
                               <label for="email_address" class="col-md-4 col-form-label text-md-right">E-Mail Address</label>
-                              <div class="col-md-6">
                                   <input type="text" id="email_address" class="form-control" name="email" required autofocus>
                                   @if ($errors->has('email'))
                                       <span class="text-danger">{{ $errors->first('email') }}</span>
-                                  @endif
-                              </div>
+                                  @endif 
                           </div>
-                          <div class="col-md-6 offset-md-4">
-                              <button type="submit" class="btn btn-primary">
-                                  Wyślij link do zresetowania hasła
+
+                         <div class="d-grid gap-2 col-6 mx-auto mb-4">
+                              <button type="submit" class="btn btn-warning">
+                                  Wyślij link do zerowania hasła
                               </button>
                           </div>
                       </form>

@@ -20,10 +20,10 @@
 
    
     <div class="wrapper">
-              <div class="container mb-5">
+              <div class="container mb-5 ">
                  <div class="row gx-4">
                     <div class="col-md-4 mb-4">
-                          <div class="card shadow-sm">
+                          <div class="card shadow-sm border border-warning">
                              <img src="{{ URL::to('/img/car-traffic.jpg') }}" />
                                <div class="card-body">
                                   <h3>Auto Dane</h3>
@@ -36,7 +36,7 @@
                     </div>
 
                     <div class="col-md-4 mb-4">
-                         <div class="card shadow-sm">
+                         <div class="card shadow-sm border border-warning">
                             <img src="{{ URL::to('/img/tankowanie.jpg') }}" />
                                 <div class="card-body">
                                   <h3>Kalkulator Spalania</h3>
@@ -48,7 +48,7 @@
                           </div>
                     </div>
                     <div class="col-md-4 mb-4">
-                        <div class="card shadow-sm">
+                        <div class="card shadow-sm border border-warning">
                             <img src="{{ URL::to('/img/car-tax.jpg') }}" />
                                 <div class="card-body">
                                   <h3>Moje raporty</h3>

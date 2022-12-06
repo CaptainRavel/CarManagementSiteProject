@@ -3,7 +3,7 @@
 @section('content')
 <html>
 <head>
-    <title>Baza aut</title>
+    
     @livewireStyles
 </head>
 <body>

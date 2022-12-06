@@ -1,7 +1,7 @@
 
 <div class="container">
     <div class="container col-md-8">
-<div class="card">
+<div class="card border border-warning">
     <div wire:loading>
         <div style="display: flex; justify-content: center; align-items: center; background-color: black;
         position: fixed; top: 0px; left: 0px; z-index: 9999; width: 100%; height: 100%; opacity: .75;">
@@ -17,12 +17,15 @@
             </div>
         </div>
     </div>
-    <div class="card-header">
-            <div class="autosized">
-                <div class="form-group row" >
-                    <label for="make" class="h4 text-center">Marka</label>
-                        <select wire:model="selectedMake" class="form-control text-center" name="make">
-                            <option value=NULL class="selected">WYBIERZ</option>
+    <div class="card-header p-3">
+           <h1 class="text-center ">Baza Aut</h1>
+    </div>
+    
+    <div class="card-body mt-3">
+         
+            <div class="form-group row m-4 mt-1" >
+                        <select wire:model="selectedMake" class="select-css text-center">
+                            <option value=NULL >Marka</option>
                             @foreach($makes as $make)
                                 <option value="{{ $make->id_car_make }}">{{ $make->name }}</option>
                             @endforeach
@@ -30,10 +33,9 @@
                     </div>
             <br>
             @if($makes != NULL)
-            <div class="form-group row" >
-                <label for="model" class="h4 text-center">Model</label>
-                    <select wire:model="selectedModel" class="form-control text-center" name="model">
-                        <option value=NULL class="selected">WYBIERZ</option>
+            <div class="form-group row m-4 mt-0" >
+                    <select wire:model="selectedModel" class="select-css text-center" >
+                        <option value=NULL >Model</option>
                         @foreach($models as $model)
                             <option value="{{ $model->id_car_model }}">{{ $model->name }}</option>
                         @endforeach
@@ -42,10 +44,9 @@
             @endif
             <br>
             @if ($models != NULL)
-            <div class="form-group row" >
-                <label for="generation" class="h4 text-center">Generacja</label>
-                    <select wire:model="selectedGeneration" class="form-control text-center" name="generation">
-                        <option value=NULL class="selected">WYBIERZ</option>
+            <div class="form-group row m-4 mt-0" >
+                    <select wire:model="selectedGeneration" class="select-css text-center">
+                        <option value=NULL >Generacja</option>
                         @foreach($generations as $generation)
                             <option value="{{ $generation->id_car_generation }}">{{ $generation->name }} [{{ $generation->year_begin }}-{{ $generation->year_end }}]</option>
                         @endforeach
@@ -54,10 +55,9 @@
             @endif
             <br>
             @if ($generations != NULL)
-            <div class="form-group row" >
-                <label for="serie" class="h4 text-center">Seria</label>
-                    <select wire:model="selectedSerie" class="form-control text-center" name="serie">
-                        <option value=NULL class="selected">WYBIERZ</option>
+            <div class="form-group row m-4 mt-0">
+                    <select wire:model="selectedSerie" class="select-css text-center">
+                        <option value=NULL class="selected">Seria</option>
                         @foreach($series as $serie)
                             <option value="{{ $serie->id_car_serie }}">{{ $serie->name }}</option>
                         @endforeach
@@ -66,33 +66,21 @@
             @endif
             <br>
             @if ($series != NULL)
-            <div class="form-group row" >
-                <label for="trim" class="h4 text-center">Wersja silnika</label>
-                    <select wire:model="selectedTrim" class="form-control text-center" name="trim">
-                        <option value=NULL class="selected">WYBIERZ</option>
+            <div class="form-group row m-4 mt-0 mb-0">
+                    <select wire:model="selectedTrim" class="select-css text-center">
+                        <option value=NULL class="selected">Silnik</option>
                         @foreach($trims as $trim)
                             <option value="{{ $trim->id_car_trim }}">{{ $trim->name }}</option>
                         @endforeach
                     </select>
                 </div>   
             @endif
-            <br>
-           {{-- @if ($trims != NULL)
-            <div class="form-group row" >
-                <label for="equipments" class="h4 text-center">Wersja wyposażenia</label>
-                    <select wire:model="selectedEquipment" class="form-control text-center" name="equipment">
-                        <option value=NULL class="selected">WYBIERZ</option>
-                        @foreach($equipments as $equipment)
-                            <option value="{{ $equipment->id_car_equipment }}">{{ $equipment->equip_name }} {{ $equipment->year }}</option>
-                        @endforeach
-                    </select>
-                </div>   
-            @endif
-            <br> --}}
+         
             <table class="table">
                 <thead>
-                    <tr>
-                        <th>SPECYFIKACJA</th>
+                    <tr>  
+                        
+                        <h3 class="text-center mt-5 mb-4">Specyfikacja:</h3>
                     </tr>
                 </thead>
                 <tbody>
