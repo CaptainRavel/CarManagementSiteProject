@@ -3,23 +3,113 @@
 @section('content')
 
 
-<h3 class='text-center'>Twoje auta</h3>
+<h3 class='text-center mb-4'>Twoje auta</h3>
 <div class="d-flex justify-content-center">
-@if (!$exist)
-  <div class="card" >
-    <div class="card-body">
-      <h5 class="card-title">BRAK AUT</h5>
-      <p class="card-text">Nie dodałeś jeszcze żadnego auta, kliknij poniżej by zapisać swoje pierwsze auto!</p>
+    @if (!$exist)
+      <div class="card border border-warning">
+        <div class="card-body text-center mt-2">
+          <h5 class="card-title">BRAK AUT</h5> 
+        </div>
+      <div class="card-body">
+          <p class="card-text">Nie dodałeś jeszcze żadnego auta, kliknij poniżej by zapisać swoje pierwsze auto!</p>
+           <div class="col text-center">
+               <a href="{{ route('user_auto.add_car') }}" <button type="button" href="{{ route('user_auto.add_car') }}" class="btn btn-warning d-flex justify-content-center ">Dodaj auto</button></a>  
+            </div>
+      </div>  
+    @endif
+</div>
+<div class="container">
+    @if ($exist)
+    <div class="row justify-content-center">
+              @foreach ($user_cars as $user_car)
+           
+                    <div class="card m-3 p-0 shadow-sm border border-warning" style="max-width: 23em;">
+                            @if ($user_car->image == '')
+                                  <img class="card-img-top " src="{{ asset('img/user_car_default.jpg') }}" />
+                                 @else
+                                  <img class="card-img-top " src="{{ asset('img/users_car_images/' . $user_car->image) }}" />
+                            @endif
+                         
+                         <div class="card-body">
+                            <h4 class="card-title text-center">{{ $user_car->name }}</h4>
+                           
+                                MARKA: {{ $user_car->car_make }}</br>
+                                MODEL: {{ $user_car->car_model }}</br>
+                                ROK PRODUKCJI: {{ $user_car->production_year }}</br>
+                                UBEZPIECZENIE: {{ $user_car->oc_date }}</br>
+                                BADANIE TECHNICZNE: {{ $user_car->tech_rev_date }}</br>
+                            
+                                <div class="card-body">
+                                  <a class="btn btn-success text-light d-flex justify-content-center" style="width: 80%; margin-left: auto; margin-right: auto;" style="width: 50%" href="{{ route('user_auto.edit_car', $user_car->car_id) }}" role="button">Edytuj</a>   
+                                  <a class="btn btn-danger text-light d-flex justify-content-center" style="width: 80%; margin-left: auto; margin-right: auto;" style="width: 50%" href="{{ route('user_auto.destroy_car', $user_car->car_id) }}" role="button" onclick="return confirm('{{ __('Jesteś pewny, że chcesz usunąć auto? Zostaną usunięte także wszystkie raporty przypisane do tego samochodu!') }}')">Usuń</a>   
+                                </div>
+                         </div>
+
+               
+                </div>
+                 @endforeach
     </div>
-  <div class="card-body">
-    <a href="{{ route('user_auto.add_car') }}" class="btn btn-warning" role="button" aria-pressed="true">DODAJ AUTO</a>
-  </div>
-  </div>
+</div>
+<div class="row justify-content-center mt-5">
+       
+  
+         <div class="card text-center" style="width: 20rem;">
+              <div class="card-body">
+              @if ($cars_count >= 2) 
+                <p class="card-text">Aby dodać więcej niż dwa auta, musisz być użytkownikiem PREMIUM</p>
+                <a href="#" class="btn btn-warning" role="button" aria-pressed="true">WYKUP KONTO PREMIUM</a>
+              @else
+                <a href="{{ route('user_auto.add_car') }}" class="btn btn-warning" role="button" aria-pressed="true">DODAJ AUTO</a>
+                 @endif
+              </div>
+          </div>
+
+  
+</div>
+
+
+
 @endif
+
+</div>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--
 
 @if ($exist)  
   @foreach ($user_cars as $user_car)
-        <div class="card" style="width: 20rem;" class="">
+        <div class="card" style="width: 20rem;">
           @if ($user_car->image == '')
             <img class="card-img-top" src="{{ asset('img/user_car_default.jpg') }}" alt="Card image cap">
           @else
@@ -41,23 +131,28 @@
               <a class="btn btn-danger text-light d-flex justify-content-center" style="width: 80%; margin-left: auto; margin-right: auto;" style="width: 50%" href="{{ route('user_auto.destroy_car', $user_car->car_id) }}" role="button" onclick="return confirm('{{ __('Jesteś pewny, że chcesz usunąć auto? Zostaną usunięte także wszystkie raporty przypisane do tego samochodu!') }}')">Usuń</a>   
             </div>
         </div>
-        <br>
-        <br>
+
+     
   @endforeach
   @if ($cars_count >= 2)   
-    <div class="card" style="width: 20rem;">
-      <div class="card-body">
-        <p class="card-text">Aby dodać więcej niż dwa auta, musisz być użytkownikiem PREMIUM</p>
-        <a href="#" class="btn btn-warning" role="button" aria-pressed="true">WYKUP KONTO PREMIUM</a>
-      </div>
-    </div>
-    @else
-    <div class="card" style="width: 20rem;">
-      <div class="card-body">
-        <a href="{{ route('user_auto.add_car') }}" class="btn btn-warning" role="button" aria-pressed="true">DODAJ AUTO</a>
-      </div>
-    </div>
+    <div class="row">
+         <div class="card" style="width: 20rem;">
+          <div class="card-body">
+            <p class="card-text">Aby dodać więcej niż dwa auta, musisz być użytkownikiem PREMIUM</p>
+            <a href="#" class="btn btn-warning" role="button" aria-pressed="true">WYKUP KONTO PREMIUM</a>
+          </div>
+        </div>
+
+   @else
+        <div class="card" style="width: 20rem;">
+          <div class="card-body">
+            <a href="{{ route('user_auto.add_car') }}" class="btn btn-warning" role="button" aria-pressed="true">DODAJ AUTO</a>
+          </div>
+        </div>
   @endif
 @endif
 </div>
+
+
+
 @endsection
