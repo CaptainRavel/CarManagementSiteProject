@@ -3,9 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\UserCars;
 use App\Models\UserRefuels;
 use App\Models\UserReprairs;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -62,7 +64,31 @@ class UserManagementController extends Controller
     public function destroy_user($id){
 
         $user_id = $id;
+    
+        $user_cars = UserCars::where('user_id', '=', $user_id)->get();
+        foreach($user_cars as $car){
+            $file_path = public_path('img/users_car_images/'.$car->image);
+            if (File::exists($file_path)){
+                File::delete($file_path);
+            }
+
+            $refuels_files = UserRefuels::where('car_id', '=', $car->car_id)->get();        
+            foreach($refuels_files as $raport_file){
+                $raport_file_path = public_path('users_reports_files/'.$raport_file->file);
+                if (File::exists($raport_file_path)){
+                    File::delete($raport_file_path);
+                    }
+                }
+            $reprairs_files = UserReprairs::where('car_id', '=', $car->car_id)->get();        
+            foreach($reprairs_files as $raport_file){
+                $raport_file_path = public_path('users_reports_files/'.$raport_file->file);
+                if (File::exists($raport_file_path)){
+                    File::delete($raport_file_path);
+                    }
+                }
+        }
         User::where('id', '=', $user_id)->delete();
+        UserCars::where('user_id', '=', $user_id)->delete();      
         UserRefuels::where('user_id', '=', $user_id)->delete();
         UserReprairs::where('user_id', '=', $user_id)->delete();
 

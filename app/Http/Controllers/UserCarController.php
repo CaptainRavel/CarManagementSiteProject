@@ -34,37 +34,178 @@ class UserCarController extends Controller
         $cars_list = UserCars::Where('user_id', '=', $user_id)->OrderBy('car_id')->get();
         $refuel_list = UserRefuels::where('user_id', '=', $user_id)->where('car_id', '=', $car_id)->orderBy('refueling_date', 'desc')->paginate(5, ['*'], 'refuels');
         $reprair_list = UserReprairs::where('user_id', '=', $user_id)->where('car_id', '=', $car_id)->orderBy('reprair_date', 'desc')->paginate(5, ['*'], 'reprairs');
+        $refuel_sum = UserRefuels::where('user_id', '=', $user_id)->where('car_id', '=', $car_id)->sum('fuel');
+        $distance_sum = UserRefuels::where('user_id', '=', $user_id)->where('car_id', '=', $car_id)->sum('distance');
+        $price_sum = UserRefuels::where('user_id', '=', $user_id)->where('car_id', '=', $car_id)->sum('price');
+        $reprair_sum = UserReprairs::where('user_id', '=', $user_id)->where('car_id', '=', $car_id)->sum('price');
         return view('user_car_raports', ["refuel_list"=>$refuel_list,
-                    "reprair_list"=>$reprair_list, "cars_list"=>$cars_list, "current_car"=>$car, "current_car_name"=>$current_car_name,
-                    "title" => "Moje konto"]);
+                    "reprair_list"=>$reprair_list, "cars_list"=>$cars_list, "current_car"=>$car,
+                    "current_car_name"=>$current_car_name, 'refuel_sum'=>$refuel_sum, 'distance_sum'=>$distance_sum,
+                    'price_sum'=>$price_sum, 'reprair_sum'=>$reprair_sum,"title" => "Moje konto"]);
     }
     
     public function store_refuels(Request $request){
+    
+        if ($request->file != NULL){
+            $newFileName = time() . '-' . $request->car_id . '.' . $request->file->extension();
+            $request->file->move(public_path('users_reports_files'), $newFileName);
+            $file = $newFileName;
+            }
+        else{
+            $file = NULL;
+            }
+
         $refuel_list = new UserRefuels();
         $refuel_list->user_id = Auth::id();
         $refuel_list->fuel = $request->fuel;
         $refuel_list->price = $request->price;
-        $refuel_list->refueling_date = $request->date;
+        $refuel_list->refueling_date = $request->refueling_date;
         $refuel_list->distance = $request->distance;
         $refuel_list->car_id = $request->car_id;
+        $refuel_list->file = $file;
         $refuel_list->save();
     
         return redirect()->route('user_raports.car_reports', $request->car_id);
     }
 
     public function store_reprairs(Request $request){
+    
+        if ($request->file != NULL){
+            $newFileName = time() . '-' . $request->car_id . '.' . $request->file->extension();
+            $request->file->move(public_path('users_reports_files'), $newFileName);
+            $file = $newFileName;
+            }
+        else{
+            $file = NULL;
+            }
+
         $reprair_list = new UserReprairs();
         $reprair_list->user_id = Auth::id();
-        $reprair_list->reprair_date = $request->date;
-        $reprair_list->car_mileage = $request->mileage;
+        $reprair_list->reprair_date = $request->reprair_date;
+        $reprair_list->car_mileage = $request->car_mileage;
         $reprair_list->reprair_location = $request->reprair_location;
         $reprair_list->reprair_subject = $request ->reprair_subject;
         $reprair_list->price = $request->price;
         $reprair_list->car_id = $request->car_id;
+        $reprair_list->file = $file;
         $reprair_list->save();
     
         return redirect()->route('user_raports.car_reports', $request->car_id);
     }
+
+    public function update_refuels(Request $request){
+
+        $id = $request->refueling_id;
+        $fuel = $request->fuel;
+        $price = $request->price;
+        $refueling_date = $request->refueling_date;
+        $distance = $request->distance;
+        $car_id = $request->car_id;
+
+        if ($request->file != NULL){
+            $file_path = UserRefuels::select('file')->where('refueling_id', '=', $id)->value('file');
+            $raport_file_path = public_path('users_reports_files/'.$file_path);
+            File::delete($raport_file_path);
+            
+            $newFileName = time() . '-' . $request->car_id . '.' . $request->file->extension();
+            $request->file->move(public_path('users_reports_files/'), $newFileName);
+            $file = $newFileName;
+        }
+        else{
+            $file = UserRefuels::select('file')->where('refueling_id', '=', $id)->value('file');
+        }
+        UserRefuels::where('refueling_id', '=', $id)->update([
+            'fuel'=>$fuel,
+            'price'=>$price,
+            'refueling_date'=>$refueling_date,
+            'distance'=>$distance,
+            'car_id'=>$car_id,
+            'file'=>$file,
+        ]);
+
+        return redirect()->route('user_raports.car_reports', $request->car_id);
+    }
+    public function update_reprairs(Request $request){
+
+        $id = $request->reprair_id;
+        $reprair_subject = $request->reprair_subject;
+        $reprair_location = $request->reprair_location;
+        $reprair_date = $request->reprair_date;
+        $car_mileage = $request->car_mileage;
+        $price = $request->price;
+        $car_id = $request->car_id;
+
+        if ($request->file != NULL){
+            $file_path = UserReprairs::select('file')->where('reprair_id', '=', $id)->value('file');
+            $raport_file_path = public_path('users_reports_files/'.$file_path);
+            File::delete($raport_file_path);
+            
+            $newFileName = time() . '-' . $request->car_id . '.' . $request->file->extension();
+            $request->file->move(public_path('users_reports_files/'), $newFileName);
+            $file = $newFileName;
+        }
+        else{
+            $file = UserReprairs::select('file')->where('reprair_id', '=', $id)->value('file');
+        }
+        UserReprairs::where('reprair_id', '=', $id)->update([
+            'reprair_subject'=>$reprair_subject,
+            'reprair_location'=>$reprair_location,
+            'reprair_date'=>$reprair_date,
+            'car_mileage'=>$car_mileage,
+            'price'=>$price,
+            'car_id'=>$car_id,
+            'file'=>$file,
+        ]);
+
+        return redirect()->route('user_raports.car_reports', $request->car_id); 
+    }
+
+    public function edit_refuel_raport($refuel_id, $car_id){
+        $id = $refuel_id;
+        $current_car = $car_id;
+        $raport_type = 'refuel';
+        $refuels = UserRefuels::where('refueling_id', '=', $id)->get();
+        return view('edit_raport', ['refuels'=>$refuels, 'raport_type'=>$raport_type, 'current_car'=>$current_car]);
+    }
+
+    public function edit_reprair_raport($reprair_id, $car_id){
+        $id = $reprair_id;
+        $current_car = $car_id;
+        $raport_type = 'reprair';
+        $reprairs = UserReprairs::where('reprair_id', '=', $id)->get();
+        return view('edit_raport', ['reprairs'=>$reprairs, 'raport_type'=>$raport_type, 'current_car'=>$current_car]);
+    }
+
+    public function destroy_refuel_raport($id, $car_id){
+
+        $refuel_id = $id;
+        $file_path = UserRefuels::select('file')->where('refueling_id', '=', $refuel_id)->value('file');
+        $raport_file_path = public_path('users_reports_files/'.$file_path);
+        if (File::exists($raport_file_path)){
+            File::delete($raport_file_path);
+            UserRefuels::where('refueling_id', '=', $refuel_id)->delete();
+        }
+        else{
+            UserRefuels::where('refueling_id', '=', $refuel_id)->delete();
+        }
+        return redirect()->route('user_raports.car_reports', $car_id);
+    }
+
+    public function destroy_reprair_raport($id, $car_id){
+
+        $reprair_id = $id;
+        $file_path = UserReprairs::select('file')->where('reprair_id', '=', $reprair_id)->value('file');
+        $raport_file_path = public_path('users_reports_files/'.$file_path);
+        if (File::exists($raport_file_path)){
+            File::delete($raport_file_path);
+            UserReprairs::where('reprair_id', '=', $reprair_id)->delete();
+        }
+        else{
+            UserReprairs::where('reprair_id', '=', $reprair_id)->delete();
+        }
+        return redirect()->route('user_raports.car_reports', $car_id);
+    }
+
     public function user_auto()
     {
         $user_id = Auth::id();
@@ -162,15 +303,24 @@ class UserCarController extends Controller
         $file_path = public_path('img/users_car_images/'.$image_path);
         if (File::exists($file_path)){
             File::delete($file_path);
-            UserCars::where('car_id', '=', $id)->delete();
-            UserRefuels::where('car_id', '=', $id)->delete();
-            UserReprairs::where('car_id', '=', $id)->delete();
         }
-        else{
-            UserCars::where('car_id', '=', $id)->delete();
-            UserRefuels::where('car_id', '=', $id)->delete();
-            UserReprairs::where('car_id', '=', $id)->delete();
-        }
+        $refuels_files = UserRefuels::where('car_id', '=', $id)->get();        
+        foreach($refuels_files as $raport_file){
+            $raport_file_path = public_path('users_reports_files/'.$raport_file->file);
+            if (File::exists($raport_file_path)){
+                File::delete($raport_file_path);
+                }
+            }
+        $reprairs_files = UserReprairs::where('car_id', '=', $id)->get();        
+        foreach($reprairs_files as $raport_file){
+            $raport_file_path = public_path('users_reports_files/'.$raport_file->file);
+            if (File::exists($raport_file_path)){
+                File::delete($raport_file_path);
+                }
+            }
+        UserCars::where('car_id', '=', $id)->delete();
+        UserRefuels::where('car_id', '=', $id)->delete();
+        UserReprairs::where('car_id', '=', $id)->delete();
 
         return redirect()->route('user_auto');
     }

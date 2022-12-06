@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Response;
 
 
 /*
@@ -33,7 +34,28 @@ Route::middleware(['auth', 'is_verify_email'])->group(function()
     Route::get('/user_raports/', [App\Http\Controllers\UserCarController::class, 'user_raports'])->name('user_raports.reports');
     Route::get('/user_raports/{car}', [App\Http\Controllers\UserCarController::class, 'user_car_raports'])->name('user_raports.car_reports');
     Route::post('/user_raports1', [App\Http\Controllers\UserCarController::class, 'store_refuels'])->name('user_raports.store_refuels');
+    Route::post('/edit_raport_refuels', [App\Http\Controllers\UserCarController::class, 'update_refuels'])->name('user_raports.update_refuels');
+    Route::post('/edit_raport_reprairs', [App\Http\Controllers\UserCarController::class, 'update_reprairs'])->name('user_raports.update_reprairs');
     Route::post('/user_raports2', [App\Http\Controllers\UserCarController::class, 'store_reprairs'])->name('user_raports.store_reprairs');
+    Route::get('/edit_raport1/{refuel_id}/{car_id}', [App\Http\Controllers\UserCarController::class, 'edit_refuel_raport'])->name('edit_raport.refuel');
+    Route::get('/edit_raport2/{reprair_id}/{car_id}', [App\Http\Controllers\UserCarController::class, 'edit_reprair_raport'])->name('edit_raport.reprair');
+    Route::get('/destroy_user_raport1/{id}/{car_id}', [App\Http\Controllers\UserCarController::class, 'destroy_refuel_raport'])->name('destroy_raport.refuel');
+    Route::get('/destroy_user_raport2/{id}/{car_id}', [App\Http\Controllers\UserCarController::class, 'destroy_reprair_raport'])->name('destroy_raport.reprair');
+    Route::get('download_raport_file/{filename}', function($filename)
+    {
+        $file_path = public_path('users_reports_files/'.$filename);
+        if (file_exists($file_path))
+        {
+            return Response::download($file_path, $filename, [
+                'Content-Length: '. filesize($file_path)
+            ]);
+        }
+        else
+        {
+            exit('Żądany plik nie znajduje się na serwerze!');
+        }
+    })
+    ->where('filename', '[A-Za-z0-9\-\_\.]+')->name('download_raport_file');
     Route::get('/user_auto', [App\Http\Controllers\UserCarController::class, 'user_auto'])->name('user_auto');
     Route::get('/add_user_auto', [App\Http\Controllers\UserCarController::class, 'user_add_car'])->name('user_auto.add_car');
     Route::post('/add_user_auto1', [App\Http\Controllers\UserCarController::class, 'user_add_car_save'])->name('user_auto.add_car_save');

@@ -38,6 +38,8 @@
                                             <th>Dystans</th>
                                             <th>Cena</th>
                                             <th>Spalanie</th>
+                                            <th>Załącznik</th>
+                                            <th>Akcja</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -48,8 +50,28 @@
                                                 <td>{{ $refuel->distance}} km</td>
                                                 <td>{{ $refuel->price}} zł</td>
                                                 <td>{{ round($refuel->fuel / $refuel->distance * 100, 2)}} l/100km</td>
-                                            </tr>
+                                                @if ($refuel->file != NULL)
+                                                <td><a href="{{ route('download_raport_file', $refuel->file) }}">Pobierz</a></td>
+                                                @else
+                                                <td>Brak</td>
+                                                @endif                                                
+                                                <td><a href="{{ route('edit_raport.refuel', ['refuel_id'=>$refuel->refueling_id, 'car_id'=>$current_car]) }}" class="btn btn-xs btn-success btn-flat show_confirm">Edytuj</a>
+                                                    <a href="{{ route('destroy_raport.refuel', ['id'=>$refuel->refueling_id, 'car_id'=>$refuel->car_id]) }}" class="btn btn-xs btn-danger btn-flat show_confirm" onclick="return confirm('{{ __('Jesteś pewny, że chcesz usunąć raport?') }}')">Usuń</a>
+                                                </td>    
+                                            </tr>                                        
                                     @endforeach
+                                    <tr>
+                                        <th>SUMA:</th>
+                                        <th>{{ $refuel_sum}} l</th> 
+                                        <th>{{ $distance_sum}} km</th>
+                                        <th>{{ $price_sum}} zł</th>
+                                        @if ($refuel_sum != 0)
+                                        <th>{{ round($refuel_sum / $distance_sum * 100, 2)}} l/100km</th>  
+                                        @else
+                                        <th>0 l/100km</th> 
+                                        @endif
+                                        
+                                    </tr>
                                     </tbody>
                                 </table>
                                 {{ $refuel_list->appends(['reprairs' => $reprair_list->currentPage()])->links() }}
@@ -63,7 +85,7 @@
                         <div class="card-header">
                             <h3 class="card-title">Dodaj raport spalania</h3>
                         </div>
-                        <form action="{{ route('user_raports.store_refuels') }}" method="POST" role="form">
+                        <form action="{{ route('user_raports.store_refuels') }}" method="POST" enctype="multipart/form-data" role="form">
                             {{ csrf_field() }}
                             <input type="hidden", name="car_id" value="{{ $current_car }}">
                                 <div class="pt-3 autosized">
@@ -81,7 +103,11 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="date">Data tankowania</label>
-                                        <input class="form-control" style="width: 80%; margin-left: auto; margin-right: auto;" type="date" class="form-control" required="required" name="date" />
+                                        <input class="form-control" style="width: 80%; margin-left: auto; margin-right: auto;" type="date"  required="required" id="refueling_date" name="refueling_date" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="date">Załącznik</label>
+                                        <input class="form-control" style="width: 80%; margin-left: auto; margin-right: auto;" type="file" id="file" name="file" />
                                     </div>
                                 </div>
                             <input style="width: 80%; margin-left: auto; margin-right: auto;" type="submit" value="Dodaj raport" class="btn btn-primary text-light d-flex justify-content-center"/><br>
@@ -104,6 +130,8 @@
                                             <th>Miejsce</th>
                                             <th>Przedmiot naprawy</th>
                                             <th>Cena</th>
+                                            <th>Załącznik</th>
+                                            <th>Akcja</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -118,8 +146,23 @@
                                                     overflow:hidden;
                                                     text-overflow:ellipsis;>{{ $reprair->reprair_subject}}</td>
                                                 <td>{{ $reprair->price}} zł</td>
+                                                @if ($reprair->file != NULL)
+                                                <td><a href="{{ route('download_raport_file', $reprair->file) }}">Pobierz</a></td>
+                                                @else
+                                                <td>Brak</td>
+                                                @endif  
+                                                <td><a href="{{ route('edit_raport.reprair', ['reprair_id'=>$reprair->reprair_id, 'car_id'=>$current_car]) }}" class="btn btn-xs btn-success btn-flat show_confirm">Edytuj</a>
+                                                    <a href="{{ route('destroy_raport.reprair', ['id'=>$reprair->reprair_id, 'car_id'=>$reprair->car_id]) }}" class="btn btn-xs btn-danger btn-flat show_confirm" onclick="return confirm('{{ __('Jesteś pewny, że chcesz usunąć raport?') }}')">Usuń</a>
+                                                </td>
                                             </tr>
                                     @endforeach
+                                    <tr>
+                                        <th>SUMA:</th>
+                                        <th></th> 
+                                        <th></th>
+                                        <th></th>
+                                        <th>{{ $reprair_sum }} zł</th>
+                                    </tr>
                                     </tbody>
                                 </table>
                                 {{ $reprair_list->appends(['refuels' => $refuel_list->currentPage()])->links() }}
@@ -133,21 +176,21 @@
                         <div class="card-header">
                             <h3 class="card-title">Dodaj raport naprawy</h3>
                         </div>
-                        <form action="{{ route('user_raports.store_reprairs') }}" method="POST" role="form">
+                        <form action="{{ route('user_raports.store_reprairs') }}" method="POST" enctype="multipart/form-data" role="form">
                             {{ csrf_field() }}
                             <input type="hidden", name="car_id" value="{{ $current_car }}">
                                 <div class="pt-3 autosized">
                                     <div class="form-group">
                                         <label for="reprair_subject">Przedmiot naprawy</label>
-                                        <input class="form-control" style="width: 80%; margin-left: auto; margin-right: auto;" type="text" class="form-control" name="reprair_subject" required="required"/>
+                                        <input class="form-control" style="width: 80%; margin-left: auto; margin-right: auto;" type="text"  id="reprair_subject" name="reprair_subject" required="required"/>
                                     </div>
                                     <div class="form-group">
                                         <label for="reprair_location">Miejsce naprawy</label>
-                                        <input class="form-control" style="width: 80%; margin-left: auto; margin-right: auto;"type="text" class="form-control" name="reprair_location" required="required" />
+                                        <input class="form-control" style="width: 80%; margin-left: auto; margin-right: auto;"type="text" id="reprair_location" name="reprair_location" required="required" />
                                     </div>
                                     <div class="form-group">
                                         <label for="mileage">Aktualny przebieg</label>
-                                        <input class="form-control" style="width: 80%; margin-left: auto; margin-right: auto;" type="number" id="mileage" name="mileage" required="required" min="1" max="9999999" step="1">
+                                        <input class="form-control" style="width: 80%; margin-left: auto; margin-right: auto;" type="number" id="car_mileage" name="car_mileage" required="required" min="1" max="9999999" step="1">
                                     </div>
                                     <div class="form-group">
                                         <label for="price">Cena</label>
@@ -155,7 +198,11 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="date">Data naprawy</label>
-                                        <input class="form-control" style="width: 80%; margin-left: auto; margin-right: auto;" type="date" class="form-control" name="date" required="required" />
+                                        <input class="form-control" style="width: 80%; margin-left: auto; margin-right: auto;" type="date" id="reprair_date" name="reprair_date" required="required" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="date">Załącznik</label>
+                                        <input class="form-control" style="width: 80%; margin-left: auto; margin-right: auto;" type="file" id="file" name="file" />
                                     </div>
                                 </div>
                             <input class="btn btn-primary text-light d-flex justify-content-center" style="width: 80%; margin-left: auto; margin-right: auto;" type="submit" value="Dodaj raport" /><br>
