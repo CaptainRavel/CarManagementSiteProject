@@ -31,14 +31,14 @@
 <!-- Tab spalanie -->
             <div id="Spalanie" class="col-md-8 tabcontent mb-5 ">         
                     <div class="card text-center">
-                            <div class="table-responsive">
+php                             <div class="table-responsive">
                                 <table class="table text-light">
                                     <thead>
                                         <tr>
-                                            <th>Data </th>
-                                            <th>Paliwo</th>
-                                            <th>Dystans</th>
-                                            <th>Cena</th>
+                                            <th>@sortablelink('refueling_date', 'Data')</th>
+                                            <th>@sortablelink('fuel', 'Paliwo')</th>
+                                            <th>@sortablelink('distance', 'Dystans')</th>
+                                            <th>@sortablelink('price', 'Cena')</th>
                                             <th>Spalanie</th>
                                             <th>Załącznik</th>
                                             <th>Akcja</th>
@@ -82,6 +82,8 @@
                                     </tbody>
                                 </table>
                                 {{ $refuel_list->appends(['reprairs' => $reprair_list->currentPage()])->links() }}
+                                <a href="{{ route('export_refuels.excel',$current_car) }}" class="btn btn-warning">Export do Excela</a>
+                                <a href="{{ route('export_refuels.csv',$current_car) }}" class="btn btn-warning">Export do CSV</a>
 
                             </div>
 
@@ -133,11 +135,11 @@
                                 <table class="table">
                                     <thead>
                                         <tr>
-                                            <th>Data</th>
+                                            <th>@sortablelink('reprair_date', 'Data')</th>
                                             <th>Przebieg</th>
                                             <th>Miejsce</th>
                                             <th>Przedmiot naprawy</th>
-                                            <th>Cena</th>
+                                            <th>@sortablelink('price', 'Cena')</th>
                                             <th>Załącznik</th>
                                             <th>Akcja</th>
                                         </tr>
@@ -180,6 +182,8 @@
                                     </tbody>
                                 </table>
                                 {{ $reprair_list->appends(['refuels' => $refuel_list->currentPage()])->links() }}
+                                <a href="{{ route('export_reprairs.excel',$current_car) }}" class="btn btn-warning">Export do Excela</a>
+                                <a href="{{ route('export_reprairs.csv',$current_car) }}" class="btn btn-warning">Export do CSV</a>
                        <div class="card text-center mt-5">
                         <div class="card-header">
                              <h3 class="card-title">Dodaj raport naprawy</h3>

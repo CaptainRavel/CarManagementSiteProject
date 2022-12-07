@@ -56,6 +56,11 @@ Route::middleware(['auth', 'is_verify_email'])->group(function()
         }
     })
     ->where('filename', '[A-Za-z0-9\-\_\.]+')->name('download_raport_file');
+    Route::get('/export_refuels_excel/{car_id}', [App\Http\Controllers\UserCarController::class, 'exportRefuelsExcel'])->name('export_refuels.excel');
+    Route::get('/export_refuels_CSV/{car_id}', [App\Http\Controllers\UserCarController::class, 'exportRefuelsCSV'])->name('export_refuels.csv');
+    Route::get('/export_reprairs_excel/{car_id}', [App\Http\Controllers\UserCarController::class, 'exportReprairsExcel'])->name('export_reprairs.excel');
+    Route::get('/export_reprairs_CSV/{car_id}', [App\Http\Controllers\UserCarController::class, 'exportReprairsCSV'])->name('export_reprairs.csv');
+
     Route::get('/user_auto', [App\Http\Controllers\UserCarController::class, 'user_auto'])->name('user_auto');
     Route::get('/add_user_auto', [App\Http\Controllers\UserCarController::class, 'user_add_car'])->name('user_auto.add_car');
     Route::post('/add_user_auto1', [App\Http\Controllers\UserCarController::class, 'user_add_car_save'])->name('user_auto.add_car_save');

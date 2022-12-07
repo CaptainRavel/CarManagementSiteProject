@@ -97,27 +97,6 @@
                 @endforeach
                 </tbody>
             </table>
-            {{--<br>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>WYPOSAŻENIE</th>
-                    </tr>
-                </thead>
-                <tbody>
-                @foreach ($options as $option)
-                        <tr>
-                            <td>{{ $option->equip_val_name }}</td>
-                            @if ($option->is_base == 1)
-                                <td>bazowe</td> 
-                                @else
-                                <td>opcjonalne</td>
-                            @endif
-                        </tr>
-                @endforeach
-                </tbody>
-            </table>--}}
     </div>
 </div>
-</div>
-</div>
+

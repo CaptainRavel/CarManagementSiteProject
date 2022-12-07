@@ -21,7 +21,6 @@ class Carbasedropdown extends Component
     public $trims;
     public $equipments;
     public $specs;
-    //public $options;
 
   
     public $selectedMake = NULL;
@@ -40,8 +39,6 @@ class Carbasedropdown extends Component
         $this->trims = collect();
         $this->equipments = collect();
         $this->specs = collect();
-        //$this->options = collect();
-
     }
 
     public function render()
@@ -57,9 +54,7 @@ class Carbasedropdown extends Component
             $this->series = collect();
             $this->trims = collect();
             $this->equipments = collect();
-            $this->specs = collect();
-           // $this->options = collect();
-            
+            $this->specs = collect();  
         }
     } 
 
@@ -70,8 +65,7 @@ class Carbasedropdown extends Component
             $this->series = CarSeries::select('id_car_serie', 'name')->where('id_car_model', '=', $model)->OrderBy('name')->get();
             $this->trims = CarTrims::select('id_car_trim', 'name')->where('id_car_model', '=', $model)->OrderBy('name')->get();    
             $this->equipments = collect(); 
-            $this->specs = collect();  
-           // $this->options = collect();          
+            $this->specs = collect();          
         }
     } 
 
@@ -82,7 +76,6 @@ class Carbasedropdown extends Component
             $this->trims = collect();
             $this->equipments = collect();
             $this->specs = collect();
-           // $this->options = collect();
         }
     } 
 
@@ -98,16 +91,7 @@ class Carbasedropdown extends Component
     public function updatedSelectedTrim($trim)
     {
         if (!is_null($trim)) {  
-        //$this->equipments = CarEquip::where('id_car_trim', '=', $trim)->OrderBy('equip_name')->get();
         $this->specs = CarSpec::select('spec_name', 'value', 'unit')->where('id_car_trim', '=', $trim)->get();
-       // $this->options = collect();
         }
     }
-
-   // public function updatedSelectedEquipment($equipment)
-   // {
-   //     if (!is_null($equipment)) {  
-   //     $this->options = CarEquip::where('id_car_equipment', '=', $equipment)->get();
-   //     }
-   // }
 }

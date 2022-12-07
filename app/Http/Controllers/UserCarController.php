@@ -10,8 +10,11 @@ use App\Models\CarMakes;
 use App\Models\CarModels;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
-
 use Illuminate\Support\Facades\Auth;
+use Kyslik\ColumnSortable\Sortable;
+use App\Exports\RefuelsExport; 
+use App\Exports\ReprairsExport;
+use Excel;
 
 class UserCarController extends Controller
 {
@@ -32,8 +35,8 @@ class UserCarController extends Controller
         $car_id=$car;
         $current_car_name= UserCars::select('name')->Where('car_id', '=', $car)->value('name');
         $cars_list = UserCars::Where('user_id', '=', $user_id)->OrderBy('car_id')->get();
-        $refuel_list = UserRefuels::where('user_id', '=', $user_id)->where('car_id', '=', $car_id)->orderBy('refueling_date', 'desc')->paginate(5, ['*'], 'refuels');
-        $reprair_list = UserReprairs::where('user_id', '=', $user_id)->where('car_id', '=', $car_id)->orderBy('reprair_date', 'desc')->paginate(5, ['*'], 'reprairs');
+        $refuel_list = UserRefuels::where('user_id', '=', $user_id)->where('car_id', '=', $car_id)->sortable(['refueling_date' => 'desc'])->paginate(5, ['*'], 'refuels');
+        $reprair_list = UserReprairs::where('user_id', '=', $user_id)->where('car_id', '=', $car_id)->sortable(['reprair_date' => 'desc'])->paginate(5, ['*'], 'reprairs');
         $refuel_sum = UserRefuels::where('user_id', '=', $user_id)->where('car_id', '=', $car_id)->sum('fuel');
         $distance_sum = UserRefuels::where('user_id', '=', $user_id)->where('car_id', '=', $car_id)->sum('distance');
         $price_sum = UserRefuels::where('user_id', '=', $user_id)->where('car_id', '=', $car_id)->sum('price');
@@ -324,4 +327,24 @@ class UserCarController extends Controller
 
         return redirect()->route('user_auto');
     }
+
+    public function exportRefuelsExcel($car_id){
+        $car_name= UserCars::select('name')->where('car_id', '=', $car_id)->value('name');
+        return Excel::download(new RefuelsExport, $car_name.'_raporty_spalania.xlsx');
+    }
+
+    public function exportRefuelsCSV($car_id){
+        $car_name= UserCars::select('name')->where('car_id', '=', $car_id)->value('name');
+        return Excel::download(new RefuelsExport, $car_name.'_raporty_spalania.csv');
+     }
+
+     public function exportReprairsExcel($car_id){
+        $car_name= UserCars::select('name')->where('car_id', '=', $car_id)->value('name');
+        return Excel::download(new ReprairsExport, $car_name.'_raporty_napraw.xlsx');
+    }
+
+    public function exportReprairsCSV($car_id){
+        $car_name= UserCars::select('name')->where('car_id', '=', $car_id)->value('name');
+        return Excel::download(new ReprairsExport, $car_name.'_raporty_napraw.csv');
+     }
 }
