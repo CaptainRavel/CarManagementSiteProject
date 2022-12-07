@@ -59,7 +59,7 @@
                             <input style="width: 80%; margin-left: auto; margin-right: auto;" type="text" class="form-control" name="name" required="required" placeholder="Zmień nick użytkownika"/>
                         </div>
                     </div>
-                    <input class="btn btn-primary text-light d-flex justify-content-center" style="width: 80%; margin-left: auto; margin-right: auto;" type="submit" value="Zmień" />
+                    <input class="btn btn-warning d-flex justify-content-center font-weight-bold" style="width: 80%; margin-left: auto; margin-right: auto;" type="submit" value="Zmień" />
                 </form>
                 <br>
                 <form action="/user_management_edit_email/{{$user_id}}" method="POST" role="form">
@@ -72,7 +72,7 @@
                             @endif
                             </div>
                         </div>
-                        <input style="width: 80%; margin-left: auto; margin-right: auto;" type="submit" value="Zmień email" class="btn btn-primary text-light d-flex justify-content-center"/>
+                        <input style="width: 80%; margin-left: auto; margin-right: auto;" type="submit" value="Zmień email" class="btn btn-warning d-flex justify-content-center font-weight-bold"/>
                     </form>
                     <br>
                     <form action="/user_management_edit_password/{{$user_id}}" method="POST" role="form">
@@ -85,10 +85,10 @@
                                 @endif
                                 </div>
                             </div>
-                            <input class="btn btn-primary text-light d-flex justify-content-center" style="width: 80%; margin-left: auto; margin-right: auto;" type="submit" value="Zmień hasło" />
+                            <input class="btn btn-warning d-flex justify-content-center font-weight-bold" style="width: 80%; margin-left: auto; margin-right: auto;" type="submit" value="Zmień hasło" />
                         </form>
                     <br>
-                    <a class="btn btn-primary text-light d-flex justify-content-center" style="width: 80%; margin-left: auto; margin-right: auto;" style="width: 50%" href="{{ route('user_account.destroy_user') }}" role="button" onclick="return confirm('{{ __('Jesteś pewny, że chcesz usunąć konto?') }}')">Usuń konto</a>   
+                    <a class="btn btn-danger text-light d-flex justify-content-center" style="width: 80%; margin-left: auto; margin-right: auto;" style="width: 50%" href="{{ route('user_account.destroy_user') }}" role="button" onclick="return confirm('{{ __('Jesteś pewny, że chcesz usunąć konto?') }}')">Usuń konto</a>   
                          </div>
         </div>
     </div>

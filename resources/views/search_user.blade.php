@@ -11,9 +11,10 @@
                             <h3 class="card-title" class='text-center'>Znajdź użytkownika</h3>
                             <div class="table-responsive">
     <form action="{{ route('search') }}" method="GET">
-        <input type="search" class="form-control" name="search" required/>
+        <input type="search" class="form-control" style="width: 80%; margin-left: auto; margin-right: auto;" name="search" required/>
         <div  class=" row d-flex justify-content-center align-content-center "  >
-        <button type="submit" class="btn btn-primary">Szukaj</button>
+        <button type="submit" class="btn btn-warning d-flex justify-content-center font-weight-bold" style="width: 60%; margin-left: auto; margin-right: auto;">Szukaj</button>
+        
         </div>
     </form>
     @if($found_user_list->isNotEmpty())

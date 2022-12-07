@@ -51,7 +51,8 @@
                         </tbody>
                     </table>
                     {{ $user_list->appends(['users' => $user_list->currentPage()])->links() }}
-                    <a href="{{ url('searchuser') }}" class="btn btn-xs btn-primary btn-flat show_confirm">Wyszukaj użytkowników</a>
+                    <a href="{{ url('searchuser') }}" class="btn btn-xs btn-warning btn-flat font-weight-bold show_confirm">Wyszukaj użytkowników</a>
+                    
                 </div>
             </div>
         </div>

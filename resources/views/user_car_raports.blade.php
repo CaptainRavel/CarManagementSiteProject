@@ -18,22 +18,19 @@
     @endforeach
 </div>
 <div class="container text-light text-center">
-   
+ <div class="row justify-content-center">  
         <h3 class="card-title mb-5 mt-5" class='text-center'>Raporty dla pojazdu: {{ $current_car_name }}</h3>
 
 
 
-            <div class="tab text-center justify-content-center">
+            <div class="col-md-8  tab text-center justify-content-center">
               <button class="tablinks" onclick="openCity(event, 'Spalanie')">Spalanie</button>
               <button class="tablinks" onclick="openCity(event, 'Naprawy')">Naprawy</button>
               
             </div>
 <!-- Tab spalanie -->
-            <div id="Spalanie" class="tabcontent mb-5">
-               <div class="card">
+            <div id="Spalanie" class="col-md-8 tabcontent mb-5 ">         
                     <div class="card text-center">
-                        <div class="card-header ">
-                            <h3 class="card-title" class='text-center'>Twoje raporty splania</h3>
                             <div class="table-responsive">
                                 <table class="table text-light">
                                     <thead>
@@ -57,15 +54,17 @@
                                                 <td>{{ round($refuel->fuel / $refuel->distance * 100, 2)}} l/100km</td>
                                                 @if ($refuel->file != NULL)
                                                 <td>
-                                                <a href="{{ route('download_raport_file', $refuel->file) }}"  class="btn btn-xs btn-success"><i class="fa-thin fa-house"></i> Pobierz</a>
+                                                <a href="{{ route('download_raport_file', $refuel->file) }}"  class="btn btn-xs btn-primary">Pobierz</a>
                                                
                                                 @else
                                                 <td>Brak</td>
                                                 @endif                                                
                                                 <td>
-                                                    <a href="{{ route('edit_raport.refuel', ['refuel_id'=>$refuel->refueling_id, 'car_id'=>$current_car]) }}" class="btn btn-xs btn-success"><i class="fa-solid fa-pen-to-square fa-xl"></i> Edytuj</a>
-                                                    <a href="{{ route('destroy_raport.refuel', ['id'=>$refuel->refueling_id, 'car_id'=>$refuel->car_id]) }}" class="btn btn-xs btn-danger" onclick="return confirm('{{ __('Jesteś pewny, że chcesz usunąć raport?') }}')"><i class="fa-sharp fa-solid fa-ban fa-xl"></i> Usuń</a> </a>
-                                                </td>    
+                                                   
+                                                           <a href="{{ route('edit_raport.refuel', ['refuel_id'=>$refuel->refueling_id, 'car_id'=>$current_car]) }}" class="btn btn-success"><i class="fa-solid fa-pen-to-square fa-xl"></i></a>
+                                                           <a href="{{ route('destroy_raport.refuel', ['id'=>$refuel->refueling_id, 'car_id'=>$refuel->car_id]) }}" class="btn btn-danger" onclick="return confirm('{{ __('Jesteś pewny, że chcesz usunąć raport?') }}')"><i class="fa-sharp fa-solid fa-ban fa-xl"></i></a>
+                                                    
+                                                </td> 
                                             </tr>                                        
                                     @endforeach
                                     <tr>
@@ -86,7 +85,7 @@
 
                             </div>
 
-
+                        
 
                     <div class="card text-center mt-5">
                         <div class="card-header">
@@ -121,17 +120,15 @@
                                     </form>
                                 </div>
                     
-                   </div>
+                  
 
-                </div>
                 </div>
             </div>
 <!-- Raporty naprawy -->
-            <div id="Naprawy" class="tabcontent">
-               <div class="card">
+            <div id="Naprawy" class="tabcontent col-lg-8">
+           
                     <div class="card text-center">
-                        <div class="card-header">
-                            <h3 class="card-title" class='text-center'>Twoje raporty napraw</h3>
+
                             <div class="table-responsive">
                                 <table class="table">
                                     <thead>
@@ -162,9 +159,13 @@
                                                 @else
                                                 <td>Brak</td>
                                                 @endif  
+
+
                                                 <td>
-                                                        <a href="{{ route('edit_raport.reprair', ['reprair_id'=>$reprair->reprair_id, 'car_id'=>$current_car]) }}" class="btn btn-xs btn-success"><i class="fa-solid fa-pen-to-square fa-xl"></i> Edytuj</a>
-                                                        <a href="{{ route('destroy_raport.reprair', ['id'=>$reprair->reprair_id, 'car_id'=>$reprair->car_id]) }}" class="btn btn-xs btn-danger" onclick="return confirm('{{ __('Jesteś pewny, że chcesz usunąć raport?') }}')"><i class="fa-sharp fa-solid fa-ban fa-xl"></i> Usuń</a>
+                                                
+                                                           
+                                                <a href="{{ route('edit_raport.reprair', ['reprair_id'=>$reprair->reprair_id, 'car_id'=>$current_car]) }}" class="btn  btn-success"><i class="fa-solid fa-pen-to-square fa-xl"></i> </a>
+                                                <a href="{{ route('destroy_raport.reprair', ['id'=>$reprair->reprair_id, 'car_id'=>$reprair->car_id]) }}" class="btn  btn-danger" onclick="return confirm('{{ __('Jesteś pewny, że chcesz usunąć raport?') }}')"><i class="fa-sharp fa-solid fa-ban fa-xl"></i> </a>
 
                                                 </td>
                                             </tr>
@@ -216,11 +217,8 @@
                         </form>
                     </div>
                             </div>
-                        </div>
-                    </div>
-                </div>
-           
-            </div>
+                    
+         
 
             
 

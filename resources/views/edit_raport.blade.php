@@ -4,8 +4,8 @@
 
 @if ($raport_type == 'refuel')
 @foreach ($refuels as $refuel)
-<div class="card">
-    <div class="card text-center">
+<div class="row justify-content-center text-light">
+    <div class="card col-md-8 col-xl-4 border border-warning text-center">
         <div class="card-header">
             <h3 class="card-title">Edytuj raport</h3>
         </div>
@@ -35,7 +35,7 @@
                         <input class="form-control" style="width: 80%; margin-left: auto; margin-right: auto;" type="file" id="file" name="file" value="{{ $refuel->file }}" />
                     </div>
                 </div>
-            <input style="width: 80%; margin-left: auto; margin-right: auto;" type="submit" value="Zapisz zmiany" class="btn btn-primary text-light d-flex justify-content-center"/><br>
+            <input style="width: 80%; margin-left: auto; margin-right: auto;" type="submit" value="Zapisz zmiany" class="btn btn-warning d-flex justify-content-center font-weight-bold"/><br>
         </form>
     </div>
 </div>
@@ -44,8 +44,8 @@
 
 @if ($raport_type == 'reprair')
 @foreach ($reprairs as $reprair)   
-<div class="card">
-    <div class="card text-center">
+<div class="row justify-content-center text-light">
+    <div class="card col-md-8 col-xl-4 border border-warning text-center">
         <div class="card-header">
             <h3 class="card-title">Edytuj raport</h3>
         </div>
@@ -79,7 +79,7 @@
                         <input class="form-control" style="width: 80%; margin-left: auto; margin-right: auto;" type="file" id="file" name="file" value="{{ $reprair->file }}" />
                     </div>
                 </div>
-            <input class="btn btn-primary text-light d-flex justify-content-center" style="width: 80%; margin-left: auto; margin-right: auto;" type="submit" value="Zapisz zmiany" /><br>
+            <input class="btn btn-warning d-flex justify-content-center font-weight-bold" style="width: 80%; margin-left: auto; margin-right: auto;" type="submit" value="Zapisz zmiany" /><br>
         </form>
     </div>
 </div>

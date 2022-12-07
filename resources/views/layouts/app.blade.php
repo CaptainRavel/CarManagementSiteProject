@@ -23,6 +23,7 @@
 
     <link href="/css/main.css" rel="stylesheet">
     <link href="/css/bootstrap.css" rel="stylesheet">
+    <link href="/css/all.css" rel="stylesheet">
     <!-- icons -->
     <script src="https://kit.fontawesome.com/87cc08ad60.js" crossorigin="anonymous"></script>
     <!--favicon-->
