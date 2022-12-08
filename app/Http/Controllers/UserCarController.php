@@ -15,6 +15,7 @@ use Kyslik\ColumnSortable\Sortable;
 use App\Exports\RefuelsExport; 
 use App\Exports\ReprairsExport;
 use Excel;
+use Illuminate\Auth\Access\Gate;
 
 class UserCarController extends Controller
 {
@@ -26,25 +27,42 @@ class UserCarController extends Controller
     {
         $user_id = Auth::id();
         $exist = UserCars::where('user_id', '=', $user_id)->exists();
-        $user_cars = UserCars::where('user_id', '=', $user_id)->get();
+        $user_role = User::where('id', '=', $user_id)->value('role');
+        if ($user_role == 'user' || $user_role == 'test_user'){
+            $user_cars = UserCars::where('user_id', '=', $user_id)->orderBy('created_at')->limit(2)->get();  
+        }
+        else{
+            $user_cars = UserCars::where('user_id', '=', $user_id)->get();
+        }
         return view('user_raports', ["user_cars"=>$user_cars, "exist"=>$exist]);
     }
     public function user_car_raports($car)
     {
         $user_id = Auth::id();
         $car_id=$car;
+        $user_role = User::where('id', '=', $user_id)->value('role');
         $current_car_name= UserCars::select('name')->Where('car_id', '=', $car)->value('name');
-        $cars_list = UserCars::Where('user_id', '=', $user_id)->OrderBy('car_id')->get();
+        if ($user_role == 'user' || $user_role == 'test_user'){
+            $cars_list = UserCars::where('user_id', '=', $user_id)->orderBy('created_at')->limit(2)->get();  
+        }
+        else{
+            $cars_list = UserCars::where('user_id', '=', $user_id)->get();
+        }
         $refuel_list = UserRefuels::where('user_id', '=', $user_id)->where('car_id', '=', $car_id)->sortable(['refueling_date' => 'desc'])->paginate(5, ['*'], 'refuels');
         $reprair_list = UserReprairs::where('user_id', '=', $user_id)->where('car_id', '=', $car_id)->sortable(['reprair_date' => 'desc'])->paginate(5, ['*'], 'reprairs');
         $refuel_sum = UserRefuels::where('user_id', '=', $user_id)->where('car_id', '=', $car_id)->sum('fuel');
         $distance_sum = UserRefuels::where('user_id', '=', $user_id)->where('car_id', '=', $car_id)->sum('distance');
         $price_sum = UserRefuels::where('user_id', '=', $user_id)->where('car_id', '=', $car_id)->sum('price');
         $reprair_sum = UserReprairs::where('user_id', '=', $user_id)->where('car_id', '=', $car_id)->sum('price');
+        if($cars_list->contains('car_id',$car_id)){
         return view('user_car_raports', ["refuel_list"=>$refuel_list,
                     "reprair_list"=>$reprair_list, "cars_list"=>$cars_list, "current_car"=>$car,
                     "current_car_name"=>$current_car_name, 'refuel_sum'=>$refuel_sum, 'distance_sum'=>$distance_sum,
                     'price_sum'=>$price_sum, 'reprair_sum'=>$reprair_sum,"title" => "Moje konto"]);
+        }
+        else{
+            return view('errors.403');
+        }
     }
     
     public function store_refuels(Request $request){
@@ -213,16 +231,32 @@ class UserCarController extends Controller
     {
         $user_id = Auth::id();
         $exist = UserCars::where('user_id', '=', $user_id)->exists();
-        $user_cars = UserCars::where('user_id', '=', $user_id)->get();
+        $user_role = User::where('id', '=', $user_id)->value('role');
+        if ($user_role == 'user' || $user_role == 'test_user'){
+            $user_cars = UserCars::where('user_id', '=', $user_id)->orderBy('created_at')->limit(2)->get();  
+        }
+        else{
+            $user_cars = UserCars::where('user_id', '=', $user_id)->get();
+        }
         $cars_count = $user_cars->count();
         return view('user_auto', ["user_cars"=>$user_cars, "exist"=>$exist, "cars_count"=>$cars_count]);
     }
 
     public function user_add_car()
     {
+        $user_id = Auth::id();
+        $cars = UserCars::where('user_id', '=', $user_id)->count('car_id');
+        if ($cars >= 2 && $cars < 6 ){
+        $this->authorize('isPremiumUser');
+        }      
+        else{
+            return view('errors.403'); 
+        }
         return view('add_user_auto');
     }
+
     public function user_add_car_save(Request $request){
+
         $request->validate([
             'name' => 'required',
             'car_make' => 'required',

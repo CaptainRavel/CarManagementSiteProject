@@ -7,6 +7,8 @@ use App\Models\UserCars;
 use App\Models\UserRefuels;
 use App\Models\UserReprairs;
 use Illuminate\Http\Request;
+use App\Models\PremiumAccount;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -23,9 +25,14 @@ class UserManagementController extends Controller
         $user_name = User::select('name')->where('id', '=', $user_id)->get();
         $user_email = User::select('email')->where('id', '=', $user_id)->get();
         $user_role = User::select('role')->where('id', '=', $user_id)->get();
+        $currentDateTime = Carbon::now();
+        $p_end = strtotime(PremiumAccount::where('user_id', '=', $user_id)->value('premium_end'));
+        $premium_end = date('d.m.Y H:i', $p_end);
+        $days = '(' . (string)$currentDateTime->diffInDays(PremiumAccount::where('user_id', '=', $user_id)->value('premium_end')) . ' dni)';
         $user_verify_status = User::select('is_email_verified')->where('id', '=', $user_id)->get();
         return view('user_management', ["user_id"=>$user_id,"user_name"=>$user_name,
-                    "user_email"=>$user_email, "user_role"=>$user_role, "user_verify_status"=>$user_verify_status]);
+                    "user_email"=>$user_email, "user_role"=>$user_role, "user_verify_status"=>$user_verify_status,
+                    "premium_end"=>$premium_end, "days"=>$days]);
     }
 
     public function update_nick(Request $request, $id){

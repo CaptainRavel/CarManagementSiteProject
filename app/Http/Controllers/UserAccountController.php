@@ -7,12 +7,14 @@ use App\Models\UserRefuels;
 use App\Models\UserReprairs;
 use App\Models\UserVerify;
 use App\Models\UserCars;
+use App\Models\PremiumAccount;
 use Illuminate\Support\Facades\File;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Str;
+use Carbon\Carbon;
 
 
 class UserAccountController extends Controller
@@ -27,8 +29,13 @@ class UserAccountController extends Controller
         $user_id = Auth::id();
         $user_name = User::select('name')->where('id', '=', $user_id)->get();
         $user_email = User::select('email')->where('id', '=', $user_id)->get();
+        $user_role = User::select('role')->where('id', '=', $user_id)->get();
+        $currentDateTime = Carbon::now();
+        $p_end = strtotime(PremiumAccount::where('user_id', '=', $user_id)->value('premium_end'));
+        $premium_end = date('d.m.Y H:i', $p_end);
+        $days = '(' . (string)$currentDateTime->diffInDays(PremiumAccount::where('user_id', '=', $user_id)->value('premium_end')) . ' dni)';
         return view('user_account', ["user_name"=>$user_name,
-                    "user_email"=>$user_email]);
+                    "user_email"=>$user_email, "user_role"=>$user_role, "premium_end"=>$premium_end, "days"=>$days]);
     }
 
     public function update_nick(Request $request){

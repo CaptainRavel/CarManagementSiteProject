@@ -44,8 +44,14 @@
                                 @if ($typ->role == 'premium_user')
                                     Użytkownik premium
                                 @endif
+                                @if ($typ->role == 'test_user')
+                                Użytkownik testowy
+                                @endif
                                 @if ($typ->role == 'admin')
                                     Administrator
+                                @endif
+                                @if ($typ->role == 'premium_user')
+                                Konto PREMIUM ważne do: {{ $premium_end }} {{ $days }}                                
                                 @endif
                                 @endforeach
                                 
