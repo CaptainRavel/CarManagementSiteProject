@@ -16,7 +16,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-6 mt-5 text-center text-white ">
-                 <a class="navbar-brand" style:"margin-left:35%" href="/"><img src="img/icon/logo.png" width="250" alt=""></a>
+                 <a class="navbar-brand" style:"margin-left:35%" href="/"><img src="{{ URL::to('/img/icon/logo.png') }}" width="250" alt=""></a>
                  <h2 class="m-5">Zweryfikuj swój adres e-mail</h2>
                     Dziękujemy na rejestrację na naszej stronie. Aby zakończyć proces rejestracji aktywuj swoje konto po przed weryfikację adresu e-mail
                     By zweryfikować email kliknij w link poniżej:  </br></br>
