@@ -39,23 +39,39 @@
                                 Typ użytkownika:
                                 @foreach ($user_role as $typ)                                
                                 @if ($typ->role == 'user')
-                                    Użytkownik darmowy
+                                    DARMOWY
                                 @endif
                                 @if ($typ->role == 'premium_user')
-                                    Użytkownik premium
+                                    PREMIUM
                                 @endif
                                 @if ($typ->role == 'test_user')
-                                Użytkownik testowy
+                                    TESTOWY
                                 @endif
                                 @if ($typ->role == 'admin')
-                                    Administrator
+                                    ADMINISTRATOR
                                 @endif
+                                <br>
                                 @if ($typ->role == 'premium_user')
-                                Konto PREMIUM ważne do: {{ $premium_end }} {{ $days }}                                
+                                <br>
+                                Konto PREMIUM ważne do: {{ $premium_end }} {{ $days }} 
+                                <a href="{{ route('add_premium.off.admin', $user_id) }}" class="btn btn-warning d-flex justify-content-center font-weight-bold" style="width: 89%;  margin-right: auto;">Wyłącz PREMIUM</a>
                                 @endif
-                                @endforeach
-                                
+                                @if ($typ->role == 'user' || $typ->role == 'test_user')
+                                <br>
+                                Wybierz rodzaj konta PREMIUM do aktywacji:
+                                <a href="{{ route('add_premium.month.admin', $user_id) }}" class="btn btn-warning d-flex justify-content-center font-weight-bold" style="width: 89%;  margin-right: auto;">PREMIUM na miesiąc!</a>
+                                <a href="{{ route('add_premium.year.admin', $user_id) }}" class="btn btn-warning d-flex justify-content-center font-weight-bold" style="width: 89%;  margin-right: auto;">PREMIUM na rok!</a>                               
+                                @endif
+                                @if($typ->role != 'admin')
+                                <br>
+                                <br>
+                                Liczba dodanych aut: {{ $user_cars_number }}  
+                                <br>
+                                Liczba zapisanych raportów: {{ $user_raports_number }}
+                                <br>
+                                <a href="{{ route('user_auto_management', $user_id) }}" class="btn btn-warning d-flex justify-content-center font-weight-bold" style="width: 89%;  margin-right: auto;">Zobacz</a>                                   
             </p>
+            <br>
             <br>
             <form action="/user_management_edit_name/{{$user_id}}" method="POST" role="form">
                 {{ csrf_field() }}
@@ -100,6 +116,7 @@
     </div>
   </div>
 </div>
-
+@endif
+@endforeach 
 
 @endsection

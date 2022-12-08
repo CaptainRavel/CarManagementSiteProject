@@ -249,10 +249,14 @@ class UserCarController extends Controller
         if ($cars >= 2 && $cars < 6 ){
         $this->authorize('isPremiumUser');
         }      
+        elseif ($cars < 2){
+            return view('add_user_auto');
+        }
         else{
-            return view('errors.403'); 
+            return view('errors.403');
         }
         return view('add_user_auto');
+        
     }
 
     public function user_add_car_save(Request $request){

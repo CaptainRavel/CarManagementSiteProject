@@ -81,6 +81,14 @@ Route::middleware(['can:isAdmin'])->group(function()
     Route::post('/user_management_edit_password/{id}', [App\Http\Controllers\UserManagementController::class, 'update_password']);
     Route::post('/user_management_edit_email/{id}', [App\Http\Controllers\UserManagementController::class, 'update_email']);
     Route::get('/user_management_delete_user/{id}', [App\Http\Controllers\UserManagementController::class, 'destroy_user']);
+
+    Route::get('/user_auto_management/{id}', [App\Http\Controllers\UserManagementController::class, 'user_auto_management'])->name('user_auto_management');
+    Route::get('/user_auto_management_delete/{user_id}/{car_id}', [App\Http\Controllers\UserManagementController::class, 'destroy_user_car_admin'])->name('user_auto_management.delete');
+    Route::get('/user_auto_management_raports/{user_id}/{car_id}', [App\Http\Controllers\UserManagementController::class, 'user_auto_raports_management'])->name('user_auto_raports_management');
+
+    Route::get('/add_premium_month/{id}', [App\Http\Controllers\UserManagementController::class, 'add_premium_month'])->name('add_premium.month.admin');
+    Route::get('/add_premium_year/{id}', [App\Http\Controllers\UserManagementController::class, 'add_premium_year'])->name('add_premium.year.admin');
+    Route::get('/add_premium_off/{id}', [App\Http\Controllers\UserManagementController::class, 'add_premium_off'])->name('add_premium.off.admin');
 });
 
 
