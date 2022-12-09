@@ -2,8 +2,7 @@
 
 @section('content')
 
-
-<h3 class='text-center mb-4'>Twoje auta</h3>
+<h3 class='text-center mb-4'>Auta użytkownika: {{ $user_name }}</h3>
 <div class="d-flex justify-content-center">
     @if (!$exist)
       <div class="card border border-warning">
@@ -11,10 +10,7 @@
           <h5 class="card-title">BRAK AUT</h5> 
         </div>
       <div class="card-body">
-          <p class="card-text">Nie dodałeś jeszcze żadnego auta, kliknij poniżej by zapisać swoje pierwsze auto!</p>
-           <div class="col text-center">
-               <a href="{{ route('user_auto.add_car') }}" <button type="button" href="{{ route('user_auto.add_car') }}" class="btn btn-warning d-flex justify-content-center ">Dodaj auto</button></a>  
-            </div>
+          <p class="card-text">Użytkownik nie posiada, żadnych dodanych aut</p>
       </div>  
     @endif
 </div>
@@ -40,49 +36,19 @@
                                 UBEZPIECZENIE: {{ $user_car->oc_date }}</br>
                                 BADANIE TECHNICZNE: {{ $user_car->tech_rev_date }}</br>
 
-                                <div class="card-body">                            
-                                    <a class="btn btn-success text-light d-flex justify-content-center" style="width: 80%; margin-left: auto; margin-right: auto;" style="width: 50%" href="{{ route('user_auto.edit_car', $user_car->car_id) }}" role="button">Edytuj</a>   
-                                    <a class="btn btn-danger text-light d-flex justify-content-center" style="width: 80%; margin-left: auto; margin-right: auto;" style="width: 50%" href="{{ route('user_auto.destroy_car', $user_car->car_id) }}" role="button" onclick="return confirm('{{ __('Jesteś pewny, że chcesz usunąć auto? Zostaną usunięte także wszystkie raporty przypisane do tego samochodu!') }}')">Usuń</a> 
+                                <div class="card-body">    
+                                    <a class="btn btn-warning text-light d-flex justify-content-center" style="width: 80%; margin-left: auto; margin-right: auto;" style="width: 50%" href="{{ route('user_auto_raports_management', ['user_id'=>$user_number, 'car_id'=>$user_car->car_id]) }}" role="button">Zobacz raporty</a>                         
+                                    <a class="btn btn-danger text-light d-flex justify-content-center" style="width: 80%; margin-left: auto; margin-right: auto;" style="width: 50%" href="{{ route('user_auto_management.delete', ['user_id'=>$user_number, 'car_id'=>$user_car->car_id]) }}" role="button" onclick="return confirm('{{ __('Jesteś pewny, że chcesz usunąć auto? Zostaną usunięte także wszystkie raporty przypisane do tego samochodu!') }}')">Usuń</a> 
                                 </div>
                          </div>               
                 </div>
-                 @endforeach
+          @endforeach
     </div>
-</div>
-<div class="row justify-content-center mt-5">
-       
-  @canany(['isUser', 'isTestUser'])
-         <div class="card text-center" style="width: 20rem;">
-              <div class="card-body">
-              @if ($cars_count >= 2) 
-                <p class="card-text">Aby zarządzać większą ilością aut, musisz być użytkownikiem PREMIUM</p>
-                <a href="{{ route('get_premium') }}" class="btn btn-warning" role="button" aria-pressed="true">WYKUP KONTO PREMIUM</a>
-              @else
-                <a href="{{ route('user_auto.add_car') }}" class="btn btn-warning" role="button" aria-pressed="true">DODAJ AUTO</a>
-                 @endif
-              </div>
-          </div>
-  @endcanany
-          @can('isPremiumUser')
-          <div class="card text-center" style="width: 20rem;">
-            <div class="card-body">
-          @if ($cars_count >= 6) 
-          <p class="card-text">Osiągnąłeś maksymalną ilość aut, jeśli potrzebujesz większej ilości, skontaktuj się z administratorem portalu:</p>
-          <a href="mailto: administrator@ilezaauto.pl">administrator@ilezaauto.pl</a>
-          @else
-          <a href="{{ route('user_auto.add_car') }}" class="btn btn-warning" role="button" aria-pressed="true">DODAJ AUTO</a>
-          @endif
-            </div>
-          </div>
-          @endcan
-  
+    <a class="btn btn-warning text-light d-flex justify-content-center" style="width: 50%; margin-left: auto; margin-right: auto;" style="width: 30%" href="{{ route('user_management',$user_number) }}" role="button">Wróc</a>                         
+
+    @endif
 </div>
 
-
-
-@endif
-
-</div>
 
 
 
