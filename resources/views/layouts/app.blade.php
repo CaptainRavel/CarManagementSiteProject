@@ -54,7 +54,7 @@
                             <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"> {{ __('Wyloguj') }} <li>Wyloguj</li></a>
                             <form id="logout-form" action="{{ route('logout') }}" method="GET" class="d-none"> @csrf </form>
                         @endcan
-                        @can('isUser')             
+                        @canany(['isUser', 'isPremiumUser', 'isTestUser'])             
                           <a class="nav-link" href="{{ route('user_raports.reports') }}"> <li>Moje Raporty</li></a>
                           <a class="nav-link" href="{{ route('user_auto') }}"> <li>Moje Auta</li></a>
                           <a class="nav-link" href="{{ route('user_account') }}"> <li>Moje Konto</li></a>
@@ -64,7 +64,7 @@
                           <form id="logout-form" action="{{ route('logout') }}" method="GET" class="d-none"> @csrf </form>        
 
                           
-                        @endcan 
+                        @endcanany 
 
 
 

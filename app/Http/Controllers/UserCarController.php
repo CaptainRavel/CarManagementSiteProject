@@ -15,6 +15,7 @@ use Kyslik\ColumnSortable\Sortable;
 use App\Exports\RefuelsExport; 
 use App\Exports\ReprairsExport;
 use Excel;
+use Illuminate\Auth\Access\Gate;
 
 class UserCarController extends Controller
 {
@@ -26,25 +27,42 @@ class UserCarController extends Controller
     {
         $user_id = Auth::id();
         $exist = UserCars::where('user_id', '=', $user_id)->exists();
-        $user_cars = UserCars::where('user_id', '=', $user_id)->get();
+        $user_role = User::where('id', '=', $user_id)->value('role');
+        if ($user_role == 'user' || $user_role == 'test_user'){
+            $user_cars = UserCars::where('user_id', '=', $user_id)->orderBy('created_at')->limit(2)->get();  
+        }
+        else{
+            $user_cars = UserCars::where('user_id', '=', $user_id)->get();
+        }
         return view('user_raports', ["user_cars"=>$user_cars, "exist"=>$exist]);
     }
     public function user_car_raports($car)
     {
         $user_id = Auth::id();
         $car_id=$car;
+        $user_role = User::where('id', '=', $user_id)->value('role');
         $current_car_name= UserCars::select('name')->Where('car_id', '=', $car)->value('name');
-        $cars_list = UserCars::Where('user_id', '=', $user_id)->OrderBy('car_id')->get();
+        if ($user_role == 'user' || $user_role == 'test_user'){
+            $cars_list = UserCars::where('user_id', '=', $user_id)->orderBy('created_at')->limit(2)->get();  
+        }
+        else{
+            $cars_list = UserCars::where('user_id', '=', $user_id)->get();
+        }
         $refuel_list = UserRefuels::where('user_id', '=', $user_id)->where('car_id', '=', $car_id)->sortable(['refueling_date' => 'desc'])->paginate(5, ['*'], 'refuels');
         $reprair_list = UserReprairs::where('user_id', '=', $user_id)->where('car_id', '=', $car_id)->sortable(['reprair_date' => 'desc'])->paginate(5, ['*'], 'reprairs');
         $refuel_sum = UserRefuels::where('user_id', '=', $user_id)->where('car_id', '=', $car_id)->sum('fuel');
         $distance_sum = UserRefuels::where('user_id', '=', $user_id)->where('car_id', '=', $car_id)->sum('distance');
         $price_sum = UserRefuels::where('user_id', '=', $user_id)->where('car_id', '=', $car_id)->sum('price');
         $reprair_sum = UserReprairs::where('user_id', '=', $user_id)->where('car_id', '=', $car_id)->sum('price');
+        if($cars_list->contains('car_id',$car_id)){
         return view('user_car_raports', ["refuel_list"=>$refuel_list,
                     "reprair_list"=>$reprair_list, "cars_list"=>$cars_list, "current_car"=>$car,
                     "current_car_name"=>$current_car_name, 'refuel_sum'=>$refuel_sum, 'distance_sum'=>$distance_sum,
                     'price_sum'=>$price_sum, 'reprair_sum'=>$reprair_sum,"title" => "Moje konto"]);
+        }
+        else{
+            return view('errors.403');
+        }
     }
     
     public function store_refuels(Request $request){
@@ -213,22 +231,44 @@ class UserCarController extends Controller
     {
         $user_id = Auth::id();
         $exist = UserCars::where('user_id', '=', $user_id)->exists();
-        $user_cars = UserCars::where('user_id', '=', $user_id)->get();
+        $user_role = User::where('id', '=', $user_id)->value('role');
+        if ($user_role == 'user' || $user_role == 'test_user'){
+            $user_cars = UserCars::where('user_id', '=', $user_id)->orderBy('created_at')->limit(2)->get();  
+        }
+        else{
+            $user_cars = UserCars::where('user_id', '=', $user_id)->get();
+        }
         $cars_count = $user_cars->count();
         return view('user_auto', ["user_cars"=>$user_cars, "exist"=>$exist, "cars_count"=>$cars_count]);
     }
 
     public function user_add_car()
     {
+        $user_id = Auth::id();
+        $cars = UserCars::where('user_id', '=', $user_id)->count('car_id');
+        if ($cars >= 2 && $cars < 6 ){
+        $this->authorize('isPremiumUser');
+        }      
+        elseif ($cars < 2){
+            return view('add_user_auto');
+        }
+        else{
+            return view('errors.403');
+        }
         return view('add_user_auto');
+        
     }
+
     public function user_add_car_save(Request $request){
+
         $request->validate([
             'name' => 'required',
             'car_make' => 'required',
             'car_model' => 'required',
+            'registration_number' => 'required',
             'production_year' => 'required|integer|min:1900|max:2099',
             'image' => 'mimes:jpg,png,jpeg|max:5048',
+
         ]);
         if ($request->image != NULL){
         $newImageName = time() . '-' . $request->name . '.' . $request->image->extension();
@@ -239,15 +279,19 @@ class UserCarController extends Controller
         else{
         $image = NULL;
         }
+
         $user_cars = new UserCars();
         $user_cars->user_id = Auth::id();
         $user_cars->name = $request->name;
-        $user_cars->car_make = $request->car_make;
-        $user_cars->car_model = $request->car_model;
+        $user_cars->car_make = CarMakes::where('id_car_make', '=', $request->car_make)->value('name');
+        $user_cars->car_model = CarModels::where('id_car_model', '=', $request->car_model)->value('name');
         $user_cars->production_year = $request->production_year;
         $user_cars->oc_date = $request->oc_date;
         $user_cars->tech_rev_date = $request->tech_rev_date;
         $user_cars->image = $image;
+        $user_cars->make_id = $request->car_make;
+        $user_cars->model_id = $request->car_model;
+        $user_cars->registration_number = strtoupper($request->registration_number);
         $user_cars->save();
     
         return redirect()->route('user_auto');
@@ -256,8 +300,11 @@ class UserCarController extends Controller
     {
         $id = $car_id;
         $user_cars = UserCars::where('car_id', '=', $id)->get();
-        return view('edit_user_auto', ['user_cars'=>$user_cars]);
+        $make_id = UserCars::where('car_id', '=', $id)->value('make_id');
+        $models = CarModels::where('id_car_make', '=', $make_id)->get();
+        return view('edit_user_auto', ['user_cars'=>$user_cars, 'id'=>$id, 'models'=>$models]);
     }
+
     public function update_user_car(Request $request){
         $request->validate([
             'name' => 'required',
@@ -266,14 +313,21 @@ class UserCarController extends Controller
             'production_year' => 'required|integer|min:1900|max:2099',
             'image' => 'mimes:jpg,png,jpeg|max:5048',
         ]);
+        
+        $make = CarMakes::where('id_car_make', '=', $request->car_make)->value('name');
+        $model = CarModels::where('id_car_model', '=', $request->car_model)->value('name');
 
         $id = $request->car_id;
         $name = $request->name;
-        $car_make = $request->car_make;
-        $car_model = $request->car_model;
+        $car_make = $make;
+        $car_model = $model;
         $production_year = $request->production_year;
         $oc_date = $request->oc_date;
         $tech_rev_date = $request->tech_rev_date;
+        $make_id =$request->car_make;
+        $model_id = $request->car_model;
+        $registration_number =strtoupper($request->registration_number);
+
         if ($request->image != NULL){
             $image_path = UserCars::select('image')->where('car_id', '=', $id)->value('image');
             $file_path = public_path('img/users_car_images/'.$image_path);
@@ -286,16 +340,30 @@ class UserCarController extends Controller
         else{
             $image = UserCars::select('image')->where('car_id', '=', $id)->value('image');
         }
+        if($make_id != 'NULL' and $model_id != 'NULL'){
         UserCars::where('car_id', '=', $id)->update([
             'name'=>$name,
-            'car_make'=>$car_make,
-            'car_model'=>$car_model,
             'production_year'=>$production_year,
             'oc_date'=>$oc_date,
             'tech_rev_date'=>$tech_rev_date,
             'image'=>$image,
+            'car_make'=>$car_make,
+            'car_model'=>$car_model,
+            'make_id'=>$make_id,
+            'model_id'=>$model_id,
+            'registration_number'=>$registration_number
         ]);
-    
+        }
+        else{
+            UserCars::where('car_id', '=', $id)->update([
+                'name'=>$name,
+                'production_year'=>$production_year,
+                'oc_date'=>$oc_date,
+                'tech_rev_date'=>$tech_rev_date,
+                'image'=>$image,
+                'registration_number'=>$registration_number
+            ]);
+        }
         return redirect()->route('user_auto');
     }
 
