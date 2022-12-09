@@ -1,5 +1,5 @@
  <!-- Fonts -->
-+<head>
+<head>
  <style>
 .angry-grid {
    width: 30%;
@@ -50,7 +50,7 @@ margin-top:30px;
 }
 
 </style>
-
+<body style="background-color:#252525">
     <div class="angry-grid">
 		  <div id="item-0">
 			<a><img src="https://bi.im-g.pl/im/31/f4/18/z26165809IER,Izera.jpg" class="center" width="250" alt=""></a>
