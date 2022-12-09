@@ -37,7 +37,7 @@
                            MARKA: {{ $user_car->car_make }}</br>
                                 MODEL: {{ $user_car->car_model }}</br>
                                 ROK PRODUKCJI: {{ $user_car->production_year }}</br>
-                               
+
                                 <div class="card-body">
                                     <a class="btn btn-warning d-flex justify-content-center font-weight-bold" style="width: 80%; margin-left: auto; margin-right: auto;" style="width: 50%" href="{{ route('user_raports.car_reports', $user_car->car_id) }}" role="button">WYBIERZ</a>   
                                 </div>

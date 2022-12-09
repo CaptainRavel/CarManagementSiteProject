@@ -21,6 +21,26 @@
                                 @foreach ($user_email as $mail)
                                 {{ $mail->email}}
                                 @endforeach
+                                <br><br>
+                                Typ konta:
+                                @foreach ($user_role as $typ)                                
+                                @if ($typ->role == 'user')
+                                    darmowe
+                                @endif
+                                @if ($typ->role == 'premium_user')
+                                    PREMIUM
+                                @endif
+                                @if ($typ->role == 'admin')
+                                    Administrator
+                                @endif
+                                @if ($typ->role == 'test_user')
+                                    testowe
+                                @endif
+                                <br><br>
+                                @if ($typ->role == 'premium_user')
+                                Konto PREMIUM ważne do: {{ $premium_end }} {{ $days }}                                
+                                @endif
+                                @endforeach
                                 </h5>
                         	<div class="row mt-5">
 		                        <div class="col col-sm-12"></div>
