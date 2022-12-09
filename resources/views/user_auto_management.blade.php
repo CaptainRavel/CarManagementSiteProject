@@ -32,6 +32,7 @@
                                 MARKA: {{ $user_car->car_make }}</br>
                                 MODEL: {{ $user_car->car_model }}</br>
                                 ROK PRODUKCJI: {{ $user_car->production_year }}</br>
+                                NUMER REJESTRACYJNY: {{ $user_car->registration_number }}</br>
                                 UBEZPIECZENIE: {{ $user_car->oc_date }}</br>
                                 BADANIE TECHNICZNE: {{ $user_car->tech_rev_date }}</br>
 
