@@ -3,7 +3,7 @@
 @section('content')
 <div class="row justify-content-center">
 @foreach ($cars_list as $car)
-    <div class="card m-3 p-0 shadow-sm border border-warning" style="width: 15rem;" class="">
+    <div class="card m-3 p-0 shadow-sm border border-warning" style="width: 20rem;" class="">
       @if ($car->image == '')
         <img class="card-img-top" src="{{ asset('img/user_car_default.jpg') }}" alt="Card image cap">
       @else
@@ -11,6 +11,7 @@
       @endif
       <div class="card-body">
         <h5 class="card-title">{{ $car->name }}</h5>
+     
           <a class="btn btn-warning d-flex justify-content-center font-weight-bold" style="width: 80%; margin-left: auto; margin-right: auto;" style="width: 50%" href="{{ route('user_raports.car_reports', $car->car_id) }}" role="button">WYBIERZ</a>   
         </div>
     </div>

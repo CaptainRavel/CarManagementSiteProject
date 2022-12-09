@@ -68,7 +68,8 @@ Route::middleware(['auth', 'is_verify_email'])->group(function()
     Route::post('/update_user_auto', [App\Http\Controllers\UserCarController::class, 'update_user_car'])->name('user_auto.update_car');
     Route::get('/destroy_user_auto/{car_id}', [App\Http\Controllers\UserCarController::class, 'destroy_user_car'])->name('user_auto.destroy_car');
 
-    Route::get('/get_premium', [App\Http\Controllers\PremiumController::class, 'get_premium'])->name('get_premium');
+    //Route::get('/add_user_car_info', [App\Http\Controllers\UserCarInfoController::class, 'index'])->name('user_car_info');
+    //Route::post('/add_user_car_info1', [App\Http\Controllers\UserCarInfoController::class, 'store_car'])->name('user_car_info.store_car');
 });
 
 Route::middleware(['can:isAdmin'])->group(function()
@@ -81,21 +82,6 @@ Route::middleware(['can:isAdmin'])->group(function()
     Route::post('/user_management_edit_password/{id}', [App\Http\Controllers\UserManagementController::class, 'update_password']);
     Route::post('/user_management_edit_email/{id}', [App\Http\Controllers\UserManagementController::class, 'update_email']);
     Route::get('/user_management_delete_user/{id}', [App\Http\Controllers\UserManagementController::class, 'destroy_user']);
-
-    Route::get('/user_auto_management/{id}', [App\Http\Controllers\UserManagementController::class, 'user_auto_management'])->name('user_auto_management');
-    Route::get('/user_auto_management_delete/{user_id}/{car_id}', [App\Http\Controllers\UserManagementController::class, 'destroy_user_car_admin'])->name('user_auto_management.delete');
-    Route::get('/user_auto_management_raports/{user_id}/{car_id}', [App\Http\Controllers\UserManagementController::class, 'user_auto_raports_management'])->name('user_auto_raports_management');
-
-    Route::get('/add_premium_month/{id}', [App\Http\Controllers\UserManagementController::class, 'add_premium_month'])->name('add_premium.month.admin');
-    Route::get('/add_premium_year/{id}', [App\Http\Controllers\UserManagementController::class, 'add_premium_year'])->name('add_premium.year.admin');
-    Route::get('/add_premium_off/{id}', [App\Http\Controllers\UserManagementController::class, 'add_premium_off'])->name('add_premium.off.admin');
-});
-
-
-Route::middleware(['can:isTestUser'])->group(function()
-{
-    Route::get('/add_premium_month', [App\Http\Controllers\PremiumController::class, 'add_premium_month'])->name('add_premium.month');
-    Route::get('/add_premium_year', [App\Http\Controllers\PremiumController::class, 'add_premium_year'])->name('add_premium.year');
 });
 
 Route::get('dashboard', [App\Http\Controllers\Auth\AuthController::class, 'dashboard'])->middleware(['auth', 'is_verify_email']); 
