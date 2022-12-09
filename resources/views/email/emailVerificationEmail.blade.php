@@ -63,7 +63,7 @@ margin-top:30px;
                     By zweryfikować email kliknij w link poniżej:  </br></br>
 		</div>
 		<div id="item-2">
-			<a href=""{{ route('user.verify', $token) }}"" class="button glow-button center-btn" target="_blank" role="button">Zweryfikuj E-mail</a>
+			<a href="{{ route('user.verify', $token) }}" class="button glow-button center-btn" target="_blank" role="button">Zweryfikuj E-mail</a>
 		</div>
 	</div>
                
