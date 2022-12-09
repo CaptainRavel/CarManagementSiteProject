@@ -12,8 +12,6 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Mail;
 use Laravel\Socialite\Facades\Socialite;
-use App\Models\PremiumAccount;
-use Carbon\Carbon;
   
 class AuthController extends Controller
 {
@@ -24,7 +22,6 @@ class AuthController extends Controller
      */
     public function index()
     {
-
         return view('auth.login');
     }  
       
@@ -55,8 +52,6 @@ class AuthController extends Controller
             return redirect()->intended('dashboard')
                         ->withSuccess('Zostałeś poprawnie zalogowany!');
         }
-
-
   
         return redirect("login")->with('not_login', 'Nie udało się zalogować! Podałeś niepoprawny email/hasło.');
     }
@@ -128,19 +123,6 @@ class AuthController extends Controller
      * @return response()
      */
     public function logout() {
-        $user_id = Auth::id();
-        $currentDateTime = Carbon::now();
-        $user_role = User::where('id', '=', $user_id)->value('role');
-        $end_premium_date = PremiumAccount::where('user_id', '=', $user_id)->value('premium_end');
-        
-        if($user_role == 'premium_user'){           
-            if($currentDateTime >= $end_premium_date)
-            {
-                PremiumAccount::where('user_id', '=', $user_id)->delete(); 
-                User::where('id', '=', $user_id)->update(['role'=>'user']);
-            }
-        }
-
         Session::flush();
         Auth::logout();
   

@@ -36,45 +36,35 @@
                                 MARKA: {{ $user_car->car_make }}</br>
                                 MODEL: {{ $user_car->car_model }}</br>
                                 ROK PRODUKCJI: {{ $user_car->production_year }}</br>
-                                NUMER REJESTRACYJNY: {{ $user_car->registration_number }}</br>
                                 UBEZPIECZENIE: {{ $user_car->oc_date }}</br>
                                 BADANIE TECHNICZNE: {{ $user_car->tech_rev_date }}</br>
-
-                                <div class="card-body">                            
-                                    <a class="btn btn-success text-light d-flex justify-content-center" style="width: 80%; margin-left: auto; margin-right: auto;" style="width: 50%" href="{{ route('user_auto.edit_car', $user_car->car_id) }}" role="button">Edytuj</a>   
-                                    <a class="btn btn-danger text-light d-flex justify-content-center" style="width: 80%; margin-left: auto; margin-right: auto;" style="width: 50%" href="{{ route('user_auto.destroy_car', $user_car->car_id) }}" role="button" onclick="return confirm('{{ __('Jesteś pewny, że chcesz usunąć auto? Zostaną usunięte także wszystkie raporty przypisane do tego samochodu!') }}')">Usuń</a> 
+                            
+                                <div class="card-body">
+                               
+                                  <a class="btn btn-success text-light d-flex justify-content-center" style="width: 80%; margin-left: auto; margin-right: auto;" style="width: 50%" href="{{ route('user_auto.edit_car', $user_car->car_id) }}" role="button">Edytuj</a>   
+                                  <a class="btn btn-danger text-light d-flex justify-content-center" style="width: 80%; margin-left: auto; margin-right: auto;" style="width: 50%" href="{{ route('user_auto.destroy_car', $user_car->car_id) }}" role="button" onclick="return confirm('{{ __('Jesteś pewny, że chcesz usunąć auto? Zostaną usunięte także wszystkie raporty przypisane do tego samochodu!') }}')">Usuń</a>   
                                 </div>
-                         </div>               
+                         </div>
+
+               
                 </div>
                  @endforeach
     </div>
 </div>
 <div class="row justify-content-center mt-5">
        
-  @canany(['isUser', 'isTestUser'])
+  
          <div class="card text-center" style="width: 20rem;">
               <div class="card-body">
               @if ($cars_count >= 2) 
-                <p class="card-text">Aby zarządzać większą ilością aut, musisz być użytkownikiem PREMIUM</p>
-                <a href="{{ route('get_premium') }}" class="btn btn-warning" role="button" aria-pressed="true">WYKUP KONTO PREMIUM</a>
+                <p class="card-text">Aby dodać więcej niż dwa auta, musisz być użytkownikiem PREMIUM</p>
+                <a href="#" class="btn btn-warning" role="button" aria-pressed="true">WYKUP KONTO PREMIUM</a>
               @else
                 <a href="{{ route('user_auto.add_car') }}" class="btn btn-warning" role="button" aria-pressed="true">DODAJ AUTO</a>
                  @endif
               </div>
           </div>
-  @endcanany
-          @can('isPremiumUser')
-          <div class="card text-center" style="width: 20rem;">
-            <div class="card-body">
-          @if ($cars_count >= 6) 
-          <p class="card-text">Osiągnąłeś maksymalną ilość aut, jeśli potrzebujesz większej ilości, skontaktuj się z administratorem portalu:</p>
-          <a href="mailto: administrator@ilezaauto.pl">administrator@ilezaauto.pl</a>
-          @else
-          <a href="{{ route('user_auto.add_car') }}" class="btn btn-warning" role="button" aria-pressed="true">DODAJ AUTO</a>
-          @endif
-            </div>
-          </div>
-          @endcan
+
   
 </div>
 
