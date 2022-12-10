@@ -43,15 +43,15 @@
                                     @endif
                                     </td>
                                     <td> 
-                                        <a href="{{ url('user_management/'.$user->id) }}" class="btn btn-xs btn-success btn-flat show_confirm">Edytuj</a>
-                                        <a href="{{ url('user_management_delete_user/'.$user->id) }}" class="btn btn-xs btn-danger btn-flat show_confirm" onclick="return confirm('{{ __('Jesteś pewny, że chcesz usunąć użytkownika?') }}')">Usuń</a>
+                                        <a href="{{ url('user_management/'.$user->id) }}" class="btn btn-xs btn-success btn-flat show_confirm"><i class="fa-solid fa-gear"></i>  Edytuj</a>
+                                        <a href="{{ url('user_management_delete_user/'.$user->id) }}" class="btn btn-xs btn-danger btn-flat show_confirm" onclick="return confirm('{{ __('Jesteś pewny, że chcesz usunąć użytkownika?') }}')"><i class="fa-regular fa-trash-can"></i>  Usuń</a>
                                     </td>
                                 </tr>
                         @endforeach
                         </tbody>
                     </table>
                     {{ $user_list->appends(['users' => $user_list->currentPage()])->links() }}
-                    <a href="{{ url('searchuser') }}" class="btn btn-xs btn-warning btn-flat font-weight-bold show_confirm">Wyszukaj użytkowników</a>
+                    <a href="{{ url('searchuser') }}" class="btn btn-xs btn-warning btn-flat font-weight-bold show_confirm"><i class="fa-solid fa-magnifying-glass"></i>   Wyszukaj użytkowników</a>
                     
                 </div>
             </div>

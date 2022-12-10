@@ -69,48 +69,53 @@
                                 <br>
                                 Liczba zapisanych raportów: {{ $user_raports_number }}
                                 <br>
-                                <a href="{{ route('user_auto_management', $user_id) }}" class="btn btn-warning d-flex justify-content-center font-weight-bold" style="width: 89%;  margin-right: auto;">Zobacz</a>                                   
+                                <a href="{{ route('user_auto_management', $user_id) }}" class="btn btn-warning d-flex justify-content-center font-weight-bold mb-5" style="width: 89%;  margin-right: auto;">Zobacz raporty i auta</a>                                   
             </p>
-            <br>
-            <br>
-            <form action="/user_management_edit_name/{{$user_id}}" method="POST" role="form">
-                {{ csrf_field() }}
-                    <div class="autosized">
-                        <div class="form-group">
 
-                            <input style="width: 80%; margin-left: auto; margin-right: auto;" type="text" class="form-control" name="name" required="required" placeholder="Zmień nick użytkownika"/>
-                        </div>
-                    </div>
-                    <input class="btn btn-warning d-flex justify-content-center font-weight-bold" style="width: 80%; margin-left: auto; margin-right: auto;" type="submit" value="Zmień" />
-                </form>
-                <br>
-                <form action="/user_management_edit_email/{{$user_id}}" method="POST" role="form">
+                <h3 class="text-center"> Ustawienia konta </h3>
+
+             <form action="/user_management_edit_name/{{$user_id}}" method="POST" role="form">
+                {{ csrf_field() }}
+                    <div class="form-group row mt-4 justify-content-center">
+                            <div class="col-md-10 mb-4" > 
+                                      <label for="exampleInputEmail1">Zmień login</label>
+                                        <input style="" type="text" class="form-control" name="name" required="required" placeholder="Zmień nick użytkownika"/>
+                                               <input class="btn btn-warning d-flex justify-content-center font-weight-bold mt-2" style="width: 80%; margin-left: auto; margin-right: auto;" type="submit" value="Zmień" /> 
+                             </div> 
+                    </div> 
+             </form>
+
+            
+
+             <form action="/user_management_edit_email/{{$user_id}}" method="POST" role="form">
                     {{ csrf_field() }}
-                        <div class="autosized">
-                            <div class="form-group">
-                                <input style="width: 80%; margin-left: auto; margin-right: auto;" type="email" class="form-control @error('email') is-invalid @enderror" name="email" required="required" placeholder="Zmień e-mail użytkownika"/>
+                        <div class="form-group row justify-content-center">
+                            <div class="col-md-10 mb-5" >
+                                <label for="exampleInputEmail1">Zmień adres e-mail</label>
+                                <input style="" type="email" class="form-control @error('email') is-invalid @enderror" name="email" required="required" placeholder="Zmień e-mail użytkownika"/>
                                 @if ($errors->has('email'))
                                 <span class="text-danger">{{ $errors->first('email') }}</span>
                             @endif
+                             <input class="btn btn-warning d-flex justify-content-center font-weight-bold mt-2" style="width: 80%; margin-left: auto; margin-right: auto;" type="submit" value="Zmień" /> 
                             </div>
-                        </div>
-                        <input style="width: 80%; margin-left: auto; margin-right: auto;" type="submit" value="Zmień email" class="btn btn-warning d-flex justify-content-center font-weight-bold"/>
+                        </div>     
                     </form>
-                    <br>
+               
+
                     <form action="/user_management_edit_password/{{$user_id}}" method="POST" role="form">
                         {{ csrf_field() }}
-                            <div class="autosized">
-                                <div class="form-group">        
-                                    <input style="width: 80%; margin-left: auto; margin-right: auto;" type="text" class="form-control" @error('password') is-invalid @enderror name="password" required="required" placeholder="Zmień hasło użytkownika"/>
+                           <div class="form-group row justify-content-center">
+                            <div class="col-md-10 mb-2" >
+                                    <input type="text" class="form-control" @error('password') is-invalid @enderror name="password" required="required" placeholder="Zmień hasło użytkownika"/>
                                     @if ($errors->has('password'))
                                     <span class="text-danger">{{ $errors->first('password') }}</span>
                                 @endif
+                                <input class="btn btn-warning d-flex justify-content-center font-weight-bold mt-2" style="width: 80%; margin-left: auto; margin-right: auto;" type="submit" value="Zmień" /> 
                                 </div>
                             </div>
-                            <input class="btn btn-warning d-flex justify-content-center font-weight-bold" style="width: 80%; margin-left: auto; margin-right: auto;" type="submit" value="Zmień hasło" />
-                        </form>
-                    <br>
-                    <a class="btn btn-danger text-light d-flex justify-content-center" style="width: 80%; margin-left: auto; margin-right: auto;" style="width: 50%" href="{{ route('user_account.destroy_user') }}" role="button" onclick="return confirm('{{ __('Jesteś pewny, że chcesz usunąć konto?') }}')">Usuń konto</a>   
+                           
+              
+                    <a class="btn btn-danger text-light d-flex justify-content-center" style="width: 80%; margin-left: auto; margin-right: auto;" href="{{ route('user_account.destroy_user') }}" role="button" onclick="return confirm('{{ __('Jesteś pewny, że chcesz usunąć konto?') }}')">Usuń konto</a>   
                          </div>
         </div>
     </div>
