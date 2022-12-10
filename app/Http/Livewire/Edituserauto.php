@@ -13,8 +13,8 @@ class Edituserauto extends Component
     public $models;
     public $user_cars;
   
-    public $selectedMake = NULL;
-    public $selectedModel = NULL;
+    public $selectedMake = 'NULL';
+    public $selectedModel = 'NULL';
 
     public function mount($user_cars, $models)
     {

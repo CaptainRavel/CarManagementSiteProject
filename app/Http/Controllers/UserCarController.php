@@ -354,6 +354,9 @@ class UserCarController extends Controller
             'registration_number'=>$registration_number
         ]);
         }
+        elseif($make_id != 'NULL' and $model_id == 'NULL'){
+            return redirect()->route('user_auto.edit_car', $id)->with('makeandmode', 'Nie możesz zminić marki auta bez zmiany modelu!');
+        }
         else{
             UserCars::where('car_id', '=', $id)->update([
                 'name'=>$name,
@@ -364,7 +367,7 @@ class UserCarController extends Controller
                 'registration_number'=>$registration_number
             ]);
         }
-        return redirect()->route('user_auto');
+       return redirect()->route('user_auto');
     }
 
     public function destroy_user_car($car_id){

@@ -10,7 +10,7 @@
                   <div class="card-header text-center mb-2"><h2>Rejestracja</h2></div>
                   <div class="card-body">
                     @if (\Session::has('message'))
-                    <div class="alert alert-success">
+                    <div class="alert alert-warning">
                     <ul>
                         <li>{!! \Session::get('message') !!}</li>
                     </ul>

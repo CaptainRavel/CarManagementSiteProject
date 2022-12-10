@@ -15,18 +15,19 @@
                         <input class="karta_edycji"  type="text" id="name" name="name" required="required" minlength="3">
                     </div>
                      <div class="form-group" >
-                        <label for="name">Marka</label>
-                        <select wire:model="selectedMake" class="karta_edycji" style="" >
+                        <label for="car_make">Marka</label>
+                        <select wire:model="selectedMake" class="karta_edycji" >
                             <option value=NULL >Wybierz</option>
                             @foreach($makes as $make)
                                 <option value="{{ $make->id_car_make }}">{{ $make->name }}</option>
                             @endforeach
                         </select>
+                        <input type="hidden", name="car_make" value="{{ $selectedMake }}">
                     </div>
 
             @if($makes != NULL)
                 <div class="form-group" >
-                        <label for="name">Model</label>
+                        <label for="car_model">Model</label>
                         <select wire:model="selectedModel" class="karta_edycji" >
                         <option value=NULL >Wybierz</option>
                         @foreach($models as $model)

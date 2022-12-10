@@ -10,7 +10,7 @@
                   <div class="card-body">
   
                     @if (\Session::has('passchange'))
-                    <div class="alert alert-success">
+                    <div class="alert alert-warning">
                     <ul>
                         <li>{!! \Session::get('passchange') !!}</li>
                     </ul>
