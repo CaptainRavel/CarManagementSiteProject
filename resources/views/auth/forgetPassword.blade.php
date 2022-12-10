@@ -21,7 +21,7 @@
                           @csrf
                           <div class="form-group row justify-content-center">
                               <div class="col-md-8 mb-4" >
-                              <label for="email_address" class="col-md-4 col-form-label text-md-right">E-Mail Address</label>
+                              <label for="email_address" class="col-md-6 col-form-label text-md-right">Adres e-mail:</label>
                                   <input type="text" id="email_address" class="form-control" name="email" required autofocus>
                                   @if ($errors->has('email'))
                                       <span class="text-danger">{{ $errors->first('email') }}</span>
@@ -30,7 +30,7 @@
 
                          <div class="d-grid gap-2 col-6 mx-auto mb-4">
                               <button type="submit" class="btn btn-warning">
-                                  Wyślij link do zerowania hasła
+                                  Wyślij link do zresetowania hasła
                               </button>
                           </div>
                       </form>
