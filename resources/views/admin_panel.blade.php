@@ -2,16 +2,16 @@
 
 @section('content')
 <div class="container text-light">
-    <div class="container px-2 px-lg-2">
-        <div class="row gx-2 gx-lg-5 my-5">
-            <div class="col-lg-12">
-                <div class="card">
+    <div class="container ">
+        <div class="row justify-content-center">
+            <div class="col-md-12">
+                <div class="card justify-content-center">
                     <div class="card text-center">
                         <div class="card-header ">
                             <h3 class="card-title" class='text-center'>Lista użytkowników</h3>
                             <a href="{{ url('searchuser') }}" class="btn btn-xs btn-warning btn-flat font-weight-bold show_confirm"><i class="fa-solid fa-magnifying-glass"></i>   Wyszukaj użytkowników</a>
                             <div class="table-responsive">
-                    <table class="table text-light">
+                    <table class="table text-light mt-4 mb-5">
                         <thead>
                             <tr>
                                 <th>
@@ -54,51 +54,53 @@
                     {{ $user_list->appends(['users' => $user_list->currentPage()])->links() }}
                     
                     <h3 class="card-title" class='text-center'>Dodaj użytkownika:</h3>
-                    <form action="{{ route('user_management.add_user') }}" method="POST">
-                        @csrf
-                        <div class="form-group row justify-content-center mb-4">
-                            <div class="col-md-8 ">
-                                <label class="mb-1" for="name" >Nick:</label>
-                                <input type="text" id="name" class="form-control" name="name" required autofocus  placeholder="Nick / Login">
-                                @if ($errors->has('name'))
-                                    <span class="text-danger">{{ $errors->first('name') }}</span>
-                                @endif
+ 
+                                    <form action="{{ route('user_management.add_user') }}" method="POST">
+                                        @csrf
+                                        <div class="row justify-content-center">
+                                            <div class=" col-md-6 mb-3">
+                                                    <label class="mb-1" for="name" >Nick:</label>
+                                                    <input type="text" id="name" class="form-control" name="name" required autofocus  placeholder="Nick / Login">
+                                                    @if ($errors->has('name'))
+                                                        <span class="text-danger">{{ $errors->first('name') }}</span>
+                                                    @endif
+                                            </div>
+                                        </div>
+
+                                       <div class="form-group row justify-content-center mb-3">
+                                            <div class="col-md-6">
+                                                <label  class="mb-1" for="email_address" >E-Mail:</label>
+                                                <input type="text" id="email_address" class="form-control" name="email" required autofocus placeholder="Adres e-mail">
+                                                @if ($errors->has('email'))
+                                                    <span class="text-danger">{{ $errors->first('email') }}</span>
+                                                @endif
+                                            </div>
+                                        </div>
+
+                                       <div class="form-group row justify-content-center mb-3">
+                                            <div class="col-md-6">
+                                                <label  class="mb-1" for="password">Hasło:</label>
+                                                <input type="password" id="password" class="form-control" name="password" required placeholder="Hasło">
+                                                @if ($errors->has('password'))
+                                                    <span class="text-danger">{{ $errors->first('password') }}</span>
+                                                @endif
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row justify-content-center mb-3">
+                                            <div class="col-md-6">
+                                              <label  class="mb-1" for="password-confirm">Powtórz hasło:</label>
+                                              <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" placeholder="Powtórz hasło">
+                                          </div>
+                                      </div>
+
+                                        <div class="d-grid gap-2 col-6 mx-auto mb-3">
+                                            <button type="submit" class="btn btn-warning">
+                                                Zapisz!
+                                            </button>
+                                        </div>
+                                    </form>
                             </div>
-                        </div>
-
-                       <div class="form-group row justify-content-center mb-4">
-                            <div class="col-md-8">
-                                <label  class="mb-1" for="email_address" >E-Mail:</label>
-                                <input type="text" id="email_address" class="form-control" name="email" required autofocus placeholder="Adres e-mail">
-                                @if ($errors->has('email'))
-                                    <span class="text-danger">{{ $errors->first('email') }}</span>
-                                @endif
-                            </div>
-                        </div>
-
-                       <div class="form-group row justify-content-center mb-4">
-                            <div class="col-md-8">
-                                <label  class="mb-1" for="password">Hasło:</label>
-                                <input type="password" id="password" class="form-control" name="password" required placeholder="Hasło">
-                                @if ($errors->has('password'))
-                                    <span class="text-danger">{{ $errors->first('password') }}</span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group row justify-content-center mb-4">
-                            <div class="col-md-8">
-                              <label  class="mb-1" for="password-confirm">Powtórz hasło:</label>
-                              <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" placeholder="Powtórz hasło">
-                          </div>
-                      </div>
-
-                        <div class="d-grid gap-2 col-6 mx-auto mb-4">
-                            <button type="submit" class="btn btn-warning">
-                                Zapisz!
-                            </button>
-                        </div>
-                    </form>
                 </div>
             </div>
         </div>
