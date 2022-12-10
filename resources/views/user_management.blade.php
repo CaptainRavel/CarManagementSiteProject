@@ -30,9 +30,13 @@
                                 @foreach ($user_verify_status as $email_status) 
                                 @if ($email_status->is_email_verified == 0)
                                     E-mail niezweryfikowany
+                                    <a href="{{ route('user_management.email_verify', $user_id) }}" class="btn btn-warning d-flex justify-content-center font-weight-bold" style="width: 89%;  margin-right: auto;">Oznacz jako zweryfikowany</a>
+
                                 @endif
                                 @if ($email_status->is_email_verified == 1)
                                     E-mail zweryfikowany poprawnie
+                                    <a href="{{ route('user_management.email_verify', $user_id) }}" class="btn btn-warning d-flex justify-content-center font-weight-bold" style="width: 89%;  margin-right: auto;">Oznacz jako niezweryfikowany</a>
+
                                 @endif
                                 @endforeach
                                 <br>                                

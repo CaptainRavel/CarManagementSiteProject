@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\UserRole;
 use App\Models\User;
 use App\Models\UserCars;
 use App\Models\UserRefuels;
@@ -46,8 +47,24 @@ class UserManagementController extends Controller
         $nick = $request->name;
         User::where('id', '=', $user_id)->update(['name' => $nick]);
     
-        return redirect()->route('admin_panel');
+        return redirect()->route('user_management', $user_id);
     }
+
+    public function verify_user_email($id){
+
+        $user_id = $id;
+        $verify_status=User::where('id', '=', $user_id)->value('is_email_verified');
+        if ($verify_status == 0){
+            $verify_status = 1;
+            User::where('id', '=', $user_id)->update(['is_email_verified' => $verify_status]);
+        }
+        else{
+            $verify_status = 0;
+            User::where('id', '=', $user_id)->update(['is_email_verified' => $verify_status]);
+        }
+        return redirect()->route('user_management', $user_id);
+    }
+
     public function update_email(Request $request, $id){
 
         $validated = $request->validate([
@@ -57,7 +74,7 @@ class UserManagementController extends Controller
         $mail = $request->email;
         User::where('id', '=', $user_id)->update(['email' => $mail]);
     
-        return redirect()->route('admin_panel');
+        return redirect()->route('user_management', $user_id);
     }
     public function update_password(Request $request, $id){
 
@@ -68,7 +85,7 @@ class UserManagementController extends Controller
         $pass = Hash::make($request->password);
         User::where('id', '=', $user_id)->update(['password' => $pass]);
     
-        return redirect()->route('admin_panel');
+        return redirect()->route('user_management', $user_id);
     }
     public function destroy_user($id){
 
@@ -205,4 +222,23 @@ class UserManagementController extends Controller
                         'price_sum'=>$price_sum, 'reprair_sum'=>$reprair_sum,"title" => "Moje konto"]);
         }
     
+        public function add_user(Request $request){
+            $request->validate([
+                'name' => ['required', 'string', 'max:255'],
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+                'password' => ['required', 'string', 'min:8', 'confirmed'],
+            ]);
+
+            $pass = Hash::make($request->password);
+
+            $new_user = new User();
+            $new_user->name = $request->name;
+            $new_user->email = $request->email;
+            $new_user->password = $pass;
+            $new_user->role = UserRole::USER;
+            $new_user->is_email_verified = 1;
+            $new_user->save();
+
+            return redirect()->route('admin_panel');
+        }
 }

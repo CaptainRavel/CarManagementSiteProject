@@ -31,7 +31,7 @@ Route::middleware(['auth'])->group(function()
 Route::middleware(['auth', 'is_verify_email'])->group(function()
 {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-    Route::get('/user_raports/', [App\Http\Controllers\UserCarController::class, 'user_raports'])->name('user_raports.reports');
+    Route::get('/user_raports', [App\Http\Controllers\UserCarController::class, 'user_raports'])->name('user_raports.reports');
     Route::get('/user_raports/{car}', [App\Http\Controllers\UserCarController::class, 'user_car_raports'])->name('user_raports.car_reports');
     Route::post('/user_raports1', [App\Http\Controllers\UserCarController::class, 'store_refuels'])->name('user_raports.store_refuels');
     Route::post('/edit_raport_refuels', [App\Http\Controllers\UserCarController::class, 'update_refuels'])->name('user_raports.update_refuels');
@@ -77,9 +77,11 @@ Route::middleware(['can:isAdmin'])->group(function()
     Route::get('/searchuser', [App\Http\Controllers\AdminPanelController::class, 'search'])->name('search');
 
     Route::get('/user_management/{id}', [App\Http\Controllers\UserManagementController::class, 'user_edit'])->name('user_management');
+    Route::post('/user_management_add_user', [App\Http\Controllers\UserManagementController::class, 'add_user'])->name('user_management.add_user');;
     Route::post('/user_management_edit_name/{id}', [App\Http\Controllers\UserManagementController::class, 'update_nick']);
     Route::post('/user_management_edit_password/{id}', [App\Http\Controllers\UserManagementController::class, 'update_password']);
     Route::post('/user_management_edit_email/{id}', [App\Http\Controllers\UserManagementController::class, 'update_email']);
+    Route::get('/user_management_edit_email_verify/{id}', [App\Http\Controllers\UserManagementController::class, 'verify_user_email'])->name('user_management.email_verify');
     Route::get('/user_management_delete_user/{id}', [App\Http\Controllers\UserManagementController::class, 'destroy_user']);
 
     Route::get('/user_auto_management/{id}', [App\Http\Controllers\UserManagementController::class, 'user_auto_management'])->name('user_auto_management');
