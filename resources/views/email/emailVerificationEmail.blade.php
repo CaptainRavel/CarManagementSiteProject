@@ -55,7 +55,7 @@ margin-top:30px;
 <body style="background-color:#252525">
     <div class="angry-grid">
 		  <div id="item-0">
-			<a><img src="https://bi.im-g.pl/im/31/f4/18/z26165809IER,Izera.jpg" class="center" width="250" alt=""></a>
+			<a><img src="https://imageup.me/images/66a0dd63-e6fc-43f2-a9e1-1cc08a8ece0c.png" class="center" width="450" alt=""></a>
 		  </div>
 		<div id="item-1">
 			   <h2 class="m-5">Zweryfikuj swój adres e-mail</h2>

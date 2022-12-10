@@ -4,20 +4,25 @@
 
 
 <h3 class='text-center mb-4'>Twoje auta</h3>
-<div class="d-flex justify-content-center">
+
     @if (!$exist)
-      <div class="card border border-warning">
-        <div class="card-body text-center mt-2">
-          <h5 class="card-title">BRAK AUT</h5> 
-        </div>
-      <div class="card-body">
-          <p class="card-text">Nie dodałeś jeszcze żadnego auta, kliknij poniżej by zapisać swoje pierwsze auto!</p>
-           <div class="col text-center">
-               <a href="{{ route('user_auto.add_car') }}" <button type="button" href="{{ route('user_auto.add_car') }}" class="btn btn-warning d-flex justify-content-center ">Dodaj auto</button></a>  
-            </div>
-      </div>  
+    <div class="container">
+       <div class="row">
+        <div class="row justify-content-center">
+          <div class="col-md-6">
+            <div class="card border border-warning text-center">
+                    <div class="card-body text-center mt-2">
+                      <h5 class="card-title mb-5">BRAK AUT</h5> 
+                      <p class="card-text">Nie dodałeś jeszcze żadnego auta, kliknij poniżej by zapisać swoje pierwsze auto!</p>
+                      <div class="col text-center">
+                       <a href="{{ route('user_auto.add_car') }}" <button type="button" href="{{ route('user_auto.add_car') }}" class=" mt-5 btn btn-warning d-flex justify-content-center ">Dodaj auto</button></a>  
+                    </div>
+              </div>
+          </div>
+     </div>
+     </div>
     @endif
-</div>
+
 <div class="container">
     @if ($exist)
     <div class="row justify-content-center">

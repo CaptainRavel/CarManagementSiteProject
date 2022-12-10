@@ -14,32 +14,27 @@
                         <label for="name">Nazwa</label>
                         <input class="karta_edycji"  type="text" id="name" name="name" required="required" minlength="3">
                     </div>
-                    <div class="form-group" >
-                        
-                        <div class="col-md-6">
-                            <label for="car_make" class="col-md-4 col-form-label">Marka</label>
-                        <select wire:model="selectedMake" class="form-control" class="" >
+                     <div class="form-group" >
+                        <label for="name">Marka</label>
+                        <select wire:model="selectedMake" class="karta_edycji" style="" >
                             <option value=NULL >Wybierz</option>
                             @foreach($makes as $make)
                                 <option value="{{ $make->id_car_make }}">{{ $make->name }}</option>
                             @endforeach
                         </select>
-                        <input type="hidden", name="car_make" value="{{ $selectedMake }}">
                     </div>
-                    </div>
+
             @if($makes != NULL)
-            <div class="form-group row" >
-                <div class="col-md-6">
-                    <label for="car_model" class="col-md-4 col-form-label">Model</label>
-                    <select wire:model="selectedModel" class="form-control" >
+                <div class="form-group" >
+                        <label for="name">Model</label>
+                        <select wire:model="selectedModel" class="karta_edycji" >
                         <option value=NULL >Wybierz</option>
                         @foreach($models as $model)
                             <option value="{{ $model->id_car_model }}">{{ $model->name }}</option>
                         @endforeach
                     </select>
                     <input type="hidden", name="car_model" value="{{ $selectedModel }}">
-                </div>   
-            </div>        
+                    </div>
             @endif
                     <div class="form-group">
                         <label for="production_year">Rok produkcji</label>
