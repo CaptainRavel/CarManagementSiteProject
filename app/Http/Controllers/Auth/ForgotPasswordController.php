@@ -44,7 +44,7 @@ class ForgotPasswordController extends Controller
   
           Mail::send('email.forgetPassword', ['token' => $token], function($message) use($request){
               $message->to($request->email);
-              $message->subject('Reset Password');
+              $message->subject('Reset hasła');
           });
   
           return back()->with('passchange', 'Wysłaliśmy ci link do zresetowania hasła!');
