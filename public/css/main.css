@@ -218,7 +218,7 @@ Resources1× 0.5× 0.25×Rerun
     display: block;
     font-size: 16px;
     font-family: sans-serif;
-    font-weight: 600;
+    font-weight: 500;
     color: #444;
     line-height: 1.3;
     padding: .6em 1.4em .5em .8em;
@@ -254,7 +254,7 @@ Resources1× 0.5× 0.25×Rerun
     outline: none;
 }
 .select-css option {
-    font-weight:600;
+    font-weight:500;
 }
 
 
@@ -480,3 +480,5 @@ a.x1 {
    border-radius: 25px;
   border-top: none;
 }
+
+
