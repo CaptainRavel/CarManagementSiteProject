@@ -1,7 +1,7 @@
 @foreach ($user_cars as $user_car )
 <div class="row justify-content-center text-light">
-                    <div class="card col-md-8 col-xl-4 border border-warning text-center">
-                        <div class="card-header">
+    <div class="card col-md-8 col-xl-4 border border-warning text-center">
+        <div class="card-header">
                             <h3 class="card-title">Dodaj auto</h3>
                         </div>
                         <form action="{{ route('user_auto.update_car') }}" method="POST" enctype="multipart/form-data" role="form">
@@ -17,28 +17,31 @@
                                         <input class="karta_edycji"   type="text" id="name" name="name" required="required" minlength="3" value="{{ $user_car->name }}">
                                     </div>
                                     <div class="form-group" >
-                                        <div class="col-md-6">
-                                            <label for="car_make" class="col-md-4 col-form-label text-md-">Marka</label>
-                                        <select wire:model="selectedMake" class="form-control" name="car_make">
+                                            <label for="car_make">Marka</label>
+                                        <select wire:model="selectedMake" class="karta_edycji" name="car_make">
                                             <option value=NULL >Wybierz</option>
                                             @foreach($makes as $make)
-                                                <option value={{ $make->id_car_make }}>{{ $make->name }}</option>
+                                                <option value={{ $make->id_car_make}}>{{ $make->name }}</option>
                                             @endforeach
                                         </select>
+                                     <input type="hidden", name="car_make" value="{{ $selectedMake }}">
                                     </div>
-                                    </div>
+                                    @if (\Session::has('makeandmode'))
+                                    <div class="alert alert-danger">
+                                            {!! Session::get('makeandmode') !!}
+                                        </div>
+                                    @endif
                             @if($makes != NULL)
-                            <div class="form-group row" >
-                                <div class="col-md-6">
-                                    <label for="car_model" class="col-md-4 col-form-label text-md-right">Model</label>
-                                    <select wire:model="selectedModel" class="form-control" name="car_model">
-                                        <option value=NULL >Wybierz</option>
-                                        @foreach($models as $model)
-                                            <option value="{{ $model->id_car_model }}">{{ $model->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>   
-                            </div>        
+                            <div class="form-group" >
+                                <label for="car_model">Model</label>
+                                <select wire:model="selectedModel" class="karta_edycji" name="car_model">
+                                <option value=NULL >Wybierz</option>
+                                @foreach($models as $model)
+                                    <option value="{{ $model->id_car_model }}">{{ $model->name }}</option>
+                                @endforeach
+                            </select>
+                            <input type="hidden", name="car_model" value="{{ $selectedModel }}">
+                            </div>     
                             @endif
                                     <div class="form-group">
                                         <label for="production_year">Rok produkcji</label>

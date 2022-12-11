@@ -9,28 +9,28 @@
                   <div class="card-header text-center"><h2>Logowanie</h2></div>
                   <div class="card-body">
                     @if (\Session::has('not verified'))
-                        <div class="alert alert-success">
+                        <div class="alert alert-warning">
                         <ul>
                             <li>{!! \Session::get('not verified') !!}</li>
                         </ul>
                         </div>
                     @endif
                     @if (\Session::has('verify'))
-                    <div class="alert alert-success">
+                    <div class="alert alert-warning">
                     <ul>
                         <li>{!! \Session::get('verify') !!}</li>
                     </ul>
                     </div>
                     @endif
                     @if (\Session::has('passchange'))
-                    <div class="alert alert-success">
+                    <div class="alert alert-warning">
                     <ul>
                         <li>{!! \Session::get('passchange') !!}</li>
                     </ul>
                     </div>
                     @endif
                     @if (\Session::has('not_login'))
-                    <div class="alert alert-success">
+                    <div class="alert alert-warning">
                     <ul>
                         <li>{!! \Session::get('not_login') !!}</li>
                     </ul>

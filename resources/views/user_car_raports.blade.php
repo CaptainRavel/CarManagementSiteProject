@@ -30,7 +30,7 @@
 <!-- Tab spalanie -->
             <div id="Spalanie" class="col-md-8 tabcontent mb-5 ">         
                     <div class="card text-center">
-php                             <div class="table-responsive">
+                            <div class="table-responsive">
                                 <table class="table text-light">
                                     <thead>
                                         <tr>

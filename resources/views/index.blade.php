@@ -55,16 +55,16 @@
                                 <p class="text-justify">Raportuj swoje tankowania oraz naprawy. Przejżyj raporty, dowiedz się ile kosztuje Cię twój samochód.</p>
                                 </div>
                                 <div class="card-footer">
-                                   @if (Route::has('login'))
                                          @auth
                                         <a href="{{ url('/user_car') }}" class="btn btn-warning d-flex justify-content-center font-weight-bold"> Raporty</a>
-                                         @else
-                                        <a href="{{ url('/user_car') }}" class="btn btn-warning d-flex justify-content-center font-weight-bold"> Raporty</a>
-                                 @endif
+                                        @endauth
+                                         @guest
+                                         <a href="{{ url('/login') }}" class="btn btn-warning d-flex justify-content-center font-weight-bold"> Raporty</a>
+                                         @endguest
+
                                 </div>
                         </div>
                     </div>                                          
-                    @endcan
                   </div>
               </div>
     </div>

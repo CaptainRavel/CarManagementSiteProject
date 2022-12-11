@@ -2,11 +2,14 @@
 
 @section('content')
 
-<h3 class='text-center'>Wybierz auto</h3>
-<div class="d-flex justify-content-center">
+<h3 class='text-center mb-4''>Wybierz auto</h3>
+
     @if (!$exist)
-  <div class="card shadow-sm border border-warning" >
-    <div class="card-body">
+    <div class="container">
+      <div class="row">
+        <div class="row justify-content-center">
+    <div class="card border border-warning text-center">
+      <div class="card-body text-center mt-2">
       <h5 class="card-title">BRAK AUT</h5>
       <p class="card-text">Nie dodałeś jeszcze żadnego auta, by móc dodawać raporty musisz mieć zapisany conajmniej jeden pojazd!</p>
     </div>
