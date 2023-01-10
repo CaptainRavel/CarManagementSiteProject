@@ -58,7 +58,7 @@ margin-top:30px;
 			<a><img src="https://imageup.me/images/66a0dd63-e6fc-43f2-a9e1-1cc08a8ece0c.png" class="center" width="450" alt=""></a>
 		  </div>
 		<div id="item-1">
-			   <h2 class="m-5">Zweryfikuj swóje Hasło</h2>
+			   <h2 class="m-5">Zweryfikuj swoje Hasło</h2>
                    Aby zresetować swoje hasło, kliknij w przycisk poniżej. Jeżeli to nie ty próbujesz zresetować swoje hasło zignoruj tą wiadomość  </br></br>
 		</div>
 		<div id="item-2">
